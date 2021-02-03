@@ -1,0 +1,27 @@
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{setspace}\linespread{2.0}
+
+\definecolor{red}{rgb}{0.8, 0, 0}
+\newfontfamily\headingfont[]{Roboto}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+
+\titleformat{\section}
+{\color{red}\headingfont\Large\bfseries\singlespacing}
+{\thesection}{2em}{}
+
+\titleformat{\subsection}
+{\color{red}\headingfont\Large\singlespacing}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\color{red}\headingfont\Large\singlespacing}
+{\thesubsubsection}{1em}{}
+
+\titleformat{\paragraph}
+{\color{black}\normalfont}
+{\theparagraph}{2em}{}
