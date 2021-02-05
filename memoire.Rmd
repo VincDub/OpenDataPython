@@ -5,10 +5,12 @@ subtitle:
   \normalfont\singlespacing\Large\color{red}{Démonstration par la pratique des apports potentiels au sein de la conception architecturale}
 fontsize : 11pt
 mainfont: Roboto Light
+highlight: ""
 output: 
   pdf_document:
     number_sections: true
     latex_engine: xelatex
+    pandoc_args: ["--wrap=auto","-s"]
     includes:
       in_header: style.sty
 geometry: "left=1.5cm,right=1.5cm,top=2cm,bottom=2cm"
@@ -18,6 +20,20 @@ lang: fr-FR
 no-cite: "@iavulga"
 indent: true
 ---
+
+```{r setup, echo = F}
+library(knitr)
+knit_hooks$set(source = function(x, options) {
+    paste("\\begin{lstlisting}[style=code]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}, output = function(x, options) {
+    paste("\\begin{lstlisting}[style=out]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+})
+library(reticulate)
+use_virtualenv("ri37")
+```
+
 
 \newpage
 
@@ -67,7 +83,8 @@ Or, les architectes ont tendance à préférer, de par leur expertise orientée 
 \
 \
 Cependant, il existe depuis les années 2010 un certain essor des travaux de recherche basés sur des données issues en partie ou totalement de l’Open Data, et ce, grâce à un langage de programmation en particulier, dont la simplicité de la syntaxe couplée à une profusion de bibliothèques (comparables à des « plug-in ») spécialisées dans le traitement de données informatiques en ont fait un outil populaire pour la recherche d’aujourd’hui, le Python.
-En effet, comme l’illustre l’exemple du travail de recherche « CityEngine - Twitter » mené au « Centre for Advanced Spatial Analysis » de Londres [@hugel_cityengine-twitter_2014] , proposant une cartographie urbaine de densité basée sur des Tweets géolocalisés dans cette même ville, un seul et unique script en Python permet à la fois de récupérer les messages sur une plage de 24 heures (via une bibliothèque , nommée « Tweepy » , permettant au code d’interagir avec l’API de Twitter), de les trier et d’en extraire leurs coordonnées et leur horaire de publication, et enfin de fournir ces données directement à l’outil de génération de modèles 3D urbains « CityEngine » (publié par l’ESRI) afin que ce dernier puisse constituer une carte procédurale (animée selon le nombre de tweets sur une plage de 24 heures).
+A juste titre, ce langage est aujourd'hui très répandu au sein des Systèmes d'Informations Géographiques (SIG) tels que ArcGIS, où ses caractéristiques mentionnés ci-dessus permettent de manière accessible de mener des travaux complexes autour des données géographiques ouvertes, de l'analyse et la datavisualisation [@arcgis1] à l'entraînement de modèles de prédiction [@arcgis2].
+Comme l’illustre l’exemple du travail de recherche « CityEngine - Twitter » mené au « Centre for Advanced Spatial Analysis » de Londres [@hugel_cityengine-twitter_2014] , proposant une cartographie urbaine de densité basée sur des Tweets géolocalisés dans cette même ville, un seul et unique script en Python permet à la fois de récupérer les messages sur une plage de 24 heures (via une bibliothèque , nommée « Tweepy » , permettant au code d’interagir avec l’API de Twitter), de les trier et d’en extraire leurs coordonnées et leur horaire de publication, et enfin de fournir ces données directement à l’outil de génération de modèles 3D urbains « CityEngine » (publié par l’ESRI) afin que ce dernier puisse constituer une carte procédurale (animée selon le nombre de tweets sur une plage de 24 heures).
 \
 \
 Une telle étude étant désormais possible sur des données massives privées, ce type d’exploitation peut encore plus aisément être mis en place lorsque les données utilisées sont totalement ouvertes et avec accès illimité.
@@ -81,11 +98,9 @@ Ce nouveau regard, personnalisé par l’architecte, pourrait alors apporter à 
 \
 \
 \
-\
 \normalfont\bfseries\color{red}{Ainsi, dans quelle mesure l’exploitation de données issues de l’Open Data grâce au langage Python représente-t-elle un avantage certain pour l’architecte ?}\
-
-&nbsp;
-
+\
+\
 \normalfont\color{black}{Après avoir initialement démontré l’intérêt du langage Python dans l’extraction et la manipulation des données issues des plateformes accessibles en Open Data à travers l’élaboration complète d’un script de récolte de données, ce dernier sera complété à travers un aperçu constitué d’exemples clés de la capacité de Python à produire des documents de travail utiles à l’architecte (cartographie, dessin et modélisation). Enfin, ce travail d’exploitation sera abouti en montrant la prodigieuse capacité du langage Python à permettre de manière accessible l’analyse complexe de ces données ainsi que la mise en place d’algorithmes de prédiction.}
 
 
@@ -106,55 +121,516 @@ Face à ce besoin de compréhension et de manipulation de données brutes, les l
 
 ## L’Open Data : entre nomenclature et variables
 
+La plupart des plateformes distribuant des données en Open Data proposant directement en ligne des moyens de prévisualiser un jeu de données, 
+cela semble constituer un moyen pratique de discerner et comprendre son contenu en détail.
+C'est le cas sur la plateforme Open Data Paris, qui nous permet de prévisualiser le jeu de données des volumes bâtis sous la forme d'un tableau, mais aussi d'une carte,
+laquelle formera un premier contact avec les données en elle-mêmes.
+\
+```{r odp_carte, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/site_odp_carte.jpg")
+```
+\
+
 ### Variables et typologies des valeurs
+
+Le premier constat que l'on peut réaliser après avoir brièvement interagi avec la carte est que le jeu de donnée associe un ensemble de **variables** 
+(dont la dénomination est commune à l'ensemble de ce jeu) et leurs **valeurs** (possédant elles aussi une notation spécifique) avec une **forme géométrique géolocalisée** 
+sur un fond de carte (en l'occurrence, ce sont des **polygones**, formes géométriques les plus à même de représenter l'emprise en plan des différents bâtiments).
+\
+\
+Afin de permettre une lecture plus complémentaire, il paraît intéressant de consulter le tableau fin d'avoir une vue plus "centrée" sur les différentes variables et leurs valeurs.
+\
+```{r odp_tbl, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/site_odp_tableau.jpg")
+```
+\
+Chacune d'entre elles est ici représentée par une **colonne**, chaque ligne correspondant à un **volume bâti**.
+Tout d'abord, la variable _geom_ est celle qui contient les informations géométriques, nous renseignant sur le type de géométrie employée,
+ainsi que les coordonnées des points qui la définissent. En l'occurence, la typologie géométrique "Polygon" se base sur les types primitifs de références des Systèmes d'Informations Géographiques (SIG),
+et ses coordonnées sont définies en **latitude/longitude** (ce que confirme la variable *geom_x_y*). 
+\
+```{r prim_geom, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = "Primitives géométriques en SIG"}
+include_graphics("__imgs/primitives_geometriques.png")
+```
+\
+Nous pouvons également noter que certaines variables comme *L_NAT_B* ou *L_SRC* sont exprimées sous forme de texte, qualifié alors de **"chaîne de caractères"** ("string" ou "str" en anglais) d'un point de vue
+informatique. Elles semblent également **catégoriques**, c'est à dire ne pouvant prendre qu'un nombre défini de valeurs possibles.
+Bien que les noms de ces variables ne soient pas explicites, leurs valeurs permettent d'avoir une première idée de ce qu'elles renseignent.
+\
+\
+A l'inverse, d'autres variables comme *B_RDC* ne possèdent ni un nom explicite, ni une valeur permettant de suggérer sa signification, étant catégorique mais notée
+sous forme d'**entiers**.
+\
+\
+Enfin, d'autres variables comme *M2* ou *NB_PL* sont notées **numériquement**, pouvant à priori prendre une infinité de valeurs
+, respectivement sous la forme de nombres à virgule (qualifiés de **"float"** en anglais), et d'entiers ("int"). Bien que l'on puisse 
+deviner que *M2* semble représenter la surface d'un volume bâti, cela reste une supposition.
+\
+Rappelons égalament que toutes ces observations sont faites sur un échantillon visible d'un jeu de données massif. Certaines subtilités présentes 
+plus loin dans le tableau peuvent encore échapper à cette lecture préliminaire. 
+\
+\
+Dès lors, chaque variable possédant sa propre nomenclature, et étant plus ou moins explicite dans sa dénomination, une première
+difficulté de lecture émerge.
+\ 
+Heureusement, les jeux de données en Open Data disposent généralement d'informations complémentaires 
+capables de renseigner l'utilisateur sur cette nomenclature, afin qu'il puisse exploiter les données.
+\
 
 ### Les métadonnées : clé de compréhension des données
 
-## La donnée ouverte : hiérarchisée et hétérogène
+Comme c'est le cas ici, la majorité des jeux de données accessibles en Open Data disposent d'un document annexe de référence, dont le but est à minima de fournir
+à l'utilisateur qui souhaite se saisir des données contenues les explications nécessaires à la compréhension des variables constituant
+le jeu de données en question. Ce sont **les métadonnées**.
+\
+Elles peuvent également contenir des informations complémentaires concernant le fournisseur, la manière dont les données ont été acquises 
+ou encore d'éventuelles limites de précision et recommandations d'utilisation par exemple.
+\
+```{r odp_meta_1, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/odp_meta1.jpg")
+```
+\
+En l'occurence, la première page nous renseigne de manière plus exhaustive sur la manière dont ont été tracés les différents polygones,
+à travers quelques schémas, ainsi qu'un paragraphe exprimant la source de ces tracés.
+Premièrement, ce document explique sa logique de séparer un bâtiment "réel" en plusieurs volumes fictifs, suivant s'ils sont 
+en porte à faux ou non, permettant d'apporter une certaine précision.
+\
+\
+Dès lors, les deux informations primordiales associées à chaque polygone est sa **hauteur**, ainsi que sa **plages de hauteur** s'il est en porte à faux.
+cette fiche indique également le contexte géographique, ainsi que les limitations géométriques (empêchants ici de représenter un polygone "évidé",
+obligeant à le sectionner si l'on veut représenter de manière correcte un patio par exemple). 
+\
+```{r odp_meta_2, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/odp_meta2.jpg")
+```
+\
+Enfin, la seconde page contient les informations cruciales concernant les données à exploiter.
+\
+En effet, le tableau-ci-dessus renseigne sur le **libellé** de chaque variable (son contenu explicite), son **type** (ici, **C*n*** où *n* est un entier
+signifique que les valeurs possibles sont sous la forme d'une chaîne de caractères, contenant *n* caractères, tandis que **N** désigne simplement des données numériques), ainsi que
+ses valeurs possibles (servant à distinguer les variables **catégoriques**).
+\
+Dès lors, il est possible de repérer les deux variables les plus pertinentes si l'on souhaite extraire la hauteur des différents volumes.
+En l'occurence, ce seront les variables **H_ET_MAX** ainsi que **L_B_U** (pour les volumes en porte à faux), toutes deux exprimées en nombre d'étages.
+La surface de plancher totale **M2_PL_TOT** est également intéressante à extraire.
+\
+\
+Ainsi, les métadonnées offrent les clés de compréhension nécessaires à l'utilisateur afin de comprendre le contenu d'un jeu de données en profondeur.
+Cette prise de connaissance permet désormais de manipuler les données en elle-mêmes, au sein d'un script en Python.
+
+## Le Python pour extraire et comprendre la structure des données
+
+Afin d'exploiter ce jeu de données constitué d'objets géolocalisées et leurs données, le langage de programmation **Python** sera exclusivement employé.
+Comme mentionné dans l'introduction, ce dernier possède toutes les fonctionnalités nécessaires pour manipuler simplement ce type de données.
+La plateforme Open Data Paris permettant de définir un périmètre directement sur la carte, cette fonction sera utilisée afin de télécharger un échantillon du jeu de données (en l'occurence localisé autour de l'ENSAPVS), 
+en premier lieu au format .CSV.
+\
+```{r odp_carte_zone, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/site_odp_carte_zone.jpg")
+```
+\
+
+### Le format JSON : hiérarchiser pour dépasser les limites du tableur
+
+Une fois téléchargé, le fichier .CSV peut être importé dans un script Python, grâce à la bibliothèque **Pandas**, spécialisée dans la manipulation de
+bases de données formatées sous forme de tableur. Afin de ne séléctionner que les variables les plus pertinentes, le paramètre *usecols* sera utilisé
+pour indiquer au code de ne garder que les colonnes **geom**,**H_ET_MAX**,**L_B_U** et **M2_PL_TOT**.
+\
+Enfin, la fonction  `print(data.head(5))`  nous permettra d'afficher seulement les 5 premiers enregistrements.
+
+```{python a1}
+import pandas as pd
+data = pd.read_csv("DONNEES/volumesbatisparis.csv",sep=";",usecols=["geom","H_ET_MAX","L_B_U","M2_PL_TOT"])
+print(data.head(5))
+```
+
+Dès lors, une limitation directement liée au choix de format tableur apparaît.
+\
+En effet, comme montré lors de la première lecture, la colonne *geom* comporte en réalité plusieurs valeurs par case.
+Cela pose problème dans un format de type tableur, car chacune d'entre elle est reconnue comme **une seule chaîne de caractères** ("str"),
+comme le prouve la commande ci-dessous.
+
+```{python a2}
+print(type(data["geom"][0]))
+```
+
+Il est donc impossible d'en extraire des données en l'état. Heureusement, le langage Python possèdant une riche collection de bibliothèques internes,
+une bonne connaissance de ces dernières permet dans la majorité des cas de palier à ce genre de problèmes.
+Ainsi, grâce au code ci-dessous, les deux valeurs peuvent être extraites individuellement.
+\
+
+```{python a3}
+import ast
+geom0 = ast.literal_eval(data["geom"][0])
+print(geom0["type"])
+print(geom0["coordinates"])
+```
+
+\
+Bien que cela fonctionne, ce n'est pas une bonne pratique à adopter en règle général. En effet, il peut arriver qu'une des valeurs 
+inscrites dans une valeur *"mère"* se décompose elle-même en un ensemble de valeurs. Il faudrait alors répéter la commande précédente autant de fois que
+nécessaire, tout en étant sûr à 100% que chaque enregistrement soit construit de manière identique sur l'ensemble du jeu de données.
+\
+\
+Ainsi, il est plus judicieux de s'orienter vers un format capable de représenter cette hiérarchie dans sa structure.
+Le format JSON (JavaScript Object Notation) est un des formats d'échanges hiérarchisés les plus courant (au côté du XML). 
+Ce dernier peut se décomposer en deux éléments primaires : le **dictionnaire**, un ensemble formé de couples **attribut : valeur** (aussi appelés *"objets"*), et la **liste**, une collection d'objets [@json].
+\
+```{python}
+# exemple de structure d'un script json
+js = [ # début de la liste
+        { # dictionnaire 1
+          "attribut" : "valeur", # couple attribut : valeur
+          "attribut2" : [0,1,2,3,4] # une liste peut être une valeur
+        },
+        { # dictionnaire 2
+          "attribut" : { "attribut3" : "valeur3" }, # un dictionnaire contenant lui même des objets peut être une valeur
+          "attribut2" : 99
+        }
+      ] # fin de la liste
+```
+Ainsi, ces deux constituantes suffisent à représenter des hiérarchies pouvant être complexes, tout en restant facile à lire et écrire pour les humains.
+
+\
+Or, la liste et le dictionnaire sont très courants au sein des langages de programmation modernes.
+Ainsi, l'import au sein de Python est extrêmement limpide. 
+La syntaxe afin d'accéder à une valeur donnée s'effectue simplement en saisissant l'index des listes ou bien le nom des attributs en partant de la base de l'arborescence (de gauche à droite) entre crochets. 
+
+```{python}
+# 1er objet de la liste (dictionnaire 1), puis "attribut2"
+print(js[0]["attribut2"])
+```
+
+```{python}
+# 2e objet de la liste (dictionnaire 1), puis "attribut2" (dictionnaire 3), puis "attribut3"
+print(js[1]["attribut"]["attribut3"])
+```
+
+La méthodologie est identique lors de l'import d'un fichier JSON externe, qui sera en l'occurence le même jeu de données téléchargé depuis le site
+Open Data Paris, mais au format .JSON. 
+
+```{python}
+import json
+data = json.load(open("DONNEES/volumesbatisparis.json","r"))
+# premier objet de la liste de volumes
+print(data[1])
+```
 
 ### L'hétérogénéité : caractéristique intrinsèque aux données ouvertes
 
-### Le format JSON : une structure plus souple que le tableur
+Cette lecture d'un des volumes du jeu de données au format JSON permet de repérer ses différents niveaux hiérarchiques,
+tout en observant les information supplémentaires dont on dispose alors.
+\
+Tout d'abord, les variables du jeu de données d'origine sont ici présentes sous l'attribut **"fields"**, et sera à référencer lors de
+l'extraction.
+En son sein, la variable **geom** est ici complètement représentée, contenant elle-même un dictionnaire avec ses deux valeurs (type et coordonnées).
+Nous pouvons également noter que les coordonnées sont constituées d'une **liste contenant des listes à deux valeurs**, représentant tout simplement une collection
+de points (définis par x et y). Cependant, elle est elle même contenue dans une liste englobante superflue, que nous allons supprimer par la suite.
+\
+\
+Ainsi, il est possible d'extraire les variables initialement souhaitées pour chacun des volumes avec une **boucle**, qui itèrera
+à travers la liste des volumes. Les résultats obtenus seront ajoutés dans un nouveau dictionnaire (avec des attributs nommés plus explicitement), lui même ajouté à une liste vide.
 
-## Un script Python pour extraire, comprendre et épurer
+```{python error=TRUE}
+liste = [] # liste vide
+for volume in data:
+  liste.append({
+    # Le [0] à la fin permet de supprimer la liste englobante superflue
+    "coords" : volume["fields"]["geom"]["coordinates"][0],
+    "surface" : volume["fields"]["m2_pl_tot"],
+    "hauteur" : volume["fields"]["h_et_max"],
+    "hauteur_paf" : volume["fields"]["l_b_u"]
+  })
+```
 
-### Un outil adapté à la manipulation de formats ouverts
+Cependant, nous obtenons l'erreur *KeyError : "l_b_u"*, signifiant que l'attribut "l_b_u" n'est pas défini pour certains objets.
+En effet, là où dans un tableur, un attribut non-défini se traduit par une valeur nulle ou une case vide, les structures hiérarchisées
+comme le JSON permettent à chaque objet de posséder certains attributs qui lui sont propres. Ainsi, les volumes n'étant pas en porte à faux ne possèdent
+pas cet attribut.
+\
+\
+D'un point de vue plus général, cette hétérogénéité est très courante dans les jeux de données ouvertes.
+Au-delà d'être causée quand **certains enregistrements** possèdent **des attributs qui leurs sont propres** sans toutefois justifier la création
+d'un jeu de données supplémentaire (comme les volumes en porte à faux ici, difficilement dissiociables des autres), 
+elle peut être tout simplement provoquée par **certaines valeurs manquantes** dans différents enregistrements (dans le cas d'une enquête 
+aussi complexe et étendue que celle des hauteurs des bâtiments de Paris, cela est compréhensible).
+Enfin, comme c'est le cas ici, cette hétérogénéité se révèle pendant l'extraction, car pas toujours mentionnée dans les métadonnées.
+\
+\
+En conséquences, les fonctions de gestion d'erreur **try** et **except** seront utilisées afin de détécter l'absence de l'attribut **"l_b_u"**.
 
-### Transformer des notations complexes en valeurs compréhensibles
+```{python}
+liste = [] # liste vide
+for volume in data:
+  try:
+    liste.append({
+      "coords" : volume["fields"]["geom"]["coordinates"][0],
+      "surface" : volume["fields"]["m2_pl_tot"],
+      "hauteur" : volume["fields"]["h_et_max"],
+      "hauteur_paf" : volume["fields"]["l_b_u"]
+    })
+  except KeyError:
+    liste.append({
+      "coords" : volume["fields"]["geom"]["coordinates"][0],
+      "surface" : volume["fields"]["m2_pl_tot"],
+      "hauteur" : volume["fields"]["h_et_max"]
+    })
+
+print(liste[1])
+print(liste[7])
+```
+\
+Ainsi, le langage Python a permis de mettre en lumière à la fois l'importance de la hiérarchisation dans un jeu de données complexe, dont
+une certaine hétérogénéité persiste (sans être forcément repérable en amont de la manipulation) réclamant une souplesse de la part des outils d'extraction à cet égard.
+
+
+## Aperçu de la souplesse des fonctions de manipulation de données
+
+Après la phase d'extraction précédente, il est nécessaire que les données etraites en l'état soient exploitables pour la suite.
+En l'occurence, il serait souhaitable d'exprimer les hauteurs en **mètres** plutôt qu'en nombre de niveaux.
+
+```{python}
+h_etage = 3
+print(liste[0]["hauteur"] * h_etage)
+```
+Cette opération est triviale pour l'attribut **"hauteur"**, étant exprimé numériquement. Il suffit alors de définir une **hauteur d'étage type** et
+d'effectuer une multiplication.
+\
+Cependant, l'attribut **"hauteur_paf"** étant exprimé sous la forme d'une chaîne de caractères (texte décrivant les plages de hauteur),
+il est nécessaire de convertir cette notation numériquement.
+
+### Approche compréhensive des différentes notations grâce à Python
+
+Heureusement, Python est capable de reconnaître des morceaux de texte au sein de chaînes de caractères, permettant ainsi de les remplacer par leur équivalent numérique.
+
+```{python}
+if "da" in "data":
+  print(1)
+else:
+  print(0)
+```
+
+Dès lors, afin de comprendre les différentes manières d'exprimer les hauteurs en porte à faux, il est possible de les énumérer par **longueur**.
+
+```{python}
+notations = {}
+for volume in liste:
+  try:
+    notations[len(volume["hauteur_paf"])] = volume["hauteur_paf"]
+  except KeyError:
+    pass
+
+print(notations.values())
+```
+
+Dès lors, certains éléments constituants peuvent être notés :
+
+* Une plage de hauteur est principalement renseignée par ses **deux niveaux de hauteur** séparées par un *a*
+* *_et_* est utilisé pour renseigner **plusieurs plages de hauteur**.
+* *"encorbt_au_N"* désigne une plage de hauteur du niveau **N** au niveau maximal (exprimé par la variable "hauteur").
+S'ils désignent le même niveau, la plage sera du niveau **N^-1^** au niveau maximal.
+* *auvent* désigne une plage du niveau **N** à **N^+1^**. 
+* Enfin, la présence de *R* exprimé seul suggère que **R** désigne une plage d'une **seule hauteur d'étage partant du sol**, tandis que
+ **Ra1** désigne **deux hauteurs d'étages partant du sol**. 
+
+```{r hpaf, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " "}
+include_graphics("__imgs/hpaf.png")
+```
+
+Cette dernière observation est cruciale : si l'on fixe **R = 0**, alors la plage **Ra1** devient **0a1**. Or, si l'on multiplie ces deux bornes
+par la hauteur d'étage type de 3 mètres, le volume aura une plage de hauteur de **0 à 3m**, tandis qu'il faudrait obtenir **0 à 6m**.
+Dès lors, il faut **ajouter 1 à tout nombre de niveau sauf R** avant multiplication par la hauteur d'étage type.
+
+
+### De la chaîne de caractère à la valeur numérique
+
+A la lumière de toutes ces subtilités, il est désormais possible de créer une fonction capable de **transformer des chaînes de caractères** en **valeurs numériques**.
+Le code ci-dessous illustre la transformation d'une notation **N^1^aN^2^**. Après s'être assuré que la notation contient
+bien un *a*, le code sépare les deux bornes à cet endroit, puis les convertit en **entiers**.
+Enfin, chaque borne est incrémentée de **1** avant multiplication par la hauteur d'étage type, sauf *R* qui prend la valeur 0. 
+
+```{python}
+# Rappel : h_etage = 3 mètres
+h_paf =  "Ra8"
+if "a" in h_paf:
+  hauteur = h_paf.split("a")
+  hauteur = [(int(h)+1)*h_etage if h != "R" else 0 for h in hauteur]
+
+print(hauteur)
+```
+
+Suivant ce principe, le bloc de code suivant opère ce type de transformation suivant les différents notations relevées
+précédemment. L'incrément de **1** sera également appliqué à l'attribut **hauteur**
+
+```{python}
+# Rappel : h_etage = 3 mètres
+for volume in liste:
+  intervalles = []
+  try:
+    intervs = volume["hauteur_paf"].split("_et_")
+    for interv in intervs:
+        if "encorbt_au_" in interv:
+          n = int(interv.strip("encorbt_au_"))
+          if n == volume["hauteur"]:
+            intervalles.append([n*h_etage,(n+1)*h_etage])
+          else:
+            intervalles.append([(n+1)*h_etage,(volume["hauteur"]+1)*h_etage])
+        elif "a" in interv:
+            if "R" in interv:
+                intervalles.append([0,(int(interv.strip("Ra"))+1)*h_etage])
+            else:
+                intervalles.append([(int(h)+1)*h_etage for h in interv.split("a")])
+        elif interv == "R":
+            intervalles.append([0,h_etage])
+    volume["hauteur_paf"] = intervalles
+  except KeyError:
+    pass
+
+  volume["hauteur"] = (volume["hauteur"]+1) * h_etage
+
+print(liste[1])
+```
+Enfin, ce jeu de données apurées peut être sauvegardé au format JSON, afin de pouvoir le réutiliser facilement dans le chapitre suivant.
+
+```{python}
+json.dump(liste,open("DONNEES/liste_apuree.json","w"))
+```
+
+Comme démontré au cours de ce chapitre, le langage de programmation Python 
+possède une souplesse lui permettant d'extraire et de manipuler facilement les formats de données courants en Open Data,
+et de palier sans réelle difficulté aux éventuelles subtilités présentes dans des jeux de données hétérogènes, le tout bénéficiant
+d'une syntaxe claire tout au long du code.
+**A la fois outil de compréhension et de traitement, il se révèle extrêmement précieux lorsque l'on souhaite 
+exploiter des jeux de données en Open Data.**
+\
+\
+Dans le contexte de la profession architecturale, l’obtention de ces données n’a cependant que peu de valeur si l’architecte 
+ne peut l’intégrer dans son environnement de travail, ce à quoi le prochain chapitre est dédié.
 
 \newpage
 
-
 # Synthétiser et intégrer les données ouvertes au sein du « workflow » de l’architecte avec Python : du graphique au modèle 3D
 
-La production de documents graphiques faisant partie intégrante du « workflow » de l’architecte, il est primordial de s’y intéresser au sein de ce mémoire.
+La production de documents synthétiques, en particulier les éléments graphiques 
+faisant partie intégrante du « workflow » de l’architecte, 
+il est primordial de s’y intéresser au sein de ce mémoire.
 \
 \
-En effet, c’est via ce type de document que l’architecte est capable de non seulement communiquer sa production ou encore sa démarche de conception, mais également de se documenter en vue de ses travaux de conception. Cependant, ce sont aussi des moyens de communication plutôt chronophages à produire, en particulier lorsque l’architecte est amené à dessiner des éléments existants.
+En effet, c’est via ce type de document que l’architecte est capable de 
+non seulement communiquer sa production ou encore sa démarche de conception, 
+mais également de se documenter au cours de sa démarche.
 \
 \
-Or, comme démontré dans le chapitre précédent, les jeux de données massifs disponibles en Open Data représentent une ressource parfaite afin de réduire cette charge de travail, pourvu que l’on dispose d’outils capables de dessiner ou de modéliser grâce à des données brutes.
+Or, il s'avère que le langage Python regorge de bibliothèques spécialisées dans la datavisualisation tel que
+*Matplotlib* [@matplotlib] ou encore *Seaborn*[@seaborn], comme le montre la plateforme *The Python Graph Gallery*[@pythondataviz]
+offrant énormément de possibilités de représentation, du graphique statistique au modèle 3D.
 \
 \
-Encore une fois, le langage Python est tout autant capable de produire des documents que d’en lire, et les domaines de la modélisation et du graphisme ne font pas exception.
-\
-\
-**Ce chapitre présentera plusieurs variantes d’exploitation du script obtenu à la fin du chapitre précédent dans le but d’obtenir des documents synthétiques à partir des données des bâtiments obtenues. Elles seront respectivement consacrées à l’élaboration de graphiques statistiques, puis d’une carte interactive, d’un dessin vectorisé avec gestion des calques, et enfin d’un modèle 3D du contexte bâti.**
+**Ce chapitre présentera ainsi plusieurs variantes d’exploitation du script 
+obtenu à la fin du chapitre précédent dans le but d’obtenir des documents 
+synthétiques à partir des données des bâtiments obtenues. 
+Elles seront respectivement consacrées à l’élaboration de graphiques statistiques, 
+puis d’une carte interactive, d’un dessin vectorisé avec gestion des calques, puis aboutir à un modèle 3D du contexte bâti.**
 
-
-```{r p2_sommaire, echo=FALSE, fig.align = 'center', out.height = "90%", fig.cap = " "}
-knitr::include_graphics("__imgs/p2.png")
+```{r p2_sommaire, echo=FALSE, fig.align = 'center', out.height = "100%", fig.cap = " "}
+include_graphics("__imgs/p2.png")
 ```
 
 \newpage
 
-## Le graphique statistique : visualisation basique des données
+## Production de documents synthétiques interactifs
 
-## Cartographie personnalisée
+Cette section présentera deux méthodes afin de visualiser les données extraites.
+Au sein de cette section, la bibliothèque *Plotly* sera employée, possédant davantage d'options graphiques ainsi que de possibilités d'export (dont des options d'interactivité) 
+que son concurrent plus répandu *Matplotlib* mentionné précédemment. 
 
-## Production de dessins vectorisés organisé
+### Visualisation statistique des données
 
-## Génération d’un modèle 3D
+Lorsque l’on aborde la question de la synthèse de données quelles qu’elles soient, la représentation statistique par des graphiques semble représenter l’approche la plus intuitive et la plus directe.
+
+```{python}
+import json
+import plotly.graph_objects as go
+volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+```
+Le premier graphique créé sera un histogramme de **répartition du nombre de volumes par hauteur**.
+Le code ci-dessus permet d'importer la bibliothèque *Plotly* (par l’intermédiaire d’un de ses « sous-module » nommé « graph_objects », que nous appellerons ici avec « go » tout au long du script),
+et charge également la liste des volumes enregistrée à la fin du chapitre 1.
+\
+
+```{python}
+n_par_hauteur = {}
+for volume in volumes:
+  try:
+    n_par_hauteur[volume["hauteur"]] += 1
+  except KeyError:
+    n_par_hauteur[volume["hauteur"]] = 1
+  
+print(n_par_hauteur)
+```
+
+Cette liste des volumes est ensuite analysée dans le code ci-dessus à travers une boucle. Le but est en effet d'en récupérer le **nombre de volumes par hauteur**.
+La fonction **try**/**except** permet d'inclure une nouvelle hauteur dans le dictionnaire **n_par_hauteur** si elle n'existe pas encore. Si elle existe déjà, sa valeur est incrémentée.
+\
+\
+Enfin, quelques lignes de codes permettent à la fois la construction d'un graphique, ainsi que son export.
+La **liste des différentes hauteurs** (soit celle des *attributs* du dictionnaire **n_par_hauteur**) représentera l'axe *x*,
+tandis que les différents **nombres de volumes** associés formeront les valeurs à renseigner pour l'axe *y*.
+Quelques paramètres graphiques servent à définir un titre général, des libellés pour les deux axes ainsi qu'une résolution d'export.
+Ici, deux exports possibles seront montrés, à savoir un export **statique** sous forme d'image au format PNG, ainsi qu'un export **interactif** au sein d'une page web au format HTML. 
+
+```{python message=FALSE}
+# traçage du graphique
+fig = go.Figure([go.Bar(x=list(n_par_hauteur.keys()), y=list(n_par_hauteur.values()),opacity=0.8,marker_color='rgb(200,0,0)')])
+fig.update_xaxes(categoryorder='category ascending',tickvals=sorted(list(n_par_hauteur.keys())))
+fig.update_layout(title="Répartition des hauteurs",xaxis_title="hauteur (m)",yaxis_title="nombre de volumes",width=600,height=600)
+# Export sous forme d'image statique
+fig.write_image("OUTPUT/graphique_hauteurs.png")
+# Export sous forme d'une page web interactive
+fig.write_html("OUTPUT/graphique_hauteurs.html")
+```
+
+```{r graph_h, echo=FALSE, fig.align = 'center', out.width = "45%", fig.cap = " ",fig.show='hold'}
+include_graphics("OUTPUT/graphique_hauteurs.png")
+include_graphics("__imgs/graphique_hauteurs_int.png")
+```
+
+Il est également possible de créer de la même manière une multitude d'autres graphiques que *Plotly* permet de construire.
+Un second graphique plus complet peut être construit, en s'intéressant cette fois-ci à une répartition **des volumes suivant leur hauteur, leur surface et s'ils sont en porte à faux**.
+Ici, le sous-module *express* de *Plotly* sera employé avec *Pandas*, permettant une mise en forme plus condensée et une meilleur gestion des données.
+Il sera possible de réutiliser directement les éléments de la liste des volumes. Cependant, un attribut devra être ajouté à chaque volume, spécifiant s'il est en porte à faux ou pas,
+afin de pouvoir être traité dans *Plotly*. La fonction **assert** permettra de le vérifier dans le code ci-dessous.
+
+```{python message=FALSE}
+import plotly.express as px
+import pandas
+
+for volume in volumes:
+  try:
+    _ = volume["hauteur_paf"]
+    volume["is_paf"] = 1
+  except KeyError:
+    volume["is_paf"] = 0
+    
+df = pandas.DataFrame(volumes).drop(columns=["coords","hauteur_paf"])
+# traçage d'un graphique en "donut"
+#fig2 = px.scatter_ternary(df,a="surface", b="hauteur", c="is_paf")
+#fig2 = px.parallel_coordinates(df, color="hauteur",color_continuous_scale=px.colors.sequential.amp)
+fig2 = px.line_polar(df, r='r', theta='theta', line_close=True)
+fig2.update_layout(title="Répartition des hauteurs",width=1800,height=800)
+fig2.write_image("OUTPUT/graphique_repart.png")
+fig2.write_html("OUTPUT/graphique_repart.html")
+```
+
+### Visualisation statistique des données
+
+### Cartographier de manière interactive
+
+## Génération automatique de supports de travail
+
+### Fichier CAD vectorisé et hiérarchisé
+
+### Construction d’un modèle 3D
 
 \newpage
 
@@ -199,4 +675,9 @@ Au-delà de cette appropriation, une certaine motivation de créer des outils lo
 
 # BIBLIOGRAPHIE {-}
 
+<div id="refs"></div>
 
+# ICONOGRAPHIE {-}
+
+\renewcommand{\listfigurename}{}
+\listoffigures
