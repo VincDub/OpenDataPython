@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.3)  5 FEB 2021 21:44
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.3)  7 FEB 2021 23:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1501,68 +1501,153 @@ Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt
 !
 Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
 !
-[31]
 File: OUTPUT/graphique_hauteurs.png Graphic file (type bmp)
 <OUTPUT/graphique_hauteurs.png>
 File: __imgs/graphique_hauteurs_int.png Graphic file (type bmp)
 <__imgs/graphique_hauteurs_int.png>
+[31]
+File: OUTPUT/graphique_repart.png Graphic file (type bmp)
+<OUTPUT/graphique_repart.png>
 [32]
+Underfull \hbox (badness 10000) in paragraph at lines 1224--1234
+
+ []
+
+[33]
 Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
 !
 Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
 !
-[33] [34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
+!
+File: __imgs/carte_hauteurs_1.png Graphic file (type bmp)
+<__imgs/carte_hauteurs_1.png>
+File: __imgs/carte_hauteurs_2.png Graphic file (type bmp)
+<__imgs/carte_hauteurs_2.png>
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 1308--1329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 1490) in paragraph at lines 1308--1329
+\TU/RobotoLight(0)/m/n/10.95 Un second module nommé \TU/RobotoLight(0)/b/n/10.9
+5 utm \TU/RobotoLight(0)/m/n/10.95 sera également utilisé pour manipuler les co
+ordonnées géographiques.
+ []
+
+[35] [36]
+File: __imgs/cad_1.png Graphic file (type bmp)
+<__imgs/cad_1.png>
+[37]
+Underfull \hbox (badness 10000) in paragraph at lines 1404--1453
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1404--1453
+
+ []
+
+[38]
+Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
+!
+Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
+!
+Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
+!
+Missing character: There is no ␣ in font Consolas/OT:script=latn;language=dflt;
+!
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 1516--1536
+
+ []
+
+[40]
+File: __imgs/3d_vue1.jpg Graphic file (type bmp)
+<__imgs/3d_vue1.jpg>
+File: __imgs/3d_zoom_1.jpg Graphic file (type bmp)
+<__imgs/3d_zoom_1.jpg>
+File: __imgs/3d_zoom_2.jpg Graphic file (type bmp)
+<__imgs/3d_zoom_2.jpg>
+[41]
+Underfull \hbox (badness 10000) in paragraph at lines 1559--1594
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1559--1594
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1559--1594
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1559--1594
+
+ []
+
+[42] [43] [44]
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
 
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 1282--1363
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1612--1693
+
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 1612--1693
 \TU/RobotoLight(0)/m/n/10.95 Au-delà de cette appropriation, une certaine motiv
 ation de créer des outils logiciels par les architectes
  []
 
-[36] [37] [38] [39] (./memoire.lof
+[45] [46] [47] [48]
+Underfull \hbox (badness 1881) in paragraph at lines 1804--1807
+[][]\TU/RobotoLight(0)/m/n/10.95 ZHOU, Qian-Yi, PARK, Jaesik et KOLTUN, Vladlen
+. Open3D : A Modern Library for 3D Data Processing.
+ []
+
+[49] (./memoire.lof
 LaTeX Info: Redefining \rmfamily on input line 1.
 LaTeX Info: Redefining \sffamily on input line 1.
 LaTeX Info: Redefining \ttfamily on input line 1.
@@ -1573,6 +1658,7 @@ Package polyglossia Warning: Failed to patch part for French on input line 1.
 \tf@lof=\write4
 \openout4 = `memoire.lof'.
 
+[50]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -1607,7 +1693,7 @@ braces):
 >  {french/babelname}  =>  {french}
 >  {french/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {french/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-[40] (./memoire.aux
+[51] (./memoire.aux
 LaTeX Info: Redefining \rmfamily on input line 19.
 LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
@@ -1616,12 +1702,12 @@ Package polyglossia Warning: Failed to patch part for French on input line 19.
 
 ) ) 
 Here is how much of TeX's memory you used:
- 21512 strings out of 477219
- 378390 string characters out of 5834002
- 1788306 words of memory out of 5000000
- 40842 multiletter control sequences out of 15000+600000
+ 21653 strings out of 477219
+ 380953 string characters out of 5834002
+ 1787381 words of memory out of 5000000
+ 40976 multiletter control sequences out of 15000+600000
  412103 words of font info for 129 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  98i,12n,125p,1772b,1872s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (40 pages).
+Output written on memoire.pdf (51 pages).

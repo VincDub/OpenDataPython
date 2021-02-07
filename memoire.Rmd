@@ -579,14 +579,12 @@ tandis que les différents **nombres de volumes** associés formeront les valeur
 Quelques paramètres graphiques servent à définir un titre général, des libellés pour les deux axes ainsi qu'une résolution d'export.
 Ici, deux exports possibles seront montrés, à savoir un export **statique** sous forme d'image au format PNG, ainsi qu'un export **interactif** au sein d'une page web au format HTML. 
 
-```{python message=FALSE}
+```{python results='hide'}
 # traçage du graphique
 fig = go.Figure([go.Bar(x=list(n_par_hauteur.keys()), y=list(n_par_hauteur.values()),opacity=0.8,marker_color='rgb(200,0,0)')])
 fig.update_xaxes(categoryorder='category ascending',tickvals=sorted(list(n_par_hauteur.keys())))
 fig.update_layout(title="Répartition des hauteurs",xaxis_title="hauteur (m)",yaxis_title="nombre de volumes",width=600,height=600)
-# Export sous forme d'image statique
 fig.write_image("OUTPUT/graphique_hauteurs.png")
-# Export sous forme d'une page web interactive
 fig.write_html("OUTPUT/graphique_hauteurs.html")
 ```
 
@@ -599,9 +597,9 @@ Il est également possible de créer de la même manière une multitude d'autres
 Un second graphique plus complet peut être construit, en s'intéressant cette fois-ci à une répartition **des volumes suivant leur hauteur, leur surface et s'ils sont en porte à faux**.
 Ici, le sous-module *express* de *Plotly* sera employé avec *Pandas*, permettant une mise en forme plus condensée et une meilleur gestion des données.
 Il sera possible de réutiliser directement les éléments de la liste des volumes. Cependant, un attribut devra être ajouté à chaque volume, spécifiant s'il est en porte à faux ou pas,
-afin de pouvoir être traité dans *Plotly*. La fonction **assert** permettra de le vérifier dans le code ci-dessous.
+afin de pouvoir être traité dans *Plotly*.
 
-```{python message=FALSE}
+```{python results='hide'}
 import plotly.express as px
 import pandas
 
@@ -613,24 +611,321 @@ for volume in volumes:
     volume["is_paf"] = 0
     
 df = pandas.DataFrame(volumes).drop(columns=["coords","hauteur_paf"])
-# traçage d'un graphique en "donut"
-#fig2 = px.scatter_ternary(df,a="surface", b="hauteur", c="is_paf")
-#fig2 = px.parallel_coordinates(df, color="hauteur",color_continuous_scale=px.colors.sequential.amp)
-fig2 = px.line_polar(df, r='r', theta='theta', line_close=True)
-fig2.update_layout(title="Répartition des hauteurs",width=1800,height=800)
+fig2 = px.parallel_coordinates(df, color="hauteur",color_continuous_scale=px.colors.sequential.amp)
+fig2.update_layout(font={"size":20},width=1800,height=800)
 fig2.write_image("OUTPUT/graphique_repart.png")
 fig2.write_html("OUTPUT/graphique_repart.html")
 ```
 
-### Visualisation statistique des données
+```{r graph_repart, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " ",fig.show='hold'}
+include_graphics("OUTPUT/graphique_repart.png")
+```
+
+En l'occurrence, le jeu de données extrait contient davantage de petites surfaces ainsi qu'un nombre équlibré de volumes en porte à faux.
+Cependant, cette souplesse dans la création de représentations graphiques que permet *Plotly*
+rend également possible de dessiner les **emprises des volumes en eux-mêmes**, qui sera également augmentée avec de l'interactivité.
 
 ### Cartographier de manière interactive
 
-## Génération automatique de supports de travail
+Cette sous-section a pour but de présenter une fonctionnalité particulièrement utile pour la profession architecturale.
+En effet, *Plotly* est capable de créer de représenter des **formes géométriques sur un fond de carte** (d'une manière similaire aux solutions de SIG
+ sans avoir besoin de convertir les coordonnées en latitude/longitude), avec laquelle il est possible d'**interagir**, à travers notamment
+ des fonctionnalités telles que le **zoom**, l'**affichage/masquage** d'élements légendés ainsi que l'affichage de caractéristiques au **survol avec le curseur**.
+
+Ainsi, l'objectif sera ici de générer une **carte interactive des volumes par hauteur**.
+
+
+
+```{python}
+import json
+import plotly.graph_objects as go
+volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+```
+
+Après avoir chargé le jeu de données de base, la première étape est de **grouper les volumes par hauteur**. Ceci sera effectué comme dans
+la section précédente, à l'exception que les **volumes ainsi que leurs caractéristiques** seront ajoutés à une liste par hauteur au lieu d'être simplement comptés.
+Le tout sera trié selon la hauteur par **ordre croissant**.
+
+```{python}
+volumes_par_hauteur = {}
+for volume in volumes:
+  try:
+    volumes_par_hauteur[volume["hauteur"]].append(volume)
+  except KeyError:
+    volumes_par_hauteur[volume["hauteur"]] = [volume]
+
+volumes_par_hauteur = dict(sorted(volumes_par_hauteur.items()))
+```
+
+Ensuite, une **boucle** permet d'itérer à travers chaque **hauteur et ses volumes** afin de les tracer.
+Une **couleur** sera préalablement attribuée pour chacune d'entre elles, calculées selon une échelle de gris en RGB (plus le volume est **haut**, plus il sera **clair**).
+La seule subtilité ici est de devoir séparer **les listes de coordonnées latitude/longitude** en **deux listes séparées**, et
+ainsi avoir une liste pour les valeurs de **latitude** et une autre pour les valeurs de **longitude**, contenant des valeurs **nulles** pour
+séparer les volumes lors du traçage.
+\
+
+```{python}
+traces = []
+for h,volumes in volumes_par_hauteur.items():
+  couleur = "rgb(" + ",".join([str(h/max(volumes_par_hauteur.keys())*255)]*3) +")"
+  X = []
+  Y = []
+  for vol in volumes:
+    for coords in vol["coords"]:
+      X.append(coords[0]) # longitude
+      Y.append(coords[1]) # latitude
+    X.append(None) #Séparations entre chaque volume
+    Y.append(None)
+    # Traçage des volumes
+  traces.append(go.Scattermapbox(
+    name=str(h) +"m",
+    mode="lines",
+    line = {"width" : 0.5, "color" : couleur},
+    lon=X,
+    lat=Y,
+    opacity=1.0,
+    hoverinfo="name",
+    fill="toself"))
+```
+Enfin, la carte complète (avec chaque couche de volumes pour chaque hauteur) est créée à partir de la liste *traces*, 
+en configurant le titre, la légende ainsi que le style de fond de carte. Le tout est sauvegardé au format .HTML, 
+permettant de l’ouvrir dans un navigateur afin de permettre l’interactivité et la **navigation libre** dans le fond de carte.
+
+```{python results='hide'}
+fig = go.Figure(traces)
+fig.update_layout(title="Hauteurs des volumes bâtis",legend_title="Hauteur", autosize=True,
+    mapbox = {'style':"carto-positron",'center': {'lon': 2.3848515, 'lat': 48.8272092}, "zoom" : 16.6})
+# Export sous forme d'une page web interactive
+fig.write_html("OUTPUT/carte_des_hauteurs.html")
+```
+
+```{r carte_inter, echo=FALSE, fig.align = 'center', out.width = "45%", fig.cap = " ",fig.show='hold'}
+include_graphics("__imgs/carte_hauteurs_1.png")
+include_graphics("__imgs/carte_hauteurs_2.png")
+```
+
+Dès lors, une telle capacité à cartographier avec souplesse des données brutes présente un intérêt certain
+au sein de la pratique architecturale.
+
+**Ainsi, ces aperçus attestent de la capacité du langage Python à produire facilement de multiples
+représentations graphiques synthétiques à partir de données brutes, du graphique statistique 
+aux cartes interactives, renforcant ainsi la pertinence de son utilisation dans le cadre de l'exploitation
+de données issues de l'Open Data pour les architectes.**
+
+## Génération automatique de documents techniques.
+
+Les capacités de synthèse graphique et de cartographie des données montrées précédemment sont certes intéressantes,
+mais le domaine de la conception architecturale est surtout concerné par la production de dessins, modèles 3D et 
+autres représentations techniques à l'échelle dans le cadre d'un projet. 
+Cette section permettra de répondre à cet enjeu grâce à Python.
 
 ### Fichier CAD vectorisé et hiérarchisé
 
+Le premier aperçu livré dans cette section, sera de **produire un document vectorisé au format .DXF** 
+(format d’échange de dessin vectorisé similaire au .DWG, répandu en CAO), où seront tracés les **différents volumes sous forme de polylignes**. 
+Chacun d’entre eux sera également classé dans un **calque correspondant à sa hauteur**, avec pour chaque calque une couleur différente.
+Pour ce faire, le module **ezdxf** sera employé. Ce dernier permet la plupart des fonctions de dessin vectoriel
+que propose d'autres outils de CAD tels qu'*AutoCAD*, dont la création de calques entre autres.
+\
+\
+Un second module nommé **utm** sera également utilisé pour manipuler les coordonnées géographiques.
+En effet, il est ici indispensable de convertir les **coordonnées géodésiques** exprimées en *degrés de latitude/longitude* en **coordonnées cartésiennes** exprimées en unités de grandeur terrestres.
+La notation UTM (*Universal Transverse Mercator*) étant exprimée en **mètres** et dont le calcul prend en compte la rotondité de la Terre,
+elle se révèle donc essentielle pour pouvoir dessiner dans un repère. (Une petite subtilité sera d'inverser l'ordre des degrés de latitude/longitude dans le code, afin que l'axe *x* corresponde à la **longitude**, 
+et l'axe *y* à la **latitude**).
+
+```{python}
+import json
+import ezdxf
+import utm
+volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+```
+
+Après l'import des modules nécessaires et le chargement du jeu de données de base, un nouveau dessin
+est initialisé. Ensuite, **un calque par hauteur** sera créé en amont des tracés des volumes, de sorte à ce qu'ils
+apparaîssent dans un ordre croissant au sein du futur fichier. Tout comme dans la carte interactive présentée dans la session
+2.1.2, une **teinte de couleur proportionnelle à chaque hauteur** sera créée (en l'occurence, sur du rouge).
+
+```{python}
+# initialisation d'un nouveau dessin
+doc = ezdxf.new(dxfversion='R2010')
+msp = doc.modelspace()
+# boucle sur une ligne pour récupérer les hauteurs
+hauteurs = [volume["hauteur"] for volume in volumes]
+# permet de supprimer les doublons et de trier par ordre croissant
+hauteurs = sorted(list(set(hauteurs)))
+for h in hauteurs:
+  calque = doc.layers.new(str(h) + "m")
+  calque.rgb = (255*(h/hauteurs[-1]),0,0)
+```
+
+Ceci effectué, une boucle itèrera à travers chaque volume.
+Pour chacun d'entre eux, leurs **coordonnées seront préalablement converties** des degrés de latitude/longitude en mètres grâce au module
+*utm*. Une **polyligne** peut ainsi être tracée à partir des points aux coordonnées converties pour représenter l'emprise de chaque volume,
+puis affectée au calque correspondant à la hauteur du volume.
+Enfin, le document est exporté au format .DXF.
+
+```{python  results='hide'}
+for volume in volumes:
+    coords_cart = []
+    # Conversion des coordonnées géodésiques (lat/lon) en cartésiennes (x/y)
+    for coords in volume["coords"]:
+        c = utm.from_latlon(coords[1],coords[0])
+        coords_cart.append((c[0],c[1]))
+    
+    calque = str(volume["hauteur"]) + "m"
+    msp.add_polyline2d(coords_cart, dxfattribs={'layer': calque})
+
+doc.saveas("OUTPUT/plan_bati.dxf")
+```
+
+```{r dessin_cad, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " ",fig.show='hold'}
+include_graphics("__imgs/cad_1.png")
+```
+
+Le document fourni en sortie peut ensuite être importé dans n'importe quel logiciel 
+supportant le format DXF, ce qui est le cas pour la majorité des outils de dessin vectoriel des agences d'architecture.
+Ce document est d'autant plus exploitable qu'il reste **géoréférencé** (les volumes conservent leurs coordonnées UTM dans le dessin),
+et **à l'échelle** (puisque exprimés en mètres).
+\
+De plus, les options de **personnalisation** des calques permettent d'organiser les données
+dont on dispose en amont d'une exploitation "manuelle".
+
+Ainsi, le langage Python prouve également son efficacité lorsqu'il est question de générer des documents
+vectoriels graphiques, pleinement exploitables comme support de travail.
+
 ### Construction d’un modèle 3D
+
+Cette sous-section aura pour but de clore le chapitre en exploitant à son plein potentiel le jeu de donné extrait.
+En effet, puisque l'on dispose à la fois d'**emprises géométriques traçables** ainsi que de **hauteurs**, construire un **modèle 3D**
+automatiquement se présente comme un aboutissement certain, d'autant plus qu'il représente tout naturellement une
+forte utilité pour l'architecte.
+\
+\
+Bien que Python possède des bibliothèques permettant de manipuler de la 3D telles que **PyOpenGL** [@pyopengl] ou **Open3D**[@Zhou2018],
+ces dernières sont plutôt orientées pour effectuer des rendu en images de synthèses ou de la reconstruction sur des maillages.
+Or, ces fonctionnalités sont assez éloignées de l'usage souhaité, où l'on cherche plutôt à **construire un modèle 3D** à partir de données brutes puis les exporter
+dans des formats possédant des **capacités d'organisation du modèle** (comme des calques par exemple) et en évitant le **maillage**,
+afin de les rendre compatibles avec l'usage qu'en feraient un architecte. Ce n'est pas le cas ici, les bibliothèques citées
+privilégiant les formats d'échange maillés comme le format OBJ.
+\
+De plus, même si ce retard a tendance à diminuer avec leur évolution, la quasi-totalité des bibliothèques orientées 3D pour Python sont basées sur des versions codées dans des langages de programmation plus complexes
+comme le *C++* pour des raisons de performances, ce qui fait qu'il persiste toujours un "retard" entre le moteur natif
+et son intégration destinée à Python, comme le présente plus en détail l'ouvrage *Python & OpenGL for Scientific Visualization* (P.ROUGIER,2018) [@pyopenglcrit].
+\
+C'est pourquoi la bibliothèque **RhinoInside** [@rhinoinside] sera ici utilisée. C'est une solution logicielle Open Source développée sous l'initiative de la société développant Rhinoceros (McNeel) 
+associée au modeleur 3D Rhinoceros depuis la version 7. Elle a pour but de **connecter Rhinoceros à un autre programme**, afin de pouvoir transférer de manière directe des données entre ces deux éléments.
+\
+La version Python de cet outil permet de connecter une instance de Rhinoceros sans interface graphique (mais permettant tout de même toute opération possible manuellement dans le logiciel) à un script, en important un module nommé « rhinoinside ».
+Ainsi, il sera possible directement dans un même script de créer un fichier au format natif de Rhinoceros (.3DM), puis y dessiner et extruder des tracés pour enfin le sauvegarder sur son disque dur.
+\
+
+```{python}
+import json
+import utm
+volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+# chargement d'une instance de RhinoInside
+import rhinoinside
+from pathlib import Path
+rhino_path = Path("C:/Program Files/Rhino 7/System")
+rhinocore_path = Path("C:/Program Files/Rhino 7/System/RhinoCore.dll")
+rhinoinside.load(str(rhino_path))
+import System
+import Rhino
+```
+
+La séquence d'import est un peu plus conséquente, puisqu'il faut référencer le chemin d'installation de Rhino 7.
+Le module *utm* sera également utilisé ici.
+
+
+```{python  results='hide'}
+# Création du document
+DOC = Rhino.RhinoDoc.Create("")
+DOC.ModelUnitSystem = Rhino.UnitSystem.Meters
+# Création d'un calque principal
+calque_bati =  Rhino.DocObjects.Layer()
+calque_bati.Color = System.Drawing.Color.FromArgb(255,0,0,0)
+calque_bati.Name = 'batiments'
+DOC.Layers.Add(calque_bati)
+# Définition de ce calque comme actuel
+c_actuel = DOC.Layers.FindByFullPath("calque_bati",-1)
+DOC.Layers.SetCurrentLayerIndex(c_actuel,False)
+```
+
+Une première étape consiste à créer une **nouvelle instance d'un document rhino**, spécifier ses unités (ici, en accord avec les unités des coordonnées UTM, soit le *mètre*),
+ainsi que créer un calque dans lequel seront dessinés les volumes. Ce dernier se verra attribuer un **nom** et une **couleur**.
+
+```{python  results='hide'}
+for volume in volumes:
+  pts = System.Collections.Generic.List[Rhino.Geometry.Point3d]()
+  # Conversion des coordonnées géodésiques (lat/lon) en cartésiennes (x/y)
+  for coords in volume["coords"]:
+    c = utm.from_latlon(coords[1],coords[0])
+    pts.Add(Rhino.Geometry.Point3d(c[0],c[1],0.0))
+  
+  poly = Rhino.Geometry.Polyline(pts)
+  try:
+    # Si le volume est en porte à faux
+    for intervalle in volume['hauteur_paf']:
+      poly.SetAllZ(float(intervalle[0]))
+      polyz = poly.ToPolylineCurve()
+      h_cible = float(intervalle[1])-float(intervalle[0])
+      extr = Rhino.Geometry.Extrusion.Create(polyz,-1*h_cible,True)
+      DOC.Objects.AddExtrusion(extr)
+  except KeyError:
+    # Si le volume repose au rdc
+    polyz = poly.ToPolylineCurve()
+    extr = Rhino.Geometry.Extrusion.Create(polyz,-1*float(volume["hauteur"]),True)
+    DOC.Objects.AddExtrusion(extr)
+
+success = DOC.SaveAs('OUTPUT/modele.3dm')
+```
+
+La boucle ci-dessus effectue deux opérations distinctes sur chaque volume.
+\
+La première étape consiste à **convertir les coordonnées** en latitude/longitude en coordonnées *utm* afin de pouvoir les exploiter dans le repère de Rhino, 
+puis de les grouper au sein d'une liste (nommée *pts*) afin d'en générer une **polyligne**.
+\
+Ensuite, si le volume est en **porte à faux**, les différents **intervalles de hauteur** qu’il occupe dans son emprise en plan (exemple : 6 à 15 mètres) sont récupérés.
+Pour chacun d'entre eux, la polyligne créée précédemment sera déplacée en hauteur pour atteindre la borne "basse" de l’intervalle. 
+Une **extrusion** est alors créée depuis cette base pour atteindre la hauteur définie par la borne "haute" de l’intervalle, et sera enfin écrite dans le fichier Rhinoceros.
+En revanche, en cas d’un volume simple reposant au rez-de-chaussée, une seule extrusion sera créée afin d’atteindre la hauteur définie par l’attribut *hauteur*, puis sera écrite dans le fichier.
+\
+\
+Enfin, le fichier est sauvegardé au format 3DM, que l'on peut ensuite visualiser et parcourir directement dans Rhinoceros.
+
+```{r modele_3d, echo=FALSE, fig.align = 'center', out.width = "90%", fig.cap = " ",fig.show='hold'}
+include_graphics("__imgs/3d_vue1.jpg")
+```
+
+Le résultat révèle à la fois une **précision** et un **degré de complexité** certains du jeu de données initial, jusque-là non-visualisables.
+
+```{r modele_3d_zoom, echo=FALSE, fig.align = 'center', out.height = "30%", fig.cap = " ",fig.show='hold'}
+include_graphics("__imgs/3d_zoom_1.jpg")
+include_graphics("__imgs/3d_zoom_2.jpg")
+```
+
+Bien que la syntaxe de **Rhinoinside** soit plus ardue que celle de la section précédente (dû au fait qu'il faille s'appuyer sur de la documentation
+écrite pour le langage de programmation natif de Rhinoceros, le *C#*), un architecte possédant une bonne connaissance du logiciel Rhinoceros,
+et surtout de la manière logique de résoudre un problème de modélisation dans cet outil précis (surtout vis à vis des commandes) peut établir une stratégie viable.
+\
+**Cette solution a donc permis d’exploiter les données collectées à leur plein potentiel.**
+\
+\
+\
+**Ainsi, au-delà de permettre une simple visualisation statistique des jeux de données en Open Data, 
+le langage Python apporte à l’architecte des solutions techniques variées afin de convertir les jeux de données bruts en 
+fichiers synthétiques dans des formats pleinements exploitables dans son environnement de travail, de la visualisation des données interactives au modèle 3D.**
+\
+\
+En outre, toutes ces solutions permettent d’obtenir chacun de ces éléments en **un temps d'éxécution très faible (quelques minutes d’exécution tout au plus)**, 
+permettant un **gain de temps considérable** une fois qu'ils ont été développés, qui ne fera que **s'accroître** à mesure qu'on le **réutilise**.
+De plus, les scripts présentés au cours de ce chapitre démontrent de par leur **longueur maîtrisée** (50 lignes maximum) que ce genre de manipulations complexes 
+peuvent être mises en place de manière clarifiée, en prolongement des concepts basiques abordés dans le chapitre 1.
+\
+\
+Jusqu’à lors, l’exercice a été de manipuler une infime portion d’un jeu de données ciblé autour d’un site, dans une optique « traditionnelle » de se renseigner sur un contexte immédiat.
+Le prochain chapitre sera dédié à une approche plus approfondie de l’utilisation de données ouvertes, recélant cependant un intérêt certain pour la conception architecturale.
 
 \newpage
 
@@ -677,7 +972,15 @@ Au-delà de cette appropriation, une certaine motivation de créer des outils lo
 
 <div id="refs"></div>
 
+\newpage
+
 # ICONOGRAPHIE {-}
 
 \renewcommand{\listfigurename}{}
 \listoffigures
+
+\newpage
+
+# ANNEXE : MÉTHODOLOGIE DE RÉDACTION {-}
+
+Ce mémoire a été écrit en utilisant le langage **R markdown**, sous la forme d'un seul script.
