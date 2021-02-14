@@ -1,0 +1,58 @@
+```{r echo=FALSE}
+l = "Import de données au format CSV dans Python via Pandas"
+s = "Réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r io_csv, echo=FALSE, fig.align = 'center', out.width = "90%"}
+include_graphics("__imgs/io_csv.png")
+```
+
+Une fois téléchargé, le fichier .CSV peut être importé dans un script Python, grâce à la bibliothèque **Pandas**, spécialisée dans la manipulation de
+bases de données formatées sous forme de tableur. Afin de ne séléctionner que les variables les plus pertinentes, le paramètre *usecols* (signifiant *"useful columns"*, soit "colonnes utiles") sera utilisé
+afin d'indiquer au code de ne garder que les colonnes **geom**,**H_ET_MAX**,**L_B_U** et **M2_PL_TOT**.
+\
+Enfin, la fonction  **print()** nous permettra d'afficher seulement les 5 premiers enregistrements du jeu de données.
+\
+
+```{python a1}
+# Import de la bibliothèque pandas (appelé ici avec l'abréviation "pd")
+import pandas as pd
+# Lecture du fichier CSV avec les colonnes choisies
+data = pd.read_csv("DONNEES/volumesbatisparis.csv",sep=";",usecols=["geom","H_ET_MAX","L_B_U","M2_PL_TOT"])
+# Affichage des 5 premiers enregistrements
+print(data.head(5))
+```
+\
+
+Dès lors, comme montré lors de la première lecture, la colonne *geom* comporte plusieurs valeurs par case (à savoir le type de géométrie et ses coordonnées).
+
+Or, cela pose problème dans un format de type tableur, ne pouvant afficher qu'un type de valeur par case (soit du texte, soit des nombres).
+Afin de conserver le maximum d'informations, ce tableau inclue les informations géométriques en **texte brut seulement** ("chaine de caractères", ou "str" en anglais),
+comme le prouve la commande ci-dessous.
+
+```{python a2}
+# Affichage du type de données dans la colonne "geom"
+print(type(data["geom"][0]))
+```
+
+Ayant perdu le formatage de ces données, il est impossible d'en extraire des données en l'état. 
+Heureusement, le langage Python possèdant une riche collection de bibliothèques internes,
+une bonne connaissance de ces dernières permet dans la majorité des cas de palier à ce genre de problèmes.
+Ainsi, grâce au code ci-dessous, les deux valeurs peuvent être extraites individuellement.
+\
+
+```{python a3}
+import ast
+# Permet à Python de reconnaitre une notation à partir de texte
+geom0 = ast.literal_eval(data["geom"][0])
+# Affichage des deux informations de "geom" individuellement
+print(geom0["type"])
+print(geom0["coordinates"])
+```
+
+\
+Bien que cela fonctionne, ce n'est pas une bonne pratique à adopter en règle général. En effet, il peut arriver qu'une des valeurs 
+inscrites dans une valeur *"mère"* se décompose elle-même en un ensemble de valeurs. Il faudrait alors répéter la commande précédente autant de fois que
+nécessaire, tout en étant sûr à 100% que chaque enregistrement soit construit de manière identique sur l'ensemble du jeu de données.
+\
+\
