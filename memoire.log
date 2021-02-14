@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.9)  13 FEB 2021 23:21
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.9)  14 FEB 2021 21:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -695,69 +695,11 @@ Package fontspec Info: Font family 'RobotoMono(0)' created for font 'Roboto
 (fontspec)             <->s*[0.9999973608090705]"Roboto
 (fontspec)             Mono/BI/OT:script=DFLT;language=dflt;+smcp;"
 
-(c:/texlive/2020/texmf-dist/tex/latex/mdframed/mdframed.sty
-Package: mdframed 2013/07/01 1.9b: mdframed
-(c:/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count309
-) (c:/texlive/2020/texmf-dist/tex/latex/zref/zref-abspage.sty
-Package: zref-abspage 2020-07-03 v2.32 Module abspage for zref (HO)
-(c:/texlive/2020/texmf-dist/tex/latex/zref/zref-base.sty
-Package: zref-base 2020-07-03 v2.32 Module base for zref (HO)
-Package zref Info: New property list: main on input line 764.
-Package zref Info: New property: default on input line 765.
-Package zref Info: New property: page on input line 766.
-)
-\c@abspage=\count310
-Package zref Info: New property: abspage on input line 66.
-) (c:/texlive/2020/texmf-dist/tex/latex/needspace/needspace.sty
-Package: needspace 2010/09/12 v1.3d reserve vertical space
-)
-\mdf@templength=\skip64
-\c@mdf@globalstyle@cnt=\count311
-\mdf@skipabove@length=\skip65
-\mdf@skipbelow@length=\skip66
-\mdf@leftmargin@length=\skip67
-\mdf@rightmargin@length=\skip68
-\mdf@innerleftmargin@length=\skip69
-\mdf@innerrightmargin@length=\skip70
-\mdf@innertopmargin@length=\skip71
-\mdf@innerbottommargin@length=\skip72
-\mdf@splittopskip@length=\skip73
-\mdf@splitbottomskip@length=\skip74
-\mdf@outermargin@length=\skip75
-\mdf@innermargin@length=\skip76
-\mdf@linewidth@length=\skip77
-\mdf@innerlinewidth@length=\skip78
-\mdf@middlelinewidth@length=\skip79
-\mdf@outerlinewidth@length=\skip80
-\mdf@roundcorner@length=\skip81
-\mdf@footenotedistance@length=\skip82
-\mdf@userdefinedwidth@length=\skip83
-\mdf@needspace@length=\skip84
-\mdf@frametitleaboveskip@length=\skip85
-\mdf@frametitlebelowskip@length=\skip86
-\mdf@frametitlerulewidth@length=\skip87
-\mdf@frametitleleftmargin@length=\skip88
-\mdf@frametitlerightmargin@length=\skip89
-\mdf@shadowsize@length=\skip90
-\mdf@extratopheight@length=\skip91
-\mdf@subtitleabovelinewidth@length=\skip92
-\mdf@subtitlebelowlinewidth@length=\skip93
-\mdf@subtitleaboveskip@length=\skip94
-\mdf@subtitlebelowskip@length=\skip95
-\mdf@subtitleinneraboveskip@length=\skip96
-\mdf@subtitleinnerbelowskip@length=\skip97
-\mdf@subsubtitleabovelinewidth@length=\skip98
-\mdf@subsubtitlebelowlinewidth@length=\skip99
-\mdf@subsubtitleaboveskip@length=\skip100
-\mdf@subsubtitlebelowskip@length=\skip101
-\mdf@subsubtitleinneraboveskip@length=\skip102
-\mdf@subsubtitleinnerbelowskip@length=\skip103
-(c:/texlive/2020/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/texlive/20
-20/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/texlive/2020/texmf-dist/tex/
-latex/pgf/utilities/pgfrcs.sty (c:/texlive/2020/texmf-dist/tex/generic/pgf/util
-ities/pgfutil-common.tex
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2020/10/09 version 4.42 text color boxes
+(c:/texlive/2020/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/texlive/2020/t
+exmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/texlive/2020/texmf-dist/tex/ge
+neric/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks27
 \pgfutil@tempdima=\dimen182
 \pgfutil@tempdimb=\dimen183
@@ -791,14 +733,14 @@ Package: pgfsys 2020/12/27 v3.1.8b (3.1.8b)
 \pgf@yd=\dimen193
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count312
-\c@pgf@countb=\count313
-\c@pgf@countc=\count314
-\c@pgf@countd=\count315
+\c@pgf@counta=\count309
+\c@pgf@countb=\count310
+\c@pgf@countc=\count311
+\c@pgf@countd=\count312
 \t@pgf@toka=\toks31
 \t@pgf@tokb=\toks32
 \t@pgf@tokc=\toks33
-\pgf@sys@id@count=\count316
+\pgf@sys@id@count=\count313
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/12/27 v3.1.8b (3.1.8b)
 )
@@ -810,12 +752,12 @@ File: pgfsys-dvipdfmx.def 2020/12/27 v3.1.8b (3.1.8b)
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2020/12/27 v3.1.8b (3.1.8b)
 )
-\pgfsys@objnum=\count317
+\pgfsys@objnum=\count314
 )))
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/12/27 v3.1.8b (3.1.8b)
-\pgfsyssoftpath@smallbuffer@items=\count318
-\pgfsyssoftpath@bigbuffer@items=\count319
+\pgfsyssoftpath@smallbuffer@items=\count315
+\pgfsyssoftpath@bigbuffer@items=\count316
 )
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/12/27 v3.1.8b (3.1.8b)
@@ -826,7 +768,7 @@ Package: pgfcore 2020/12/27 v3.1.8b (3.1.8b)
 -dist/tex/generic/pgf/math/pgfmathutil.code.tex) (c:/texlive/2020/texmf-dist/te
 x/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen194
-\pgfmath@count=\count320
+\pgfmath@count=\count317
 \pgfmath@box=\box57
 \pgfmath@toks=\toks34
 \pgfmath@stack@operand=\toks35
@@ -849,7 +791,7 @@ x)
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithm
 etics.code.tex))) (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfloat
 .code.tex
-\c@pgfmathroundto@lastzeros=\count321
+\c@pgfmathroundto@lastzeros=\count318
 )) (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/texliv
 e/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/12/27 v3.1.8b (3.1.8b)
@@ -884,7 +826,7 @@ File: pgfcorescopes.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 \pgfpic=\box58
 \pgf@hbox=\box59
 \pgf@layerbox@main=\box60
-\pgf@picture@serial@count=\count322
+\pgf@picture@serial@count=\count319
 )
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code
 .tex
@@ -912,8 +854,8 @@ File: pgfcorearrows.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 ) (c:/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 \pgf@max=\dimen274
-\pgf@sys@shading@range@num=\count323
-\pgf@shadingcount=\count324
+\pgf@sys@shading@range@num=\count320
+\pgf@shadingcount=\count321
 ) (c:/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 
@@ -948,25 +890,58 @@ Package: pgfcomp-version-0-65 2020/12/27 v3.1.8b (3.1.8b)
 (c:/texlive/2020/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.st
 y
 Package: pgfcomp-version-1-18 2020/12/27 v3.1.8b (3.1.8b)
-)) (c:/texlive/2020/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (c:/texlive/2
-020/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (c:/texlive/2020/texmf-dist/
-tex/generic/pgf/utilities/pgfkeys.code.tex)) (c:/texlive/2020/texmf-dist/tex/la
-tex/pgf/math/pgfmath.sty (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfma
-th.code.tex)) (c:/texlive/2020/texmf-dist/tex/generic/pgf/utilities/pgffor.code
-.tex
+)) (c:/texlive/2020/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks37
+\verbatim@line=\toks38
+\verbatim@in@stream=\read3
+) (c:/texlive/2020/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(c:/texlive/2020/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)) (c:/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count322
+)
+\tcb@titlebox=\box63
+\tcb@upperbox=\box64
+\tcb@lowerbox=\box65
+\tcb@phantombox=\box66
+\c@tcbbreakpart=\count323
+\c@tcblayer=\count324
+\c@tcolorbox@number=\count325
+\tcb@temp=\box67
+\tcb@temp=\box68
+\tcb@temp=\box69
+\tcb@temp=\box70
+\tcb@out=\write4
+\tcb@record@out=\write5
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+Library (tcolorbox): 'tcbraster.code.tex' version '4.42'
+\c@tcbrastercolumn=\count326
+\c@tcbrasterrow=\count327
+\c@tcbraster=\count328
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+Library (tcolorbox): 'tcbskins.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/texlive/20
+20/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (c:/texlive/2020/texmf-dist/te
+x/latex/pgf/utilities/pgfkeys.sty (c:/texlive/2020/texmf-dist/tex/generic/pgf/u
+tilities/pgfkeys.code.tex)) (c:/texlive/2020/texmf-dist/tex/latex/pgf/math/pgfm
+ath.sty (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (c:
+/texlive/2020/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2020/12/27 v3.1.8b (3.1.8b)
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen277
 \pgffor@skip=\dimen278
-\pgffor@stack=\toks37
-\pgffor@toks=\toks38
+\pgffor@stack=\toks39
+\pgffor@toks=\toks40
 )) (c:/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2020/12/27 v3.1.8b (3.1.8b)
 
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.co
 de.tex
 File: pgflibraryplothandlers.code.tex 2020/12/27 v3.1.8b (3.1.8b)
-\pgf@plot@mark@count=\count325
+\pgf@plot@mark@count=\count329
 \pgfplotmarksize=\dimen279
 )
 \tikz@lastx=\dimen280
@@ -977,72 +952,84 @@ File: pgflibraryplothandlers.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 \tikz@lastmovetoy=\dimen285
 \tikzleveldistance=\dimen286
 \tikzsiblingdistance=\dimen287
-\tikz@figbox=\box63
-\tikz@figbox@bg=\box64
-\tikz@tempbox=\box65
-\tikz@tempbox@bg=\box66
-\tikztreelevel=\count326
-\tikznumberofchildren=\count327
-\tikznumberofcurrentchild=\count328
-\tikz@fig@count=\count329
+\tikz@figbox=\box71
+\tikz@figbox@bg=\box72
+\tikz@tempbox=\box73
+\tikz@tempbox@bg=\box74
+\tikztreelevel=\count330
+\tikznumberofchildren=\count331
+\tikznumberofcurrentchild=\count332
+\tikz@fig@count=\count333
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/12/27 v3.1.8b (3.1.8b)
-\pgfmatrixcurrentrow=\count330
-\pgfmatrixcurrentcolumn=\count331
-\pgf@matrix@numberofcolumns=\count332
+\pgfmatrixcurrentrow=\count334
+\pgfmatrixcurrentcolumn=\count335
+\pgf@matrix@numberofcolumns=\count336
 )
-\tikz@expandcount=\count333
+\tikz@expandcount=\count337
 
 (c:/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
 brarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2020/12/27 v3.1.8b (3.1.8b)
-))) (c:/texlive/2020/texmf-dist/tex/latex/mdframed/md-frame-1.mdf
-File: md-frame-1.mdf 2013/07/01\ 1.9b: md-frame-1
+)))
+\tcb@waterbox=\box75
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '4.42'
+)) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+Library (tcolorbox): 'tcbbreakable.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/generic/oberdiek/pdfcol.sty
+Package: pdfcol 2019/12/29 v1.6 Handle new color stacks for pdfTeX (HO)
+Package pdfcol Info: Interface disabled because of missing PDF mode of pdfTeX.
 )
-\mdf@frametitlebox=\box67
-\mdf@footnotebox=\box68
-\mdf@splitbox@one=\box69
-\mdf@splitbox@two=\box70
-\mdf@splitbox@save=\box71
-\mdfsplitboxwidth=\skip104
-\mdfsplitboxtotalwidth=\skip105
-\mdfsplitboxheight=\skip106
-\mdfsplitboxdepth=\skip107
-\mdfsplitboxtotalheight=\skip108
-\mdfframetitleboxwidth=\skip109
-\mdfframetitleboxtotalwidth=\skip110
-\mdfframetitleboxheight=\skip111
-\mdfframetitleboxdepth=\skip112
-\mdfframetitleboxtotalheight=\skip113
-\mdffootnoteboxwidth=\skip114
-\mdffootnoteboxtotalwidth=\skip115
-\mdffootnoteboxheight=\skip116
-\mdffootnoteboxdepth=\skip117
-\mdffootnoteboxtotalheight=\skip118
-\mdftotallinewidth=\skip119
-\mdfboundingboxwidth=\skip120
-\mdfboundingboxtotalwidth=\skip121
-\mdfboundingboxheight=\skip122
-\mdfboundingboxdepth=\skip123
-\mdfboundingboxtotalheight=\skip124
-\mdf@freevspace@length=\skip125
-\mdf@horizontalwidthofbox@length=\skip126
-\mdf@verticalmarginwhole@length=\skip127
-\mdf@horizontalspaceofbox=\skip128
-\mdfsubtitleheight=\skip129
-\mdfsubsubtitleheight=\skip130
-\c@mdfcountframes=\count334
+Package pdfcol Info: pdfTeX's color stacks are not available.
+\tcb@testbox=\box76
+\tcb@totalupperbox=\box77
+\tcb@totallowerbox=\box78
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbhooks.code.tex
+Library (tcolorbox): 'tcbhooks.code.tex' version '4.42'
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+Library (tcolorbox): 'tcbtheorems.code.tex' version '4.42'
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
+Library (tcolorbox): 'tcbfitting.code.tex' version '4.42'
+\tcbfitdim=\dimen288
+\tcb@lowerfitdim=\dimen289
+\tcb@upperfitdim=\dimen290
+\tcb@cur@hbadness=\count338
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbxparse.code.tex
+Library (tcolorbox): 'tcbxparse.code.tex' version '4.42'
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcblistingsutf8.code.tex
+Library (tcolorbox): 'tcblistingsutf8.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+Library (tcolorbox): 'tcblistings.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+Library (tcolorbox): 'tcblistingscore.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+Library (tcolorbox): 'tcbprocessing.code.tex' version '4.42'
+(c:/texlive/2020/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Restricted shell escape enabled on input line 77.
+))
+\c@tcblisting=\count339
+))
+Package tcolorbox Info: Library `listingsutf8' is compatible with pdftex only. 
+Library `listings` is loaded instead. on input line 29.
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbexternal.code.tex
+Library (tcolorbox): 'tcbexternal.code.tex' version '4.42'
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbmagazine.code.tex
+Library (tcolorbox): 'tcbmagazine.code.tex' version '4.42'
+) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbvignette.code.tex
+Library (tcolorbox): 'tcbvignette.code.tex' version '4.42'
 
-****** mdframed patching \endmdf@trivlist
+(c:/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzli
+braryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2020/12/27 v3.1.8b (3.1.8b)
 
-****** -- success******
-
-\mdf@envdepth=\count335
-\c@mdf@env@i=\count336
-\c@mdf@env@ii=\count337
-\c@mdf@zref@counter=\count338
-Package zref Info: New property: mdf@pagevalue on input line 895.
-) (c:/texlive/2020/texmf-dist/tex/latex/polyglossia/polyglossia.sty
+(c:/texlive/2020/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.te
+x
+File: pgflibraryfadings.code.tex 2020/12/27 v3.1.8b (3.1.8b)
+))) (c:/texlive/2020/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+Library (tcolorbox): 'tcbposter.code.tex' version '4.42'
+)) (c:/texlive/2020/texmf-dist/tex/latex/polyglossia/polyglossia.sty
 Package: polyglossia 2020/12/08 v1.51 Modern multilingual typesetting with XeLa
 TeX and LuaLaTeX
 (c:/texlive/2020/texmf-dist/tex/latex/makecmds/makecmds.sty
@@ -1051,10 +1038,10 @@ Package: makecmds 2009/09/03 v1.0a extra command making commands
 Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 (c:/texlive/2020/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2020/te
 xmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks39
-\XKV@tempa@toks=\toks40
+\XKV@toks=\toks41
+\XKV@tempa@toks=\toks42
 )
-\XKV@depth=\count339
+\XKV@depth=\count340
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 \xpg@normalclass=\XeTeXcharclass1
@@ -1126,26 +1113,26 @@ braces):
 Package polyglossia Info: Option: French, variant=french.
 )
 Package polyglossia Info: Default language is french.
-\cslhangindent=\skip131
-\csllabelwidth=\skip132
+\cslhangindent=\skip64
+\csllabelwidth=\skip65
 (c:/texlive/2020/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count340
-\calc@Bcount=\count341
-\calc@Adimen=\dimen288
-\calc@Bdimen=\dimen289
-\calc@Askip=\skip133
-\calc@Bskip=\skip134
+\calc@Acount=\count341
+\calc@Bcount=\count342
+\calc@Adimen=\dimen291
+\calc@Bdimen=\dimen292
+\calc@Askip=\skip66
+\calc@Bskip=\skip67
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count342
-\calc@Cskip=\skip135
+\calc@Ccount=\count343
+\calc@Cskip=\skip68
 ) (./memoire.aux
-LaTeX Info: Redefining \rmfamily on input line 20.
-LaTeX Info: Redefining \sffamily on input line 20.
-LaTeX Info: Redefining \ttfamily on input line 20.
+LaTeX Info: Redefining \rmfamily on input line 19.
+LaTeX Info: Redefining \sffamily on input line 19.
+LaTeX Info: Redefining \ttfamily on input line 19.
 
-Package polyglossia Warning: Failed to patch part for French on input line 20.
+Package polyglossia Warning: Failed to patch part for French on input line 19.
 
 )
 \openout1 = `memoire.aux'.
@@ -1449,7 +1436,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2020/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count343
+\c@section@level=\count344
 )
 LaTeX Info: Redefining \ref on input line 207.
 LaTeX Info: Redefining \pageref on input line 207.
@@ -1488,7 +1475,7 @@ LaTeX Info: Redefining \nameref on input line 207.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count344
+\c@lstlisting=\count345
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Info: Redefining \rmfamily on input line 207.
@@ -1581,8 +1568,8 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.7065pt on input line 6.
 [3])
-\tf@toc=\write4
-\openout4 = `memoire.toc'.
+\tf@toc=\write6
+\openout6 = `memoire.toc'.
 
 [4]
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
@@ -1713,25 +1700,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 472--479
 File: __imgs/site_odp_carte.jpg Graphic file (type bmp)
 <__imgs/site_odp_carte.jpg>
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/sc' will be
-(Font)              scaled to size 10.95pt on input line 488.
-LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 488.
+(Font)              scaled to size 10.95pt on input line 487.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 488.
+(Font)              scaled to size 10.0pt on input line 487.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/scit' will be
-(Font)              scaled to size 10.0pt on input line 488.
+(Font)              scaled to size 10.0pt on input line 487.
 
-Underfull \hbox (badness 10000) in paragraph at lines 492--493
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 498--510
+Underfull \hbox (badness 10000) in paragraph at lines 491--492
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 498--510
+Underfull \hbox (badness 10000) in paragraph at lines 497--509
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--509
 
  []
 
@@ -1739,56 +1724,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 498--510
 File: __imgs/site_odp_tableau.jpg Graphic file (type bmp)
 <__imgs/site_odp_tableau.jpg>
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--530
+Underfull \hbox (badness 10000) in paragraph at lines 521--531
 
  []
 
 File: __imgs/primitives_geometriques.png Graphic file (type bmp)
 <__imgs/primitives_geometriques.png>
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 540--571
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--571
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--571
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--571
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--571
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 576--587
+Underfull \hbox (badness 10000) in paragraph at lines 579--590
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--587
+Underfull \hbox (badness 10000) in paragraph at lines 579--590
 
  []
 
 File: __imgs/odp_meta1.jpg Graphic file (type bmp)
 <__imgs/odp_meta1.jpg>
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 597--612
+Underfull \hbox (badness 10000) in paragraph at lines 602--617
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--612
+Underfull \hbox (badness 10000) in paragraph at lines 602--617
 
  []
 
@@ -1796,31 +1781,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 597--612
 File: __imgs/odp_meta2.jpg Graphic file (type bmp)
 <__imgs/odp_meta2.jpg>
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/it' will be
-(Font)              scaled to size 10.95pt on input line 627.
+(Font)              scaled to size 10.95pt on input line 634.
 
-Underfull \hbox (badness 10000) in paragraph at lines 622--643
+Underfull \hbox (badness 10000) in paragraph at lines 629--650
 
  []
 
 [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 651--661
+Underfull \hbox (badness 10000) in paragraph at lines 658--668
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 651--661
+Underfull \hbox (badness 10000) in paragraph at lines 658--668
 
  []
 
 File: __imgs/site_odp_carte_zone.jpg Graphic file (type bmp)
 <__imgs/site_odp_carte_zone.jpg>
 
-Underfull \hbox (badness 10000) in paragraph at lines 671--672
+Underfull \hbox (badness 10000) in paragraph at lines 680--681
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 682--692
+Underfull \hbox (badness 10000) in paragraph at lines 691--701
 
  []
 
@@ -1828,79 +1813,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 682--692
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 693.
+(Font)              scaled to size 9.0pt on input line 703.
 File: __imgs/io_json.png Graphic file (type bmp)
 <__imgs/io_json.png>
 [20]
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 729.
+(Font)              scaled to size 9.0pt on input line 743.
 LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 731.
-
-Underfull \hbox (badness 10000) in paragraph at lines 758--776
+(Font)              scaled to size 9.0pt on input line 745.
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 777--795
 
  []
 
 
-Underfull \hbox (badness 1365) in paragraph at lines 758--776
+Underfull \hbox (badness 1365) in paragraph at lines 777--795
 \TU/RobotoLight(0)/m/n/10.95 Ainsi, il est possible d’extraire les variables in
 itialement souhaitées pour chacun des volumes avec une
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 795--818
+
+Underfull \hbox (badness 10000) in paragraph at lines 777--795
+
+ []
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 815--816
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 795--818
+Underfull \hbox (badness 10000) in paragraph at lines 817--840
 
  []
 
-[22] [23]
+
+Underfull \hbox (badness 10000) in paragraph at lines 817--840
+
+ []
+
+[23] [24]
 LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/n' will be
-(Font)              scaled to size 10.79997pt on input line 866.
-[24]
+(Font)              scaled to size 10.79997pt on input line 891.
+[25]
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/n' will be
-(Font)              scaled to size 7.665pt on input line 926.
+(Font)              scaled to size 7.665pt on input line 956.
 File: __imgs/hpaf.png Graphic file (type bmp)
 <__imgs/hpaf.png>
-[25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 1021--1034
+[26] [27]
+Underfull \hbox (badness 10000) in paragraph at lines 1059--1072
 
  []
 
-[27]
-Underfull \hbox (badness 10000) in paragraph at lines 1041--1070
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1041--1070
+[28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1041--1070
+Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
 
  []
 
 File: __imgs/p2.png Graphic file (type bmp)
 <__imgs/p2.png>
-[28]
-Overfull \vbox (22.01535pt too high) has occurred while \output is active []
-
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 1105--1111
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1125--1143
-
- []
-
 [30]
+Overfull \vbox (52.7941pt too high) has occurred while \output is active []
+
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 1147--1153
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1169--1187
+
+ []
+
+[32]
 Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
 lt;!
 Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
@@ -1917,15 +1912,15 @@ File: OUTPUT/graphique_hauteurs.png Graphic file (type bmp)
 <OUTPUT/graphique_hauteurs.png>
 File: __imgs/graphique_hauteurs_int.png Graphic file (type bmp)
 <__imgs/graphique_hauteurs_int.png>
-[31]
+[33] [34]
 File: OUTPUT/graphique_repart.png Graphic file (type bmp)
 <OUTPUT/graphique_repart.png>
-[32]
-Underfull \hbox (badness 10000) in paragraph at lines 1248--1258
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 1304--1314
 
  []
 
-[33]
+[36]
 Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
 lt;!
 Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
@@ -1936,189 +1931,189 @@ File: __imgs/carte_hauteurs_1.png Graphic file (type bmp)
 <__imgs/carte_hauteurs_1.png>
 File: __imgs/carte_hauteurs_2.png Graphic file (type bmp)
 <__imgs/carte_hauteurs_2.png>
-[34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 1334--1355
+[37] [38]
+Underfull \hbox (badness 10000) in paragraph at lines 1396--1417
 
  []
 
 
-Underfull \hbox (badness 1490) in paragraph at lines 1334--1355
+Underfull \hbox (badness 1490) in paragraph at lines 1396--1417
 \TU/RobotoLight(0)/m/n/10.95 Un second module nommé \TU/RobotoLight(0)/b/n/10.9
 5 utm \TU/RobotoLight(0)/m/n/10.95 sera également utilisé pour manipuler les co
 ordonnées géographiques.
  []
 
-[36]
+[39]
 File: __imgs/cad_1.png Graphic file (type bmp)
 <__imgs/cad_1.png>
-[37]
-Underfull \hbox (badness 10000) in paragraph at lines 1430--1479
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1430--1479
-
- []
-
-[38] [39]
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
 [40]
-Underfull \hbox (badness 10000) in paragraph at lines 1542--1562
+Underfull \hbox (badness 10000) in paragraph at lines 1500--1549
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1500--1549
+
+ []
+
+[41] [42]
+Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
+lt;!
+Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
+lt;!
+Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
+lt;!
+Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
+lt;!
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 1618--1638
 
  []
 
 File: __imgs/3d_vue1.jpg Graphic file (type bmp)
 <__imgs/3d_vue1.jpg>
-[41]
+[44]
 File: __imgs/3d_zoom_1.jpg Graphic file (type bmp)
 <__imgs/3d_zoom_1.jpg>
 File: __imgs/3d_zoom_2.jpg Graphic file (type bmp)
 <__imgs/3d_zoom_2.jpg>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1585--1620
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1585--1620
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1585--1620
+Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1585--1620
-
- []
-
-[42] [43]
-Underfull \hbox (badness 10000) in paragraph at lines 1627--1669
+Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1627--1669
+Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
+
+ []
+
+[46] [47]
+Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1627--1669
+Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1627--1669
-
- []
-
-[44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 1685--1693
+Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1685--1693
+Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
+
+ []
+
+[48] [49]
+Underfull \hbox (badness 10000) in paragraph at lines 1765--1773
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1765--1773
 
  []
 
 File: __imgs/zac_photo.png Graphic file (type bmp)
 <__imgs/zac_photo.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1703--1712
+Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1703--1712
+Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1703--1712
+Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
 
  []
 
-[46]
+[50]
 File: __imgs/zac_schema.png Graphic file (type bmp)
 <__imgs/zac_schema.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1722--1730
+Underfull \hbox (badness 10000) in paragraph at lines 1806--1814
 
  []
 
-[47]
-Underfull \hbox (badness 10000) in paragraph at lines 1745--1767
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1745--1767
-
- []
-
-[48]
-Underfull \hbox (badness 10000) in paragraph at lines 1775--1784
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 1829--1851
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1789--1809
+Underfull \hbox (badness 10000) in paragraph at lines 1829--1851
+
+ []
+
+[52]
+Underfull \hbox (badness 10000) in paragraph at lines 1859--1868
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1873--1893
 
  []
 
 File: __imgs/carte_apur.png Graphic file (type bmp)
 <__imgs/carte_apur.png>
-[49]
+[53]
 File: __imgs/meta_apur.png Graphic file (type bmp)
 <__imgs/meta_apur.png>
-[50]
+[54]
 File: __imgs/schema_apur.png Graphic file (type bmp)
 <__imgs/schema_apur.png>
-[51]
-Underfull \hbox (badness 10000) in paragraph at lines 1843--1866
+[55]
+Underfull \hbox (badness 10000) in paragraph at lines 1933--1956
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1843--1866
+Underfull \hbox (badness 10000) in paragraph at lines 1933--1956
 
  []
 
 File: __imgs/meta_ign.png Graphic file (type bmp)
 <__imgs/meta_ign.png>
-[52]
+[56]
 File: __imgs/meta_ign_2.png Graphic file (type bmp)
 <__imgs/meta_ign_2.png>
 File: __imgs/matmur.png Graphic file (type bmp)
 <__imgs/matmur.png>
 File: __imgs/mattoit.png Graphic file (type bmp)
 <__imgs/mattoit.png>
-[53]
+[57]
 File: __imgs/donnee_ign.png Graphic file (type bmp)
 <__imgs/donnee_ign.png>
-[54]
-Underfull \hbox (badness 10000) in paragraph at lines 1923--1936
+[58]
+Underfull \hbox (badness 10000) in paragraph at lines 2023--2036
 
  []
 
-[55]
-Underfull \hbox (badness 10000) in paragraph at lines 1948--1962
+[59]
+Underfull \hbox (badness 10000) in paragraph at lines 2048--2062
 
  []
 
 
-Underfull \hbox (badness 1199) in paragraph at lines 1948--1962
+Underfull \hbox (badness 1199) in paragraph at lines 2048--2062
 \TU/RobotoLight(0)/m/n/10.95 Ceci permettra ainsi d’isoler pour chaque bâtiment
  (dont on dipose des coordonnées de l’emprise) une
  []
@@ -2127,79 +2122,79 @@ File: __imgs/bd_ortho_img.png Graphic file (type bmp)
 <__imgs/bd_ortho_img.png>
 File: __imgs/bd_ortho.png Graphic file (type bmp)
 <__imgs/bd_ortho.png>
-[56]
-Underfull \hbox (badness 10000) in paragraph at lines 1972--1986
+[60]
+Underfull \hbox (badness 10000) in paragraph at lines 2074--2088
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1972--1986
+Underfull \hbox (badness 10000) in paragraph at lines 2074--2088
 
  []
 
-[57] [58]
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
+[61] [62]
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2011--2075
-
- []
-
-[59]
-Underfull \hbox (badness 10000) in paragraph at lines 2076--2100
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2076--2100
+Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
+
+ []
+
+[63]
+Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2076--2100
+Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
 
  []
 
 
-Underfull \hbox (badness 1565) in paragraph at lines 2076--2100
+Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
+
+ []
+
+
+Underfull \hbox (badness 1565) in paragraph at lines 2178--2202
 \TU/RobotoLight(0)/m/n/10.95 Au-delà de cette appropriation, une certaine motiv
 ation de créer des outils logiciels par les architectes
  []
 
-[60] [61] [62] [63]
-Underfull \hbox (badness 1881) in paragraph at lines 2254--2257
+[64] [65] [66] [67]
+Underfull \hbox (badness 1881) in paragraph at lines 2356--2359
 [][]\TU/RobotoLight(0)/m/n/10.95 ZHOU, Qian-Yi, PARK, Jaesik et KOLTUN, Vladlen
 . Open3D : A Modern Library for 3D Data Processing.
  []
 
-[64] (./memoire.lof
+[68] (./memoire.lof
 LaTeX Info: Redefining \rmfamily on input line 1.
 LaTeX Info: Redefining \sffamily on input line 1.
 LaTeX Info: Redefining \ttfamily on input line 1.
@@ -2208,21 +2203,21 @@ Package polyglossia Warning: Failed to patch part for French on input line 1.
 
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
 (Font)              scaled to size 5.475pt on input line 4.
-[65])
-\tf@lof=\write5
-\openout5 = `memoire.lof'.
+[69])
+\tf@lof=\write7
+\openout7 = `memoire.lof'.
 
-[66]
-Underfull \hbox (badness 10000) in paragraph at lines 2279--2291
+[70]
+Underfull \hbox (badness 10000) in paragraph at lines 2381--2393
 
  []
 
 File: __imgs/markdown.png Graphic file (type bmp)
 <__imgs/markdown.png>
-[67] [68]
+[71] [72]
 File: __imgs/pandoc1.png Graphic file (type bmp)
 <__imgs/pandoc1.png>
-[69]
+[73]
 The property list \polyglossia@langsetup contains the pairs (without outer
 braces):
 >  {latex/script}  =>  {latin}
@@ -2257,21 +2252,21 @@ braces):
 >  {french/babelname}  =>  {french}
 >  {french/localnumeral}  =>  {polyglossia@C@localnumeral}
 >  {french/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-[70] (./memoire.aux
-LaTeX Info: Redefining \rmfamily on input line 20.
-LaTeX Info: Redefining \sffamily on input line 20.
-LaTeX Info: Redefining \ttfamily on input line 20.
+[74] (./memoire.aux
+LaTeX Info: Redefining \rmfamily on input line 19.
+LaTeX Info: Redefining \sffamily on input line 19.
+LaTeX Info: Redefining \ttfamily on input line 19.
 
-Package polyglossia Warning: Failed to patch part for French on input line 20.
+Package polyglossia Warning: Failed to patch part for French on input line 19.
 
 ) ) 
 Here is how much of TeX's memory you used:
- 33230 strings out of 477218
- 637232 string characters out of 5833987
- 1491018 words of memory out of 5000000
- 52289 multiletter control sequences out of 15000+600000
- 412151 words of font info for 135 fonts, out of 8000000 for 9000
+ 37000 strings out of 477218
+ 749447 string characters out of 5833987
+ 1622834 words of memory out of 5000000
+ 56007 multiletter control sequences out of 15000+600000
+ 412135 words of font info for 133 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 107i,12n,125p,1185b,1852s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 101i,12n,125p,1185b,1443s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (70 pages).
+Output written on memoire.pdf (74 pages).

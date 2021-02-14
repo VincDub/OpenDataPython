@@ -25,7 +25,7 @@ indent: true
 library(knitr)
 
 udfig <- function(l=" ",s=" ",sep=" - ",...){
-  opts_chunk$set(fig.cap=paste(l),fig.scap=paste(l,sep,s))
+  opts_chunk$set(fig.cap=paste(l),fig.scap=paste(l,sep,s),boite=paste(l))
   }
 
 knit_hooks$set(source = function(x, options) {
@@ -34,7 +34,21 @@ knit_hooks$set(source = function(x, options) {
 }, output = function(x, options) {
     paste("\\begin{lstlisting}[style=out]\n", x, 
         "\\end{lstlisting}\n", sep = "")
-})
+}, error = function(x, options) {
+    paste("\\begin{lstlisting}[style=out]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}, result = function(x, options) {
+    paste("\\begin{lstlisting}[style=out]\n", x, 
+        "\\end{lstlisting}\n", sep = "")
+}, boite = function(before,options,envir,...){
+  if (options$echo != FALSE || options$fig.align == "center") {
+    if (options$fig.align == "center") {
+      if (before) {paste("\\begin{tcolorbox}\n")} else {paste("\\end{tcolorbox}\n")}
+      } 
+      else {
+        if (before) {paste("\\begin{tcolorbox}[title=",options$boite,",colback=boitecode]\n")} else {paste("\\end{tcolorbox}\n")}
+      }
+    }})
 library(reticulate)
 use_virtualenv("ri37")
 ```
@@ -154,7 +168,6 @@ cela semble constituer un moyen pratique de discerner et comprendre son contenu 
 C'est le cas sur la plateforme Open Data Paris, qui nous permet de prévisualiser le jeu de données des volumes bâtis sous la forme d'un tableau, mais aussi d'une carte,
 laquelle formera un premier contact avec les données en elle-mêmes.
 \
-\begin{mdframed}[style=code]
 ```{r echo=FALSE}
 l = "Prévisualisation cartographique du jeu de données des volumes bâtis."
 s = "https://opendata.paris.fr/"
@@ -163,7 +176,6 @@ udfig(l=l,s=s)
 ```{r odp_carte, echo=FALSE, fig.align = 'center', out.width = "90%"}
 include_graphics("__imgs/site_odp_carte.jpg")
 ```
-\end{mdframed}
 \
 
 ### Variables et typologies des valeurs
@@ -280,7 +292,7 @@ Cette prise de connaissance permet désormais de manipuler les données en elle-
 
 \newpage
 
-## Le langage Python pour extraire et comprendre la structure des données
+## Le langage Python pour mieux s'approprier les données ouvertes
 
 Afin d'exploiter ce jeu de données constitué d'objets géolocalisées et leurs données, le langage de programmation **Python** sera exclusivement employé.
 Comme mentionné dans l'introduction, ce dernier possède toutes les fonctionnalités nécessaires pour manipuler simplement ce type de données.
@@ -289,7 +301,6 @@ Comme mentionné dans l'introduction, ce dernier possède toutes les fonctionnal
 La plateforme Open Data Paris permettant de définir un périmètre afin de restreindre le jeu de données directement sur la carte, 
 cette fonction sera utilisée afin d'en télécharger un échantillon (en l'occurence localisé autour de l'ENSAPVS).
 \
-
 
 ```{r echo=FALSE}
 l = "Définition d'une zone d'extraction de données des volumes bâtis"
@@ -300,19 +311,60 @@ udfig(l=l,s=s)
 include_graphics("__imgs/site_odp_carte_zone.jpg")
 ```
 \
+### Une multiplicité des formats
 
-### Des données constituées d'objets hiérarchisés
+```{r echo=FALSE}
+l = "Un choix étendu de formats de fichiers"
+s = "https://opendata.paris.fr/"
+udfig(l=l,s=s)
+```
+```{r odp_formats, echo=FALSE, fig.align = 'center', out.width = "90%"}
+include_graphics("__imgs/site_odp_formats.jpg")
+```
 
-A l'instar d'autres jeux de données complexes, le jeu des "volumes bâtis".
-Dès lors, à la lumière de la lecture des métadonnées, le **format de fichier** doit être choisi judicieusement
-en fonction du contenu du jeu de données.
-En l'occurrence.
-
+A l'instar d'autres jeux de données, celui des "volumes bâtis" propose **plusieurs formats** lors du
+téléchargement.
 \
-Ainsi, il est plus judicieux de s'orienter vers un format capable de représenter cette hiérarchie dans sa structure.
-Le format JSON (JavaScript Object Notation) est un des formats d'échanges hiérarchisés les plus courant (au côté du XML). 
+\
+Dès lors, grâce à son large éventail de **bibliothèques** (comparables à des "extensions") le langage Python se révèle ici précieux
+car il est **capable de manipuler tous les formats de fichiers proposés**.
+Or, le choix d'un format en particulier pourrait alors être perçu comme un "non-problème", étant donné de telles capacités.
+En réalité, une sélection peut déjà être effectuée d'après la lecture des métadonnées ainsi que la prévisualisation.
+\
+\
+Image avec tableau
+\
+\
+Tout d'abord, les formats de type tableur comme **CSV** ou **Excel** représentent des choix inadaptés.
+En effet, dû au fait que le tableur est limité à **un type de valeur par colonne**, en l'occurence **soit du texte, soit des chiffres**,
+des variables telles que **GEOM**, d'une structure plus complexe s'intègrent ici très mal.
+Cela peut être prouvé grâce à la bibliothèque **Pandas**, spécialisée dans la manipulation de tableurs.
+En l'occurrence, toute la variable est notée telle quelle sous forme de **texte** (*str*).
+
+```{r echo=FALSE}
+l = "Vérification du type de GEOM dans un tableur"
+```
+```{python}
+# Import de la bibliothèque pandas
+import pandas
+# Lecture du fichier CSV
+data = pandas.read_csv("DONNEES/volumesbatisparis.csv",sep=";")
+# Affichage du premier élément de la colonne geom
+geom = data["geom"][0]
+print(type(geom))
+```
+
+Ensuite, si l'on analyse
+
+
+### La notation objet : une structure universelle et souple
+
 Ce dernier peut se décomposer en deux éléments primaires : le **dictionnaire**, un ensemble formé de couples **attribut : valeur** (aussi appelés *"objets"*), et la **liste**, une collection d'objets [@json].
 \
+
+```{r echo=FALSE}
+
+```
 
 ```{python}
 # exemple de structure d'un script json
@@ -327,6 +379,7 @@ js = [ # début de la liste
         }
       ] # fin de la liste
 ```
+
 
 Ainsi, ces deux constituantes suffisent à représenter des hiérarchies pouvant être complexes, tout en restant facile à lire et écrire pour les humains.
 
@@ -364,22 +417,18 @@ data = json.load(open("DONNEES/volumesbatisparis.json","r"))
 print(data[1])
 ```
 
-
-### L'hétérogénéité : caractéristique intrinsèque aux données ouvertes
-
 Cette lecture d'un des volumes du jeu de données au format JSON permet de repérer ses différents niveaux hiérarchiques,
-tout en observant les information supplémentaires dont on dispose alors.
+tout en observant les information supplémentaires dont on dispose.
 \
-Tout d'abord, les variables du jeu de données d'origine sont ici présentes sous l'attribut **"fields"**, et sera à référencer lors de
-l'extraction.
-En son sein, la variable **geom** est ici complètement représentée, contenant elle-même un dictionnaire avec ses deux valeurs (type et coordonnées).
+Tout d'abord, les variables du jeu de données d'origine sont ici présentes sous l'attribut **fields**.
+En son sein, la variable **geom** contient un dictionnaire avec ses deux valeurs (à savoir son type et ses coordonnées).
 Nous pouvons également noter que les coordonnées sont constituées d'une **liste contenant des listes à deux valeurs**, représentant tout simplement une collection
 de points (définis par x et y). Cependant, elle est elle même contenue dans une liste englobante superflue, que nous allons supprimer par la suite.
 \
 \
 Ainsi, il est possible d'extraire les variables initialement souhaitées pour chacun des volumes avec une **boucle**, qui itèrera
 à travers la liste des volumes. Les résultats obtenus seront ajoutés dans un nouveau dictionnaire (avec des attributs nommés plus explicitement), lui même ajouté à une liste vide.
-
+\
 ```{python error=TRUE}
 liste = [] # liste vide
 for volume in data:
@@ -391,14 +440,14 @@ for volume in data:
     "hauteur_paf" : volume["fields"]["l_b_u"]
   })
 ```
+\
 
-Cependant, nous obtenons l'erreur *KeyError : "l_b_u"*, signifiant que l'attribut "l_b_u" n'est pas défini pour certains objets.
-En effet, là où dans un tableur, un attribut non-défini se traduit par une valeur nulle ou une case vide, les structures hiérarchisées
-comme le JSON permettent à chaque objet de posséder certains attributs qui lui sont propres. Ainsi, les volumes n'étant pas en porte à faux ne possèdent
-pas cet attribut.
+Cependant, nous obtenons l'erreur *KeyError : "l_b_u"*, signifiant que l'attribut **l_b_u** n'est pas défini pour certains objets.
+En effet, la notation objet permet ici de ne défnir cet attribut que lorsque le volume **est en porte à faux**, qu'il serait inutile
+d'attribuer aux autres. Cette **hétérogénéité** est donc à prendre en compte lors du traitement. 
 \
 \
-D'un point de vue plus général, cette hétérogénéité est très courante dans les jeux de données ouvertes.
+D'un point de vue plus général, cette dernière est très courante dans les jeux de données ouvertes.
 Au-delà d'être causée quand **certains enregistrements** possèdent **des attributs qui leurs sont propres** sans toutefois justifier la création
 d'un jeu de données supplémentaire (comme les volumes en porte à faux ici, difficilement dissiociables des autres), 
 elle peut être tout simplement provoquée par **certaines valeurs manquantes** dans différents enregistrements (dans le cas d'une enquête 
@@ -406,12 +455,16 @@ aussi complexe et étendue que celle des hauteurs des bâtiments de Paris, cela 
 Enfin, comme c'est le cas ici, cette hétérogénéité se révèle pendant l'extraction, car pas toujours mentionnée dans les métadonnées.
 \
 \
-En conséquences, les fonctions de gestion d'erreur **try** et **except** seront utilisées afin de détécter l'absence de l'attribut **"l_b_u"**.
+En conséquences, les fonctions de gestion d'erreur **try** et **except** seront utilisées afin de détécter 
+l'absence de l'attribut **l_b_u**. Lorsque **try**, essayant d'accéder à l'attribut **l_b_u** se retrouve face
+à l'erreur recontrée précédemment, **except** se chargera de la détécter et d'exécuter un autre morceau de code à la place.
+\
 
 ```{python}
 liste = [] # liste vide
 for volume in data:
   try:
+    #
     liste.append({
       "coords" : volume["fields"]["geom"]["coordinates"][0],
       "surface" : volume["fields"]["m2_pl_tot"],
@@ -429,8 +482,8 @@ print(liste[1])
 print(liste[7])
 ```
 \
-Ainsi, le langage Python a permis de mettre en lumière à la fois l'importance de la hiérarchisation dans un jeu de données complexe, dont
-une certaine hétérogénéité persiste (sans être forcément repérable en amont de la manipulation) réclamant une souplesse de la part des outils d'extraction à cet égard.
+Ainsi, outre ses capacités à gérer **une multitude de formats courants en Open Data**, le langage Python a permis de mettre en lumière l'importance de la **notation objet** 
+au sein des jeux de données complexes afin de permettre une certaine **hétérogénéité**, réclamant une souplesse de la part des outils d'extraction.
 
 \newpage
 
@@ -684,7 +737,7 @@ fig2.write_html("OUTPUT/graphique_repart.html")
 ```
 
 ```{r echo=FALSE}
-l = "Répartition des volumes selon leur surface, leur hauteur et le fait qu'ils soient en porte à faux"
+l = "Répartition des volumes selon leurs caractéristiques"
 s = "Réalisation personnelle"
 udfig(l=l,s=s)
 ```
@@ -704,7 +757,6 @@ En effet, *Plotly* est capable de créer de représenter des **formes géométri
  des fonctionnalités telles que le **zoom**, l'**affichage/masquage** d'élements légendés ainsi que l'affichage de caractéristiques au **survol avec le curseur**.
 
 Ainsi, l'objectif sera ici de générer une **carte interactive des volumes par hauteur**.
-
 
 
 ```{python}
@@ -1260,7 +1312,6 @@ carreau représente 5 kilomètres de côté. Chacun d'entre eux possède un fich
 \
 \
 Ceci permettra ainsi d'isoler pour chaque bâtiment (dont on dipose des coordonnées de l'emprise) une **photographie découpée** à partir de ces photographies. 
-
 
 ```{r echo=FALSE}
 l = "Extrait d'un carreau de la BD ORTHO (gauche) et ses données de géolocalisation (droite)"

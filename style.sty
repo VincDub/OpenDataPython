@@ -7,14 +7,16 @@
 \usepackage{setspace}\linespread{2.0}
 \usepackage{chngcntr}
 
-\usepackage[font={small,it}]{caption}
+\usepackage[font={it,small}]{caption}
 
 \counterwithin{figure}{section}
+
 %\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}%
 
 \addtolength{\skip\footins}{2pc plus 5pt}
 
 \definecolor{red}{rgb}{0.8, 0, 0}
+\definecolor{white}{rgb}{1, 1, 1}
 \definecolor{boitecode}{HTML}{f0f0f0}
 \definecolor{boiteout}{HTML}{ffffff}
 \usepackage{url}
@@ -35,6 +37,7 @@
 {\color{red}\headingfont\Large\singlespacing}
 {\thesubsection}{1.5em}{}
 
+% !TeX encoding=UTF-8
 \titleformat{\subsubsection}
 {\color{red}\headingfont\Large\singlespacing}
 {\thesubsubsection}{1.5em}{}
@@ -44,17 +47,14 @@
 {\theparagraph}{2em}{}
 
 
-\usepackage[framemethod=TikZ]{mdframed}
-\mdfdefinestyle{code}{%
-    linecolor=red,
-    outerlinewidth=0.6pt,
-    roundcorner=20pt,
-    innertopmargin=5pt,
-    innerbottommargin=5pt,
-    innerrightmargin=5pt,
-    innerleftmargin=5pt
-    }
-
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listingsutf8}
+\tcbset{
+    colback=white,
+    colframe=red,
+    fonttitle=\it,
+    boxrule=0.3mm
+}
 
 \lstdefinelanguage{json}{
     basicstyle=\footnotesize\codefont\singlespacing,
