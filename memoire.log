@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.9)  14 FEB 2021 21:19
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.9)  15 FEB 2021 19:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1544,34 +1544,27 @@ LaTeX Font Info:    Font shape `TU/Roboto(0)/b/n' will be
 (Font)              scaled to size 14.4pt on input line 213.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/n' will be
 (Font)              scaled to size 10.95pt on input line 221.
-[2] (./memoire.toc
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
-
-Package polyglossia Warning: Failed to patch part for French on input line 1.
-
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.39pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.70715pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 13.41565pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.39095pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.70782pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 13.41296pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.38907pt on input line 6.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.7065pt on input line 6.
-[3])
+[2] (./memoire.toc)
 \tf@toc=\write6
 \openout6 = `memoire.toc'.
 
-[4]
+[3]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.39pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.70715pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 13.41565pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.39095pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.70782pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 13.41296pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.38907pt on input line 251.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.7065pt on input line 251.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
 (Font)              scaled to size 7.665pt on input line 251.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
@@ -1677,7 +1670,7 @@ Underfull \hbox (badness 1253) in paragraph at lines 247--420
 ées issues de l’Open Data grâce au langage Python
  []
 
-[5] [6] [7] [8] [9]
+[4] [5] [6] [7] [8]
 Underfull \hbox (badness 10000) in paragraph at lines 428--465
 
  []
@@ -1692,7 +1685,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 428--465
 
  []
 
-[10] [11]
+[9] [10]
 Underfull \hbox (badness 10000) in paragraph at lines 472--479
 
  []
@@ -1720,7 +1713,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 497--509
 
  []
 
-[12]
+[11]
 File: __imgs/site_odp_tableau.jpg Graphic file (type bmp)
 <__imgs/site_odp_tableau.jpg>
 
@@ -1730,32 +1723,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 521--531
 
 File: __imgs/primitives_geometriques.png Graphic file (type bmp)
 <__imgs/primitives_geometriques.png>
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 543--574
+
+ []
+
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 543--574
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 543--574
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 543--574
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 543--574
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 543--574
-
- []
-
-[14]
 Underfull \hbox (badness 10000) in paragraph at lines 579--590
 
  []
@@ -1767,17 +1760,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 579--590
 
 File: __imgs/odp_meta1.jpg Graphic file (type bmp)
 <__imgs/odp_meta1.jpg>
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 602--617
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 602--617
+
+ []
+
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 602--617
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 602--617
-
- []
-
-[16]
 File: __imgs/odp_meta2.jpg Graphic file (type bmp)
 <__imgs/odp_meta2.jpg>
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/it' will be
@@ -1787,486 +1780,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 629--650
 
  []
 
-[17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 658--668
+[16] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 657--667
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 658--668
+Underfull \hbox (badness 10000) in paragraph at lines 657--667
 
  []
 
 File: __imgs/site_odp_carte_zone.jpg Graphic file (type bmp)
 <__imgs/site_odp_carte_zone.jpg>
-
-Underfull \hbox (badness 10000) in paragraph at lines 680--681
-
- []
-
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 691--701
+File: __imgs/site_odp_formats.jpg Graphic file (type bmp)
+<__imgs/site_odp_formats.jpg>
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 690--700
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 690--700
+
+ []
+
+File: __imgs/io_csv.png Graphic file (type bmp)
+<__imgs/io_csv.png>
 (c:/texlive/2020/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 703.
-File: __imgs/io_json.png Graphic file (type bmp)
-<__imgs/io_json.png>
-[20]
+(Font)              scaled to size 9.0pt on input line 716.
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 743.
-LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 745.
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 777--795
-
- []
-
-
-Underfull \hbox (badness 1365) in paragraph at lines 777--795
-\TU/RobotoLight(0)/m/n/10.95 Ainsi, il est possible d’extraire les variables in
-itialement souhaitées pour chacun des volumes avec une
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 777--795
-
- []
-
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 815--816
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 817--840
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 817--840
-
- []
-
-[23] [24]
-LaTeX Font Info:    Font shape `TU/RobotoMono(0)/m/n' will be
-(Font)              scaled to size 10.79997pt on input line 891.
-[25]
-LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/n' will be
-(Font)              scaled to size 7.665pt on input line 956.
-File: __imgs/hpaf.png Graphic file (type bmp)
-<__imgs/hpaf.png>
-[26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 1059--1072
-
- []
-
-[28] [29]
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1079--1108
-
- []
-
-File: __imgs/p2.png Graphic file (type bmp)
-<__imgs/p2.png>
-[30]
-Overfull \vbox (52.7941pt too high) has occurred while \output is active []
-
-[31]
-Underfull \hbox (badness 10000) in paragraph at lines 1147--1153
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1169--1187
-
- []
-
-[32]
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-File: OUTPUT/graphique_hauteurs.png Graphic file (type bmp)
-<OUTPUT/graphique_hauteurs.png>
-File: __imgs/graphique_hauteurs_int.png Graphic file (type bmp)
-<__imgs/graphique_hauteurs_int.png>
-[33] [34]
-File: OUTPUT/graphique_repart.png Graphic file (type bmp)
-<OUTPUT/graphique_repart.png>
-[35]
-Underfull \hbox (badness 10000) in paragraph at lines 1304--1314
-
- []
-
-[36]
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-File: __imgs/carte_hauteurs_1.png Graphic file (type bmp)
-<__imgs/carte_hauteurs_1.png>
-File: __imgs/carte_hauteurs_2.png Graphic file (type bmp)
-<__imgs/carte_hauteurs_2.png>
-[37] [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1396--1417
-
- []
-
-
-Underfull \hbox (badness 1490) in paragraph at lines 1396--1417
-\TU/RobotoLight(0)/m/n/10.95 Un second module nommé \TU/RobotoLight(0)/b/n/10.9
-5 utm \TU/RobotoLight(0)/m/n/10.95 sera également utilisé pour manipuler les co
-ordonnées géographiques.
- []
-
-[39]
-File: __imgs/cad_1.png Graphic file (type bmp)
-<__imgs/cad_1.png>
-[40]
-Underfull \hbox (badness 10000) in paragraph at lines 1500--1549
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1500--1549
-
- []
-
-[41] [42]
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-Missing character: There is no ␣ in font Roboto Mono/OT:script=DFLT;language=df
-lt;!
-[43]
-Underfull \hbox (badness 10000) in paragraph at lines 1618--1638
-
- []
-
-File: __imgs/3d_vue1.jpg Graphic file (type bmp)
-<__imgs/3d_vue1.jpg>
-[44]
-File: __imgs/3d_zoom_1.jpg Graphic file (type bmp)
-<__imgs/3d_zoom_1.jpg>
-File: __imgs/3d_zoom_2.jpg Graphic file (type bmp)
-<__imgs/3d_zoom_2.jpg>
-[45]
-Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1665--1700
-
- []
-
-[46] [47]
-Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1707--1749
-
- []
-
-[48] [49]
-Underfull \hbox (badness 10000) in paragraph at lines 1765--1773
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1765--1773
-
- []
-
-File: __imgs/zac_photo.png Graphic file (type bmp)
-<__imgs/zac_photo.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1785--1794
-
- []
-
-[50]
-File: __imgs/zac_schema.png Graphic file (type bmp)
-<__imgs/zac_schema.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 1806--1814
-
- []
-
-[51]
-Underfull \hbox (badness 10000) in paragraph at lines 1829--1851
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1829--1851
-
- []
-
-[52]
-Underfull \hbox (badness 10000) in paragraph at lines 1859--1868
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1873--1893
-
- []
-
-File: __imgs/carte_apur.png Graphic file (type bmp)
-<__imgs/carte_apur.png>
-[53]
-File: __imgs/meta_apur.png Graphic file (type bmp)
-<__imgs/meta_apur.png>
-[54]
-File: __imgs/schema_apur.png Graphic file (type bmp)
-<__imgs/schema_apur.png>
-[55]
-Underfull \hbox (badness 10000) in paragraph at lines 1933--1956
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1933--1956
-
- []
-
-File: __imgs/meta_ign.png Graphic file (type bmp)
-<__imgs/meta_ign.png>
-[56]
-File: __imgs/meta_ign_2.png Graphic file (type bmp)
-<__imgs/meta_ign_2.png>
-File: __imgs/matmur.png Graphic file (type bmp)
-<__imgs/matmur.png>
-File: __imgs/mattoit.png Graphic file (type bmp)
-<__imgs/mattoit.png>
-[57]
-File: __imgs/donnee_ign.png Graphic file (type bmp)
-<__imgs/donnee_ign.png>
-[58]
-Underfull \hbox (badness 10000) in paragraph at lines 2023--2036
-
- []
-
-[59]
-Underfull \hbox (badness 10000) in paragraph at lines 2048--2062
-
- []
-
-
-Underfull \hbox (badness 1199) in paragraph at lines 2048--2062
-\TU/RobotoLight(0)/m/n/10.95 Ceci permettra ainsi d’isoler pour chaque bâtiment
- (dont on dipose des coordonnées de l’emprise) une
- []
-
-File: __imgs/bd_ortho_img.png Graphic file (type bmp)
-<__imgs/bd_ortho_img.png>
-File: __imgs/bd_ortho.png Graphic file (type bmp)
-<__imgs/bd_ortho.png>
-[60]
-Underfull \hbox (badness 10000) in paragraph at lines 2074--2088
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2074--2088
-
- []
-
-[61] [62]
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2113--2177
-
- []
-
-[63]
-Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2178--2202
-
- []
-
-
-Underfull \hbox (badness 1565) in paragraph at lines 2178--2202
-\TU/RobotoLight(0)/m/n/10.95 Au-delà de cette appropriation, une certaine motiv
-ation de créer des outils logiciels par les architectes
- []
-
-[64] [65] [66] [67]
-Underfull \hbox (badness 1881) in paragraph at lines 2356--2359
-[][]\TU/RobotoLight(0)/m/n/10.95 ZHOU, Qian-Yi, PARK, Jaesik et KOLTUN, Vladlen
-. Open3D : A Modern Library for 3D Data Processing.
- []
-
-[68] (./memoire.lof
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
-
-Package polyglossia Warning: Failed to patch part for French on input line 1.
-
-LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/n' will be
-(Font)              scaled to size 5.475pt on input line 4.
-[69])
-\tf@lof=\write7
-\openout7 = `memoire.lof'.
-
-[70]
-Underfull \hbox (badness 10000) in paragraph at lines 2381--2393
-
- []
-
-File: __imgs/markdown.png Graphic file (type bmp)
-<__imgs/markdown.png>
-[71] [72]
-File: __imgs/pandoc1.png Graphic file (type bmp)
-<__imgs/pandoc1.png>
-[73]
-The property list \polyglossia@langsetup contains the pairs (without outer
-braces):
->  {latex/script}  =>  {latin}
->  {latex/lcscript}  =>  {latin}
->  {latex/scripttag}  =>  {}
->  {latex/language}  =>  {Latex}
->  {latex/langtag}  =>  {ENG}
->  {latex/bcp47}  =>  {}
->  {latex/hyphennames}  =>  {english}
->  {latex/direction}  =>  {LR}
->  {latex/hyphenmins}  =>  {2,3}
->  {latex/frenchspacing}  =>  {false}
->  {latex/indentfirst}  =>  {false}
->  {latex/fontsetup}  =>  {true}
->  {latex/envname}  =>  {latex}
->  {latex/babelname}  =>  {latex}
->  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
->  {french/script}  =>  {Latin}
->  {french/lcscript}  =>  {latin}
->  {french/scripttag}  =>  {}
->  {french/language}  =>  {French}
->  {french/langtag}  =>  {FRA}
->  {french/bcp47}  =>  {fr-FR}
->  {french/hyphennames}  =>  {french,francais}
->  {french/direction}  =>  {LR}
->  {french/hyphenmins}  =>  {2,2}
->  {french/frenchspacing}  =>  {true}
->  {french/indentfirst}  =>  {true}
->  {french/fontsetup}  =>  {true}
->  {french/envname}  =>  {french}
->  {french/babelname}  =>  {french}
->  {french/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {french/Localnumeral}  =>  {polyglossia@C@localnumeral}.
-[74] (./memoire.aux
-LaTeX Info: Redefining \rmfamily on input line 19.
-LaTeX Info: Redefining \sffamily on input line 19.
-LaTeX Info: Redefining \ttfamily on input line 19.
-
-Package polyglossia Warning: Failed to patch part for French on input line 19.
-
-) ) 
+(Font)              scaled to size 9.0pt on input line 718.
+! You can't use `macro parameter character #' in horizontal mode.
+l.726 ttvar{#
+             }ttvar{#} <class 'str'> 
 Here is how much of TeX's memory you used:
- 37000 strings out of 477218
- 749447 string characters out of 5833987
- 1622834 words of memory out of 5000000
- 56007 multiletter control sequences out of 15000+600000
- 412135 words of font info for 133 fonts, out of 8000000 for 9000
+ 36441 strings out of 477218
+ 739086 string characters out of 5833987
+ 1470889 words of memory out of 5000000
+ 55482 multiletter control sequences out of 15000+600000
+ 412103 words of font info for 129 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 101i,12n,125p,1185b,1443s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 101i,11n,125p,720b,1445s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on memoire.pdf (74 pages).
+Output written on memoire.pdf (18 pages).

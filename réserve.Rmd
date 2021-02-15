@@ -56,3 +56,128 @@ inscrites dans une valeur *"mère"* se décompose elle-même en un ensemble de v
 nécessaire, tout en étant sûr à 100% que chaque enregistrement soit construit de manière identique sur l'ensemble du jeu de données.
 \
 \
+
+### La notation objet : une structure universelle et souple
+
+Ce dernier peut se décomposer en deux éléments primaires : le **dictionnaire**, un ensemble formé de couples **attribut : valeur** (aussi appelés *"objets"*), et la **liste**, une collection d'objets [@json].
+\
+
+```{r echo=FALSE}
+
+```
+
+```{python}
+# exemple de structure d'un script json
+js = [ # début de la liste
+        { # dictionnaire 1
+          "attribut" : "valeur", # couple attribut : valeur
+          "attribut2" : [0,1,2,3,4] # une liste peut être une valeur
+        },
+        { # dictionnaire 2
+          "attribut" : { "attribut3" : "valeur3" }, # un dictionnaire contenant lui même des objets peut être une valeur
+          "attribut2" : 99
+        }
+      ] # fin de la liste
+```
+
+
+Ainsi, ces deux constituantes suffisent à représenter des hiérarchies pouvant être complexes, tout en restant facile à lire et écrire pour les humains.
+
+
+```{r echo=FALSE}
+l = "Import de données au format JSON dans Python"
+s = "Réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r io_json, echo=FALSE, fig.align = 'center', out.width = "90%"}
+include_graphics("__imgs/io_json.png")
+```
+\
+Or, la liste et le dictionnaire sont tous deux très courants au sein des langages de programmation modernes.
+Ainsi, l'import au sein de Python est extrêmement limpide. 
+La syntaxe afin d'accéder à une valeur donnée s'effectue simplement en saisissant l'**index de l'objet souhaité** pour les listes et le **nom des attributs** en partant de la base de l'arborescence (de gauche à droite) pour les dictionnaires. 
+
+```{python}
+# 1er objet de la liste (dictionnaire 1), puis "attribut2"
+print(js[0]["attribut2"])
+```
+
+```{python}
+# 2e objet de la liste (dictionnaire 1), puis "attribut2" (dictionnaire 3), puis "attribut3"
+print(js[1]["attribut"]["attribut3"])
+```
+
+La méthodologie est identique lors de l'import d'un fichier JSON externe, qui sera en l'occurence le même jeu de données téléchargé depuis le site
+Open Data Paris, mais au format .JSON. 
+
+```{python}
+import json
+data = json.load(open("DONNEES/volumesbatisparis.json","r"))
+# premier objet de la liste de volumes
+print(data[1])
+```
+
+Cette lecture d'un des volumes du jeu de données au format JSON permet de repérer ses différents niveaux hiérarchiques,
+tout en observant les information supplémentaires dont on dispose.
+\
+Tout d'abord, les variables du jeu de données d'origine sont ici présentes sous l'attribut **fields**.
+En son sein, la variable **geom** contient un dictionnaire avec ses deux valeurs (à savoir son type et ses coordonnées).
+Nous pouvons également noter que les coordonnées sont constituées d'une **liste contenant des listes à deux valeurs**, représentant tout simplement une collection
+de points (définis par x et y). Cependant, elle est elle même contenue dans une liste englobante superflue, que nous allons supprimer par la suite.
+\
+\
+Ainsi, il est possible d'extraire les variables initialement souhaitées pour chacun des volumes avec une **boucle**, qui itèrera
+à travers la liste des volumes. Les résultats obtenus seront ajoutés dans un nouveau dictionnaire (avec des attributs nommés plus explicitement), lui même ajouté à une liste vide.
+\
+```{python error=TRUE}
+liste = [] # liste vide
+for volume in data:
+  liste.append({
+    # Le [0] à la fin permet de supprimer la liste englobante superflue
+    "coords" : volume["fields"]["geom"]["coordinates"][0],
+    "surface" : volume["fields"]["m2_pl_tot"],
+    "hauteur" : volume["fields"]["h_et_max"],
+    "hauteur_paf" : volume["fields"]["l_b_u"]
+  })
+```
+\
+
+Cependant, nous obtenons l'erreur *KeyError : "l_b_u"*, signifiant que l'attribut **l_b_u** n'est pas défini pour certains objets.
+En effet, la notation objet permet ici de ne défnir cet attribut que lorsque le volume **est en porte à faux**, qu'il serait inutile
+d'attribuer aux autres. Cette **hétérogénéité** est donc à prendre en compte lors du traitement. 
+\
+\
+D'un point de vue plus général, cette dernière est très courante dans les jeux de données ouvertes.
+Au-delà d'être causée quand **certains enregistrements** possèdent **des attributs qui leurs sont propres** sans toutefois justifier la création
+d'un jeu de données supplémentaire (comme les volumes en porte à faux ici, difficilement dissiociables des autres), 
+elle peut être tout simplement provoquée par **certaines valeurs manquantes** dans différents enregistrements (dans le cas d'une enquête 
+aussi complexe et étendue que celle des hauteurs des bâtiments de Paris, cela est compréhensible).
+Enfin, comme c'est le cas ici, cette hétérogénéité se révèle pendant l'extraction, car pas toujours mentionnée dans les métadonnées.
+\
+\
+En conséquences, les fonctions de gestion d'erreur **try** et **except** seront utilisées afin de détécter 
+l'absence de l'attribut **l_b_u**. Lorsque **try**, essayant d'accéder à l'attribut **l_b_u** se retrouve face
+à l'erreur recontrée précédemment, **except** se chargera de la détécter et d'exécuter un autre morceau de code à la place.
+\
+
+```{python}
+liste = [] # liste vide
+for volume in data:
+  try:
+    #
+    liste.append({
+      "coords" : volume["fields"]["geom"]["coordinates"][0],
+      "surface" : volume["fields"]["m2_pl_tot"],
+      "hauteur" : volume["fields"]["h_et_max"],
+      "hauteur_paf" : volume["fields"]["l_b_u"]
+    })
+  except KeyError:
+    liste.append({
+      "coords" : volume["fields"]["geom"]["coordinates"][0],
+      "surface" : volume["fields"]["m2_pl_tot"],
+      "hauteur" : volume["fields"]["h_et_max"]
+    })
+
+print(liste[1])
+print(liste[7])
+```

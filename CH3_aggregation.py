@@ -1,31 +1,58 @@
-import json
+import geopandas as gpd
+from shapely import speedups
+speedups.enabled
 
-# Fonction pour charger les fichiers à aggréger
-def charger_json(path):
-    with open(path, "r",encoding='utf-8') as fichier:
-        output = json.load(fichier)
-        fichier.close()
-    return output
+apur = gpd.read_file("F:\\DATABASE\\APUR\\BESOIN_THEORIQUE_CHAUFFAGE_ET_TYPOLOGIE_AU_BATI.geojson")
+apur.crs = 4326
+apur.to_crs(2154)
 
-# Fichier principal
-bati_paris = charger_json("F:\\DONNEES_APUR\\EMPRISE_BATIE_PARIS.json")
+attributs_apur = [
+    "geometry"
+    "SURFACE_VITRAGE",
+    "SURFACE_HABITABLE",
+    "C_PERCONST_APUR",
+    "Shape_Area",
+    "SURFACE_PAROI_TOT",
+    "NB_NIV",
+    "H_MEDIANE",
+    "Typologie_apur"
+    ]
 
-# Données à intégrer
-sport = charger_json("F:\\DONNEES_APUR\\EQUIPEMENT_EMPRISE_SPORT.json")
-eco = charger_json("F:\\DONNEES_APUR\\EQUIPEMENT_EMPRISE_ACTIVITE_ECONOMIQUE.json")
-loisirs = charger_json("F:\\DONNEES_APUR\\EQUIPEMENT_EMPRISE_CULTURE_LOISIRS.json")
-edu = charger_json("F:\\DONNEES_APUR\\EQUIPEMENT_EMPRISE_ENSEIGNEMENT_EDUCATION.json")
+for attribut in attributs_apur:
+    apur = apur[~apur[attribut].isna()]
 
-def inclusion_batiment(bati,jeu_ext):
+apur = apur[(apur["NB_NIV"] > 1) & (apur["C_PERCONST_APUR"].isin([99,"99"]))]
 
-new_features = []
-# Itération à travers chaque 
-for bati in bati_paris["features"]:
+bdtopo = gpd.read_file("F:\\BD_TOPO_IDF\\BATI\\BATIMENT.shp")
 
-    bati = inclusion_batiment(bati,sport)
-    eco = inclusion_batiment(bati,sport)
-    loisirs = inclusion_batiment(bati,sport)
-    bati = inclusion_batiment(bati,sport)
+bdtopo = bdtopo[["geometry","MAT_MURS","MAT_TOITS"]]
+bdtopo = bdtopo[
+    (~bdtopo["MAT_MURS"].isna()) & 
+    (~bdtopo["MAT_TOITS"].isna()) & 
+    (~bdtopo["MAT_MURS"].isin(["9","09","90","99"])) & 
+    (~bdtopo["MAT_TOITS"].isin(["9","09","90","99"])) & 
+    (bdtopo["LEGER"] == "Non")
+    ]
 
-    new_features.append()
+bdtopo["geometry"] = bdtopo["geometry"].apply(lambda poly : poly.centroid)
+
+mats_murs = []
+mats_toits = []
+
+for bati in apur["geometry"]:
+    isinside = bdtopo.within(bati)
+    pt = bdtopo.loc[isinside]
+    if len(pt) == 1:
+        mats_murs.append(pt.iloc[0]["MAT_MURS"])
+        mats_toits.append(pt.iloc[0]["MAT_TOITS"])
+    else:
+        mats_murs.append(None)
+        mats_toits.append(None)
+
+apur["MAT_MURS"] = mats_murs
+apur["MAT_TOITS"] = mats_toits
+apur = apur[(apur["MAT_MURS"] != None) & (apur["MAT_TOITS"] != None)]
+
+apur.to_file("F:\\BASES_APUREES\\JEU_APURÉ.geojson")
+
 

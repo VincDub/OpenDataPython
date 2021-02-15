@@ -25,15 +25,26 @@ indent: true
 library(knitr)
 
 udfig <- function(l=" ",s=" ",sep=" - ",...){
-  opts_chunk$set(fig.cap=paste(l),fig.scap=paste(l,sep,s),boite=paste(l))
+  opts_chunk$set(fig.cap=paste(l),fig.scap=paste(l,sep,s),boite=paste(l),out.lines=10)
   }
 
+hook_output <- knit_hooks$get("output")
 knit_hooks$set(source = function(x, options) {
     paste("\\begin{lstlisting}[style=code]\n", x, 
         "\\end{lstlisting}\n", sep = "")
 }, output = function(x, options) {
-    paste("\\begin{lstlisting}[style=out]\n", x, 
-        "\\end{lstlisting}\n", sep = "")
+  if (!is.null(n <- options$out.lines)) {
+    x <- xfun::split_lines(gsub("#", "\\ttvar{#}",x))
+    if (length(x) > n) {
+      x <- c(head(x, n), "....\n")
+      x <- paste(c(x, ""), collapse = "\n")
+      
+      }
+    paste("\\begin{lstlisting}[style=out]\n", x, "\\end{lstlisting}\n", sep = "")
+  } else {
+    paste("\\begin{lstlisting}[style=out]\n", x,"\\end{lstlisting}\n", sep = "")
+  }
+  hook_output(x, options)
 }, error = function(x, options) {
     paste("\\begin{lstlisting}[style=out]\n", x, 
         "\\end{lstlisting}\n", sep = "")
@@ -223,7 +234,7 @@ sous forme d'**entiers**.
 \
 \
 Enfin, d'autres variables comme *M2* ou *NB_PL* sont notées **numériquement**, pouvant à priori prendre une infinité de valeurs
-, respectivement sous la forme de **réels** (ou nombres à virgule, qualifiés de **"float"** en anglais), et d'**entiers** (**"int"**). Bien que l'on puisse 
+, respectivement sous la forme de **réels** (ou nombres à virgule, qualifiés de *float* en anglais), et d'**entiers** (*int*). Bien que l'on puisse 
 deviner que *M2* semble représenter la surface d'un volume bâti, cela reste une supposition.
 \
 \
@@ -279,8 +290,8 @@ include_graphics("__imgs/odp_meta2.jpg")
 Enfin, la seconde page contient les informations cruciales concernant les données à exploiter.
 \
 En effet, le tableau-ci-dessus renseigne sur le **libellé** de chaque variable (son contenu explicite), son **type** (ici, **C*n*** où *n* est un entier
-signifique que les valeurs possibles sont sous la forme d'une chaîne de caractères, contenant *n* caractères, tandis que **N** désigne simplement des données numériques), ainsi que
-ses valeurs possibles (servant à distinguer les variables **catégoriques**).
+signifie que les valeurs sont sous forme textuelle de *n* caractères de long, tandis que **N** désigne simplement des valeurs numériques), ainsi que
+ses valeurs possibles si ces dernières sont prédéfinies (servant à distinguer les variables **catégoriques**).
 \
 Dès lors, il est possible de repérer les deux variables les plus pertinentes si l'on souhaite extraire la hauteur des différents volumes.
 En l'occurence, ce seront les variables **H_ET_MAX** ainsi que **L_B_U** (pour les volumes en porte à faux), toutes deux exprimées en nombre d'étages.
@@ -292,7 +303,7 @@ Cette prise de connaissance permet désormais de manipuler les données en elle-
 
 \newpage
 
-## Le langage Python pour mieux s'approprier les données ouvertes
+## Le langage Python pour s'approprier aisément les données ouvertes
 
 Afin d'exploiter ce jeu de données constitué d'objets géolocalisées et leurs données, le langage de programmation **Python** sera exclusivement employé.
 Comme mentionné dans l'introduction, ce dernier possède toutes les fonctionnalités nécessaires pour manipuler simplement ce type de données.
@@ -310,8 +321,6 @@ udfig(l=l,s=s)
 ```{r odp_carte_zone, echo=FALSE, fig.align = 'center', out.width = "90%"}
 include_graphics("__imgs/site_odp_carte_zone.jpg")
 ```
-\
-### Une multiplicité des formats
 
 ```{r echo=FALSE}
 l = "Un choix étendu de formats de fichiers"
@@ -329,20 +338,21 @@ téléchargement.
 Dès lors, grâce à son large éventail de **bibliothèques** (comparables à des "extensions") le langage Python se révèle ici précieux
 car il est **capable de manipuler tous les formats de fichiers proposés**.
 Or, le choix d'un format en particulier pourrait alors être perçu comme un "non-problème", étant donné de telles capacités.
-En réalité, une sélection peut déjà être effectuée d'après la lecture des métadonnées ainsi que la prévisualisation.
+Ainsi, une **brève entrevue** sera apportée sur chacun de ces formats grâce à Python, afin de déterminer lequel choisir.
 \
-\
-Image avec tableau
-\
-\
-Tout d'abord, les formats de type tableur comme **CSV** ou **Excel** représentent des choix inadaptés.
-En effet, dû au fait que le tableur est limité à **un type de valeur par colonne**, en l'occurence **soit du texte, soit des chiffres**,
-des variables telles que **GEOM**, d'une structure plus complexe s'intègrent ici très mal.
-Cela peut être prouvé grâce à la bibliothèque **Pandas**, spécialisée dans la manipulation de tableurs.
-En l'occurrence, toute la variable est notée telle quelle sous forme de **texte** (*str*).
+
+### Les formats tabulaires
 
 ```{r echo=FALSE}
-l = "Vérification du type de GEOM dans un tableur"
+l = "Chargement du jeu de données sous un format tabulaire dans Python"
+s = "réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r io_csv, echo=FALSE, fig.align = 'center', out.width = "90%"}
+include_graphics("__imgs/io_csv.png")
+```
+```{r echo=FALSE}
+l = "Format CSV"
 ```
 ```{python}
 # Import de la bibliothèque pandas
@@ -353,159 +363,220 @@ data = pandas.read_csv("DONNEES/volumesbatisparis.csv",sep=";")
 geom = data["geom"][0]
 print(type(geom))
 ```
+Tout d'abord, les formats conventionnels de type tableur comme **CSV** ou **Excel** représentent des choix inadaptés.
+En effet, dû au fait que le tableur est limité à **un type de valeur par colonne**, en l'occurence **soit du texte, soit des chiffres**,
+des variables telles que **GEOM**, d'une structure plus complexe s'intègrent ici très mal.
+Cela peut être prouvé grâce à la bibliothèque **Pandas**, spécialisée dans la manipulation de formats tableurs, en recréant dans Python
+un objet nommé *DataFrame*, composé de lignes et de colonnes.
+En l'occurrence, la variable **GEOM** a perdu sa structure, étant notée telle quelle sous forme de **texte** (*str*).
 
-Ensuite, si l'on analyse
-
-
-### La notation objet : une structure universelle et souple
-
-Ce dernier peut se décomposer en deux éléments primaires : le **dictionnaire**, un ensemble formé de couples **attribut : valeur** (aussi appelés *"objets"*), et la **liste**, une collection d'objets [@json].
-\
-
-```{r echo=FALSE}
-
-```
-
-```{python}
-# exemple de structure d'un script json
-js = [ # début de la liste
-        { # dictionnaire 1
-          "attribut" : "valeur", # couple attribut : valeur
-          "attribut2" : [0,1,2,3,4] # une liste peut être une valeur
-        },
-        { # dictionnaire 2
-          "attribut" : { "attribut3" : "valeur3" }, # un dictionnaire contenant lui même des objets peut être une valeur
-          "attribut2" : 99
-        }
-      ] # fin de la liste
-```
-
-
-Ainsi, ces deux constituantes suffisent à représenter des hiérarchies pouvant être complexes, tout en restant facile à lire et écrire pour les humains.
-
+### Les formats hiérarchisés
 
 ```{r echo=FALSE}
-l = "Import de données au format JSON dans Python"
-s = "Réalisation personnelle"
+l = "Chargement du jeu de données sous un format hiérarchisé dans Python"
+s = "réalisation personnelle"
 udfig(l=l,s=s)
 ```
 ```{r io_json, echo=FALSE, fig.align = 'center', out.width = "90%"}
 include_graphics("__imgs/io_json.png")
 ```
-\
-Or, la liste et le dictionnaire sont tous deux très courants au sein des langages de programmation modernes.
-Ainsi, l'import au sein de Python est extrêmement limpide. 
-La syntaxe afin d'accéder à une valeur donnée s'effectue simplement en saisissant l'**index de l'objet souhaité** pour les listes et le **nom des attributs** en partant de la base de l'arborescence (de gauche à droite) pour les dictionnaires. 
 
-```{python}
-# 1er objet de la liste (dictionnaire 1), puis "attribut2"
-print(js[0]["attribut2"])
+```{r echo=FALSE}
+l = "Format JSON"
 ```
-
 ```{python}
-# 2e objet de la liste (dictionnaire 1), puis "attribut2" (dictionnaire 3), puis "attribut3"
-print(js[1]["attribut"]["attribut3"])
-```
-
-La méthodologie est identique lors de l'import d'un fichier JSON externe, qui sera en l'occurence le même jeu de données téléchargé depuis le site
-Open Data Paris, mais au format .JSON. 
-
-```{python}
+# Import de la bibliothèque json
 import json
+# Lecture du fichier JSON
 data = json.load(open("DONNEES/volumesbatisparis.json","r"))
 # premier objet de la liste de volumes
-print(data[1])
+print(data[0]["fields"]["geom"]["coordinates"])
 ```
 
-Cette lecture d'un des volumes du jeu de données au format JSON permet de repérer ses différents niveaux hiérarchiques,
-tout en observant les information supplémentaires dont on dispose.
-\
-Tout d'abord, les variables du jeu de données d'origine sont ici présentes sous l'attribut **fields**.
-En son sein, la variable **geom** contient un dictionnaire avec ses deux valeurs (à savoir son type et ses coordonnées).
-Nous pouvons également noter que les coordonnées sont constituées d'une **liste contenant des listes à deux valeurs**, représentant tout simplement une collection
-de points (définis par x et y). Cependant, elle est elle même contenue dans une liste englobante superflue, que nous allons supprimer par la suite.
+Ensuite, le format **JSON** semble adapté à la structure de la variable **GEOM**, permettant ici d'en extraire les sous-informations.
+Cependant, il est nécessaire au préalable de **lire le fichier en lui même** via un éditeur de texte, afin d'en repérer la hiérarchie.
+Cette dernière se repose sur la **notation objet**, une syntaxe commune à de nombreux langages de programmation modernes comme le Python.
+Elle est constituée d'ensembles (listes) de couples **attribut : valeur**, que l'on peut **hiérarchiser** en les imbriquant.
 \
 \
-Ainsi, il est possible d'extraire les variables initialement souhaitées pour chacun des volumes avec une **boucle**, qui itèrera
-à travers la liste des volumes. Les résultats obtenus seront ajoutés dans un nouveau dictionnaire (avec des attributs nommés plus explicitement), lui même ajouté à une liste vide.
-\
-```{python error=TRUE}
-liste = [] # liste vide
-for volume in data:
-  liste.append({
-    # Le [0] à la fin permet de supprimer la liste englobante superflue
-    "coords" : volume["fields"]["geom"]["coordinates"][0],
-    "surface" : volume["fields"]["m2_pl_tot"],
-    "hauteur" : volume["fields"]["h_et_max"],
-    "hauteur_paf" : volume["fields"]["l_b_u"]
-  })
+```{r echo=FALSE}
+l = "Structure d'un volume et de ses données au format JSON"
+```
+```{python eval=FALSE}
+expl = {
+        "datasetid": "volumesbatisparis",
+        "recordid": "9cb9b7143c595f9cd2b88e4d5bc588112fedc5a8",
+        "fields": {
+            "objectid": 536158,
+            "n_sq_pf": 750031416,
+            "d_maj": "2010-07-21T04:00:00+02:00",
+            "l_src": "Fiche parcellaire et terrain certifi\u00e9",
+            "l_b_u": "Ra1_et_encorbt_au_3",
+            "h_et_max": 3.0,
+            "b_rdc": 1.0,
+            "n_ar": 13,
+            "m2_pl_tot": 12.7752023,
+            "d_cre": "2010-07-21T04:00:00+02:00",
+            "m2": 4.2584008,
+            "l_plan_h_i": "B\u00e2ti de 1 \u00e0 3 \u00e9tages",
+            "n_sq_qu": 750000050,
+            "geom_x_y": [
+                48.8272714473,
+                2.38477660061
+            ],
+            "l_nat_b": "Volume b\u00e2ti avec surplomb",
+            "n_qu": 50.0,
+            "c_plan_h_i": 2.0,
+            "shape_area": 0.0,
+            "c_src": "T",
+            "nb_pl": 3.0,
+            "n_sq_vb": 750170119,
+            "shape_len": 0.0,
+            "c_nat_b": "U",
+            "geom": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            2.384770481308271,
+                            48.827286816032526
+                        ],
+                        [
+                            2.384796971933453,
+                            48.82726286263405
+                        ],
+                        [
+                            2.384782602464847,
+                            48.8272560560162
+                        ],
+                        [
+                            2.384756236578184,
+                            48.82728017373901
+                        ],
+                        [
+                            2.384770481308271,
+                            48.827286816032526
+                        ]
+                    ]
+                ]
+            },
+            "n_sq_ar": 750000013,
+            "y": 125199.7506478,
+            "x": 603542.699385
+      }
+  }
 ```
 \
+\
+Dès lors, une fois cette notation assimilée, ce format permet une lecture relativement **aisée** pour l'utilisateur, tout en restant **simple** à lire par la machine. 
+Le code d'extraction découle donc naturellement de la lecture humaine.
 
-Cependant, nous obtenons l'erreur *KeyError : "l_b_u"*, signifiant que l'attribut **l_b_u** n'est pas défini pour certains objets.
-En effet, la notation objet permet ici de ne défnir cet attribut que lorsque le volume **est en porte à faux**, qu'il serait inutile
-d'attribuer aux autres. Cette **hétérogénéité** est donc à prendre en compte lors du traitement. 
-\
-\
-D'un point de vue plus général, cette dernière est très courante dans les jeux de données ouvertes.
-Au-delà d'être causée quand **certains enregistrements** possèdent **des attributs qui leurs sont propres** sans toutefois justifier la création
-d'un jeu de données supplémentaire (comme les volumes en porte à faux ici, difficilement dissiociables des autres), 
-elle peut être tout simplement provoquée par **certaines valeurs manquantes** dans différents enregistrements (dans le cas d'une enquête 
-aussi complexe et étendue que celle des hauteurs des bâtiments de Paris, cela est compréhensible).
-Enfin, comme c'est le cas ici, cette hétérogénéité se révèle pendant l'extraction, car pas toujours mentionnée dans les métadonnées.
-\
-\
-En conséquences, les fonctions de gestion d'erreur **try** et **except** seront utilisées afin de détécter 
-l'absence de l'attribut **l_b_u**. Lorsque **try**, essayant d'accéder à l'attribut **l_b_u** se retrouve face
-à l'erreur recontrée précédemment, **except** se chargera de la détécter et d'exécuter un autre morceau de code à la place.
-\
 
+### Les formats géographiques
+
+Enfin, puisque le jeu de données en question est constitué **d'objets géoréférencés**, les formats **GeoJSON**,
+**Shapefile** et **KML** semblent être les formats les plus adaptés.
+Or, chacun de ces formats possède **sa propre notation normée pour les données géographiques**, ce qui nécessite habituellement
+l'utilisation d'outils spécifiques comme **QGIS** afin de les lire.  
+\
+\
+Cependant, le langage Python possède une bibliothèque nommée **GeoPandas** spécialisée dans la **manipulation de données géoréférencées**.
+De manière similaire à la bibliothèque **Pandas** montrée plus haut, elle permet de traduire une collection d'**objets géoréférencés**
+en un objet *DataFrame* similaire à un tableur, cette fois-ci sans limitations au niveau des types de données.
+En outre, cette représentation prodigue un grand nombre de **fonctions** appliquables aux
+lignes et aux colonnes permettant par la suite d'opérer des transformations de manière aisée.
+
+```{r echo=FALSE}
+l = "Chargement du jeu de données sous un format géographique dans Python"
+s = "réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r io_gpd, echo=FALSE, fig.align = 'center', out.width = "90%"}
+include_graphics("__imgs/io_gpd.png")
+```
+
+```{r echo=FALSE}
+l = "Formats KML, GeoJSON et ShapeFile"
+```
 ```{python}
-liste = [] # liste vide
-for volume in data:
-  try:
-    #
-    liste.append({
-      "coords" : volume["fields"]["geom"]["coordinates"][0],
-      "surface" : volume["fields"]["m2_pl_tot"],
-      "hauteur" : volume["fields"]["h_et_max"],
-      "hauteur_paf" : volume["fields"]["l_b_u"]
-    })
-  except KeyError:
-    liste.append({
-      "coords" : volume["fields"]["geom"]["coordinates"][0],
-      "surface" : volume["fields"]["m2_pl_tot"],
-      "hauteur" : volume["fields"]["h_et_max"]
-    })
-
-print(liste[1])
-print(liste[7])
+# Import de géopandas sous l'acronyme gpd
+import geopandas as gpd
+# Spécification nécessaire à la lecture du KML
+gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
+# Lecture du fichier KML et du premier objet de la colonne "geom"
+data = gpd.read_file("DONNEES/volumesbatisparis.kml", driver='KML')
+print(data.head(1))
+# Lecture du fichier SHP et du premier objet de la colonne "geom"
+data = gpd.read_file("DONNEES/volumesbatisparis.shp")
+print(data.head(1))
+# Lecture du fichier GeoJSON et du premier objet de la colonne "geom"
+data = gpd.read_file("DONNEES/volumesbatisparis.geojson")
+print(data.head(1))
 ```
+
+De plus, **les objets géoréférencés** sont automatiquement convertis en formes géométriques,
+permettant d'y appliquer des manipulations géométriques spécifiques.
+
+```{r echo=FALSE}
+l = "Une aisance des opérations géométriques"
+```
+```{python}
+# Calcul du centroide pour le premier objet en une seule ligne
+print(data["geometry"][0].centroid)
+```
+
+Pour toutes ses qualités, cette approche avec **GeoPandas** sera privilégiée à travers les chapitres suivants.
+Enfin, quant au format de fichier en lui-même, le **GeoJSON** sera ici arbitrairement choisi.
 \
-Ainsi, outre ses capacités à gérer **une multitude de formats courants en Open Data**, le langage Python a permis de mettre en lumière l'importance de la **notation objet** 
-au sein des jeux de données complexes afin de permettre une certaine **hétérogénéité**, réclamant une souplesse de la part des outils d'extraction.
+\
+Ainsi, grâce à une **immense compatibilité** avec la majorité des types de formats courants en Open Data (prodiguée par ses nombreuses bibliothèques), 
+le langage Python constitue d'ores-et-déjà un formidable outil d'extraction, permettant de **s'approprier facilement** des jeux de données à la **structure complexe**.
+Cependant, son véritable intérêt réside dans son statut de langage de programmation, étant alors capable de traitements automatiques avancés.
 
 \newpage
 
 ## Aperçu de la souplesse des fonctions de manipulation de données
 
 Après la phase d'extraction précédente, il est nécessaire que les données etraites en l'état soient exploitables pour la suite.
-En l'occurence, il serait souhaitable d'exprimer les hauteurs en **mètres** plutôt qu'en nombre de niveaux.
 
+Premièrement, le jeu de données sera réduit aux variables identifiées lors de la lecture des métadonnées (à savoir **GEOM**,**M2_PL_TOT**,**H_ET_MAX** ainsi que **L_B_U**),
+et seront renommées afin d'être plus facilement lisible par la suite.
+
+```{r echo=FALSE}
+l = "Apurement et renommage du jeu de données"
+```
+```{python}
+data = data[["geometry","m2_pl_tot","h_et_max","l_b_u"]]
+data = data.rename(columns={
+    "m2_pl_tot" : "surface",
+    "h_et_max" : "hauteur",
+    "l_b_u" : "hauteur_paf"
+    })
+print(data)
+```
+
+Dès lors, il serait souhaitable d'exprimer les hauteurs en **mètres** plutôt qu'en nombre de niveaux.
+
+```{r echo=FALSE}
+l = "Transformation du nombre de niveaux en mètres"
+```
 ```{python}
 h_etage = 3
-print(liste[0]["hauteur"] * h_etage)
+print(data["hauteur"][0] * h_etage)
 ```
-Cette opération est triviale pour l'attribut **"hauteur"**, étant exprimé numériquement. Il suffit alors de définir une **hauteur d'étage type** et
+Cette opération est triviale pour l'attribut **hauteur**, étant exprimé numériquement. Il suffit alors de définir une **hauteur d'étage type** et
 d'effectuer une multiplication.
 \
-Cependant, l'attribut **"hauteur_paf"** étant exprimé sous la forme d'une chaîne de caractères (texte décrivant les plages de hauteur),
-il est nécessaire de convertir cette notation numériquement.
+Cependant, l'attribut **hauteur_paf** étant exprimé sous la forme de **texte** (chaînes de caractères) décrivant les plages de hauteur,
+il est nécessaire de convertir cette notation numériquement afin d'effectuer cette multiplication.
 
 ### Approche compréhensive des différentes notations grâce à Python
 
 Heureusement, Python est capable de reconnaître des morceaux de texte au sein de chaînes de caractères, permettant ainsi de les remplacer par leur équivalent numérique.
 
+```{r echo=FALSE}
+l = "Exemple de détection de texte en Python"
+```
 ```{python}
 if "da" in "data":
   print(1)
@@ -513,17 +584,57 @@ else:
   print(0)
 ```
 
-Dès lors, afin de comprendre les différentes manières d'exprimer les hauteurs en porte à faux, il est possible de les énumérer par **longueur**.
+Dès lors, afin de comprendre les différentes manières d'exprimer les hauteurs en porte à faux, il est possible de les énumérer par la **longueur de leur texte** de chacune des notations.
+\
+\
+Pour ce faire, un **dictionnaire** vide sera préalablement créé. C'est le type de donnée utilisé en Python afin de représenter la notation objet, en associant
+un **attribut** (sous forme de texte ou d'entiers) avec une **valeur** (pouvant être de type varié).
 
+```{r echo=FALSE}
+l = "Fondamentaux du dictionnaire en Python"
+```
 ```{python}
-notations = {}
-for volume in liste:
-  try:
-    notations[len(volume["hauteur_paf"])] = volume["hauteur_paf"]
-  except KeyError:
-    pass
+# Dictionnaire à deux objets
+d = {"A" : 10, "B" : 15}
+# Récupération de la valeur associée à "A"
+print(d["A"])
+# Changement de la valeur associée à "B"
+d["B"] = 30
+print(d["B"])
+```
 
-print(notations.values())
+Une **boucle** avec **for** servira ensuite à itérer à travers les différentes notations de la variable **l_b_u**.
+
+```{r echo=FALSE}
+l = "Exemple de boucle en for"
+```
+```{python}
+# Liste de valeurs
+l = [0,1,2,"trois"]
+
+for item in l:
+  print(item)
+```
+Comme le montre le code ci-dessous, pour chaque objet (**for** *objet*)  contenu dans la liste l (*in* *l*), la boucle affecte un nom de variable défini (ici, **item**),
+permettant d'opérér sur chaque objet individuellement. 
+\
+\
+
+Ainsi, en itérant à travers chaque notation contenue dans la colonne **hauteur_paf**, un **exemple de notation** sera affecté au dictionnaire vide créé précédemment en prennant
+comme attribut sa **longueur**. En réalité, pour chaque longueur, c'est la dernière notation qui sera conservée, chacune d'elle écrasant la précédente.
+Enfin, la fonction *dropna()* est employée ici pour supprimer les valeurs nulles pour les volumes non-concernés.
+
+
+```{r echo=FALSE}
+l = "Énumération des différentes notations"
+```
+```{python}
+# Création d'un dictionnaire vide
+notations = {}
+# Itération à travers la colonne "l_b_u"
+for txt in data["hauteur_paf"].dropna():
+  notations[len(txt)] = txt
+print(notations)
 ```
 
 Dès lors, certains éléments constituants peuvent être notés :
@@ -557,58 +668,88 @@ Le code ci-dessous illustre la transformation d'une notation **N^1^aN^2^**. Apr�
 bien un *a*, le code sépare les deux bornes à cet endroit, puis les convertit en **entiers**.
 Enfin, chaque borne est incrémentée de **1** avant multiplication par la hauteur d'étage type, sauf *R* qui prend la valeur 0. 
 
+```{r echo=FALSE}
+l = "Énumération des différentes notations"
+```
 ```{python}
 # Rappel : h_etage = 3 mètres
 h_paf =  "Ra8"
 if "a" in h_paf:
+  # Séparation des deux chiffres au niveau du "a"
   hauteur = h_paf.split("a")
+  # Conversion de chaque chiffre en entier, puis multiplication par la hauteur d'étage type
+  # Si "R" est présent, il prend la valeur 0
   hauteur = [(int(h)+1)*h_etage if h != "R" else 0 for h in hauteur]
 
 print(hauteur)
 ```
 
-Suivant ce principe, le bloc de code suivant opère ce type de transformation suivant les différents notations relevées
-précédemment. L'incrément de **1** sera également appliqué à l'attribut **hauteur**
+Suivant ce principe, la **fonction** suivante opèrera ce type de transformation suivant les différents notations relevées
+précédemment sur l'ensemble des volumes.
+Une **fonction** est un bloc de code que l'on définit **une seule fois** dans un script avec un **nom** et éventuellement des
+**arguments** (paramètres), et que l'on peut exécuter autant de fois que l'on souhaite par la suite en l'appelant par son nom.
+Ici, cette fonction sera appelée **texte_to_num**, et prendra pour argument chaque volume, afin de convertir la notation caractérisant son porte à faux en expression numérique.
+Elle appliquera également la transformation de la variable **hauteur** (à savoir un incrément de 1 suivi d'une multiplication par la hauteur d'étage type).
 
+```{r echo=FALSE}
+l = "Fonction à appliquer à l'ensemble des volumes"
+```
 ```{python}
 # Rappel : h_etage = 3 mètres
-for volume in liste:
-  intervalles = []
-  try:
-    intervs = volume["hauteur_paf"].split("_et_")
-    for interv in intervs:
-        if "encorbt_au_" in interv:
-          n = int(interv.strip("encorbt_au_"))
-          if n == volume["hauteur"]:
-            intervalles.append([n*h_etage,(n+1)*h_etage])
-          else:
-            intervalles.append([(n+1)*h_etage,(volume["hauteur"]+1)*h_etage])
-        elif "a" in interv:
-            if "R" in interv:
-                intervalles.append([0,(int(interv.strip("Ra"))+1)*h_etage])
-            else:
-                intervalles.append([(int(h)+1)*h_etage for h in interv.split("a")])
-        elif interv == "R":
-            intervalles.append([0,h_etage])
-    volume["hauteur_paf"] = intervalles
-  except KeyError:
-    pass
+def texte_to_num(volume):
+     # Si le volume n'est pas en porte à faux
+    if volume["hauteur_paf"] == None:
+        # Affecter une valeur nulle
+        volume["hauteur_paf"] = None
+    else:
+        # Liste vide pour contenir les notations numériques
+        output = []
+        # Séparation des sous-notations au niveau du "_et_"
+        # Si absent, la notation sera conservée telle quelle
+        intervalles = volume["hauteur_paf"].split("_et_")
+        # Itération à travers les sous-notations
+        for interv in intervalles:
+            # filtrage par syntaxe
+            if "encorbt_au_" in interv:
+                n = int(interv.strip("encorbt_au_"))
+                if n == volume["hauteur"]:
+                    output.append([n*h_etage,(n+1)*h_etage])
+                else:
+                    output.append([(n+1)*h_etage,(volume["hauteur"]+1)*h_etage])
+            elif "auvent_n" in interv:
+                n = int(interv.strip("auvent_n"))
+                output.append([n*h_etage,(n+1)*h_etage])
+            elif "a" in interv:
+                if "R" in interv:
+                    output.append([0,(int(interv.strip("Ra"))+1)*h_etage])
+                else:
+                    output.append([(int(h)+1)*h_etage for h in interv.split("a")])
+            elif interv == "R":
+                output.append([0,h_etage])
+            # Remplacement par la notation numérique
+            volume["hauteur_paf"] = output
 
-  volume["hauteur"] = (volume["hauteur"]+1) * h_etage
-
-print(liste[1])
+    volume["hauteur"] = (volume["hauteur"] + 1)*h_etage
+    return volume
 ```
-Enfin, ce jeu de données apurées peut être sauvegardé au format JSON, afin de pouvoir le réutiliser facilement dans le chapitre suivant.
 
+Enfin, cette fonction peut-être appliquée automatiquement à l'ensemble du jeu.
+
+```{r echo=FALSE}
+l = "Application de la fonction sur le jeu de données"
+```
 ```{python}
-json.dump(liste,open("DONNEES/liste_apuree.json","w"))
+# Application à chaque volume avec .apply()
+data = data.apply(lambda volume : texte_to_num(volume),axis=1)
+# Affichage des 3 premiers volumes
+print(data.head(3))
 ```
 
 Comme démontré au cours de ce chapitre, le langage de programmation Python 
 possède une souplesse lui permettant d'extraire et de manipuler facilement les formats de données courants en Open Data,
-et de palier sans réelle difficulté aux éventuelles subtilités présentes dans des jeux de données hétérogènes, le tout bénéficiant
+et de palier aux éventuelles difficultés posées par la structure ou encore le formatage des jeux de données, le tout bénéficiant
 d'une syntaxe claire tout au long du code.
-**A la fois outil de compréhension et de traitement, il se révèle extrêmement précieux lorsque l'on souhaite 
+**Ainsi, à la fois outil de compréhension et de traitement, il se révèle extrêmement précieux lorsque l'on souhaite 
 exploiter des jeux de données en Open Data.**
 \
 \
@@ -661,40 +802,31 @@ que son concurrent plus répandu *Matplotlib* mentionné précédemment.
 ### Visualisation statistique des données
 
 Lorsque l’on aborde la question de la synthèse de données quelles qu’elles soient, la représentation statistique par des graphiques semble représenter l’approche la plus intuitive et la plus directe.
-
-```{python}
-import json
-import plotly.graph_objects as go
-volumes = json.load(open("DONNEES/liste_apuree.json","r"))
-```
 Le premier graphique créé sera un histogramme de **répartition du nombre de volumes par hauteur**.
-Le code ci-dessus permet d'importer la bibliothèque *Plotly* (par l’intermédiaire d’un de ses « sous-module » nommé « graph_objects », que nous appellerons ici avec « go » tout au long du script),
-et charge également la liste des volumes enregistrée à la fin du chapitre 1.
-\
 
+```{r echo=FALSE}
+l = "Import de plotly et obtention du nombre de volumes par hauteur"
+```
 ```{python}
-n_par_hauteur = {}
-for volume in volumes:
-  try:
-    n_par_hauteur[volume["hauteur"]] += 1
-  except KeyError:
-    n_par_hauteur[volume["hauteur"]] = 1
-  
+import plotly.graph_objects as go
+n_par_hauteur = data["hauteur"].value_counts().to_dict()
 print(n_par_hauteur)
 ```
-
-Cette liste des volumes est ensuite analysée dans le code ci-dessus à travers une boucle. Le but est en effet d'en récupérer le **nombre de volumes par hauteur**.
-La fonction **try**/**except** permet d'inclure une nouvelle hauteur dans le dictionnaire **n_par_hauteur** si elle n'existe pas encore. Si elle existe déjà, sa valeur est incrémentée.
+Le code ci-dessus permet d'importer la bibliothèque *Plotly* (par l’intermédiaire d’un de ses « sous-module » nommé « graph_objects », que nous appellerons ici avec « go » tout au long du script).
+Après cet import, la fonction *value_counts()* de *GeoPandas* permet ici de récupérer le **nombre de volumes par hauteur** automatiquement (en énumérant chaque valeur possible et le nombre d'occurrences dans la colonne), 
+puis ajoute le tout dans un dictionnaire nommé **n_par_hauteur**.
 \
 \
-Enfin, quelques lignes de codes permettent à la fois la construction d'un graphique, ainsi que son export.
+Enfin, quelques lignes de codes permettent à la fois la construction du graphique, ainsi que son export.
 La **liste des différentes hauteurs** (soit celle des *attributs* du dictionnaire **n_par_hauteur**) représentera l'axe *x*,
 tandis que les différents **nombres de volumes** associés formeront les valeurs à renseigner pour l'axe *y*.
 Quelques paramètres graphiques servent à définir un titre général, des libellés pour les deux axes ainsi qu'une résolution d'export.
 Ici, deux exports possibles seront montrés, à savoir un export **statique** sous forme d'image au format PNG, ainsi qu'un export **interactif** au sein d'une page web au format HTML. 
 
+```{r echo=FALSE}
+l = "Génération du graphique et export"
+```
 ```{python results='hide'}
-# traçage du graphique
 fig = go.Figure([go.Bar(x=list(n_par_hauteur.keys()), y=list(n_par_hauteur.values()),opacity=0.8,marker_color='rgb(200,0,0)')])
 fig.update_xaxes(categoryorder='category ascending',tickvals=sorted(list(n_par_hauteur.keys())))
 fig.update_layout(title="Répartition des hauteurs",xaxis_title="hauteur (m)",yaxis_title="nombre de volumes",width=600,height=600)
@@ -714,22 +846,29 @@ include_graphics("__imgs/graphique_hauteurs_int.png")
 
 Il est également possible de créer de la même manière une multitude d'autres graphiques que *Plotly* permet de construire.
 Un second graphique plus complet peut être construit, en s'intéressant cette fois-ci à une répartition **des volumes suivant leur hauteur, leur surface et s'ils sont en porte à faux**.
-Ici, le sous-module *express* de *Plotly* sera employé avec *Pandas*, permettant une mise en forme plus condensée et une meilleur gestion des données.
-Il sera possible de réutiliser directement les éléments de la liste des volumes. Cependant, un attribut devra être ajouté à chaque volume, spécifiant s'il est en porte à faux ou pas,
-afin de pouvoir être traité dans *Plotly*.
+Ici, le sous-module *express* de *Plotly* sera employé permettant une mise en forme plus condensée.
+L'objectif est donc ici de se baser directement sur le jeu de données des volumes. 
+Cependant, une nouvelle colonne devra être ajoutée, spécifiant si chaque volume est en porte à faux ou pas,
+afin de pouvoir ajouter cette valeur dans *Plotly*.
 
+```{r echo=FALSE}
+l = "Création d'un second graphique de répartition des volumes"
+```
 ```{python results='hide'}
 import plotly.express as px
-import pandas
+# Fonction permettant de déterminer
+# si un volume est en porte à faux
+def is_paf(volume):
+    if volume["hauteur_paf"] == None:
+        return 0
+    else:
+        return 1
 
-for volume in volumes:
-  try:
-    _ = volume["hauteur_paf"]
-    volume["is_paf"] = 1
-  except KeyError:
-    volume["is_paf"] = 0
-    
-df = pandas.DataFrame(volumes).drop(columns=["coords","hauteur_paf"])
+# Suppression de la colonne "geometry"
+df = data.drop("geometry",axis=1)
+# Création de la nouvelle colonne grâce à .apply()
+df["is_paf"] = df.apply(lambda row : is_paf(row), axis=1)
+# Génération du graphique et export
 fig2 = px.parallel_coordinates(df, color="hauteur",color_continuous_scale=px.colors.sequential.amp)
 fig2.update_layout(font={"size":20},width=1800,height=800)
 fig2.write_image("OUTPUT/graphique_repart.png")
@@ -753,53 +892,46 @@ rend également possible de dessiner les **emprises des volumes en eux-mêmes**,
 
 Cette sous-section a pour but de présenter une fonctionnalité particulièrement utile pour la profession architecturale.
 En effet, *Plotly* est capable de créer de représenter des **formes géométriques sur un fond de carte** (d'une manière similaire aux solutions de SIG
- sans avoir besoin de convertir les coordonnées en latitude/longitude), avec laquelle il est possible d'**interagir**, à travers notamment
- des fonctionnalités telles que le **zoom**, l'**affichage/masquage** d'élements légendés ainsi que l'affichage de caractéristiques au **survol avec le curseur**.
-
+sans avoir besoin de convertir les coordonnées en latitude/longitude), avec laquelle il est possible d'**interagir**, à travers notamment
+des fonctionnalités telles que le **zoom**, l'**affichage/masquage** d'élements légendés ainsi que l'affichage de caractéristiques au **survol avec le curseur**.
 Ainsi, l'objectif sera ici de générer une **carte interactive des volumes par hauteur**.
 
-
-```{python}
-import json
-import plotly.graph_objects as go
-volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+```{r echo=FALSE}
+l = "Import de Plotly et tri des volumes par hauteur"
 ```
-
-Après avoir chargé le jeu de données de base, la première étape est de **grouper les volumes par hauteur**. Ceci sera effectué comme dans
-la section précédente, à l'exception que les **volumes ainsi que leurs caractéristiques** seront ajoutés à une liste par hauteur au lieu d'être simplement comptés.
+```{python results='hide'}
+import plotly.graph_objects as go
+# Création de sous-groupes de volumes par hauteur
+volumes_par_hauteur = data.groupby("hauteur")
+```
+Après avoir chargé le jeu de données de base, la première étape est de **grouper les volumes par hauteur**. Ceci sera effectué grâce à la 
+fonction *groupby()* de *GeoPandas*.
 Le tout sera trié selon la hauteur par **ordre croissant**.
 
-```{python}
-volumes_par_hauteur = {}
-for volume in volumes:
-  try:
-    volumes_par_hauteur[volume["hauteur"]].append(volume)
-  except KeyError:
-    volumes_par_hauteur[volume["hauteur"]] = [volume]
 
-volumes_par_hauteur = dict(sorted(volumes_par_hauteur.items()))
-```
-
-Ensuite, une **boucle** permet d'itérer à travers chaque **hauteur et ses volumes** afin de les tracer.
+Ensuite, une **boucle** en **for** permet d'itérer à travers chaque groupe de **hauteur et ses volumes** afin de les tracer.
 Une **couleur** sera préalablement attribuée pour chacune d'entre elles, calculées selon une échelle de gris en RGB (plus le volume est **haut**, plus il sera **clair**).
-La seule subtilité ici est de devoir séparer **les listes de coordonnées latitude/longitude** en **deux listes séparées**, et
+La seule subtilité ici est de devoir traiter **les listes de coordonnées latitude/longitude** en **deux listes séparées**, et
 ainsi avoir une liste pour les valeurs de **latitude** et une autre pour les valeurs de **longitude**, contenant des valeurs **nulles** pour
 séparer les volumes lors du traçage.
 \
 
+```{r echo=FALSE}
+l = "Génération des couches de la carte"
+```
 ```{python}
+# Liste accueillant les couches de la carte
 traces = []
-for h,volumes in volumes_par_hauteur.items():
-  couleur = "rgb(" + ",".join([str(h/max(volumes_par_hauteur.keys())*255)]*3) +")"
+for h,volumes in volumes_par_hauteur:
+  couleur = "rgb(" + ",".join([str(h/max(data["hauteur"])*255)]*3) +")"
   X = []
   Y = []
-  for vol in volumes:
-    for coords in vol["coords"]:
-      X.append(coords[0]) # longitude
-      Y.append(coords[1]) # latitude
-    X.append(None) #Séparations entre chaque volume
-    Y.append(None)
+  for geom in volumes["geometry"]:
+    coords = geom.exterior.coords.xy
+    X += list(coords[0][:-1])+[None] # longitude
+    Y += list(coords[1][:-1])+[None] # latitude
     # Traçage des volumes
+  print(X)
   traces.append(go.Scattermapbox(
     name=str(h) +"m",
     mode="lines",
@@ -814,6 +946,9 @@ Enfin, la carte complète (avec chaque couche de volumes pour chaque hauteur) es
 en configurant le titre, la légende ainsi que le style de fond de carte. Le tout est sauvegardé au format .HTML, 
 permettant de l’ouvrir dans un navigateur afin de permettre l’interactivité et la **navigation libre** dans le fond de carte.
 
+```{r echo=FALSE}
+l = "Export de la carte"
+```
 ```{python results='hide'}
 fig = go.Figure(traces)
 fig.update_layout(title="Hauteurs des volumes bâtis",legend_title="Hauteur", autosize=True,
@@ -858,53 +993,63 @@ Pour ce faire, le module **ezdxf** sera employé. Ce dernier permet la plupart d
 que propose d'autres outils de CAD tels qu'*AutoCAD*, dont la création de calques entre autres.
 \
 \
-Un second module nommé **utm** sera également utilisé pour manipuler les coordonnées géographiques.
-En effet, il est ici indispensable de convertir les **coordonnées géodésiques** exprimées en *degrés de latitude/longitude* en **coordonnées cartésiennes** exprimées en unités de grandeur terrestres.
-La notation UTM (*Universal Transverse Mercator*) étant exprimée en **mètres** et dont le calcul prend en compte la rotondité de la Terre,
-elle se révèle donc essentielle pour pouvoir dessiner dans un repère. (Une petite subtilité sera d'inverser l'ordre des degrés de latitude/longitude dans le code, afin que l'axe *x* corresponde à la **longitude**, 
-et l'axe *y* à la **latitude**).
+Cependant, il est ici indispensable de convertir les **coordonnées géodésiques** exprimées en *degrés de latitude/longitude* en **coordonnées cartésiennes** exprimées en unités de grandeur terrestres.
+Pour cela, la projection *Lambert93* sera utilisée car exprimée en **mètres** et étant **orthonormée** (son calcul prenant en compte la rotondité de la Terre),
+Elle se révèle donc essentielle pour pouvoir dessiner dans un repère tel qu'un dessin vectorisé.
+Heureusement, *GeoPandas* permet cette conversion, en référençant le code du système de coordonnées de référence (crs) par défaut (ici, le système latitude/longitude *WGS84*),
+puis celui de la projection *Lambert93*.
 
+
+```{r echo=FALSE}
+l = "Changement du Système de Coordonnées de Référence"
+```
 ```{python}
-import json
-import ezdxf
-import utm
-volumes = json.load(open("DONNEES/liste_apuree.json","r"))
+# Coordonnées latitude/longitude (WGS84)
+data.crs = 4326
+# Coordonnées X/Y (Lambert93)
+data = data.to_crs(2154)
+# Affichage d'un exemple de coordonnées
+print(data.head(1))
 ```
 
-Après l'import des modules nécessaires et le chargement du jeu de données de base, un nouveau dessin
-est initialisé. Ensuite, **un calque par hauteur** sera créé en amont des tracés des volumes, de sorte à ce qu'ils
+Après l'import du module *ezdxf*, un nouveau dessin est initialisé. 
+Ensuite, **un calque par hauteur** sera créé en amont des tracés des volumes, de sorte à ce qu'ils
 apparaîssent dans un ordre croissant au sein du futur fichier. Tout comme dans la carte interactive présentée dans la session
 2.1.2, une **teinte de couleur proportionnelle à chaque hauteur** sera créée (en l'occurence, sur du rouge).
 
+
+```{r echo=FALSE}
+l = "Initialisation du dessin et création des calques"
+```
 ```{python}
+import ezdxf
 # initialisation d'un nouveau dessin
 doc = ezdxf.new(dxfversion='R2010')
 msp = doc.modelspace()
-# boucle sur une ligne pour récupérer les hauteurs
-hauteurs = [volume["hauteur"] for volume in volumes]
-# permet de supprimer les doublons et de trier par ordre croissant
-hauteurs = sorted(list(set(hauteurs)))
+# Récupération et tri des différentes hauteurs
+hauteurs = sorted(data["hauteur"].unique())
+# Itération à travers les différentes hauteurs
 for h in hauteurs:
+  # Création d'un nouveau calque nommé
   calque = doc.layers.new(str(h) + "m")
+  # Affectation d'une couleur suivant la hauteur
   calque.rgb = (255*(h/hauteurs[-1]),0,0)
 ```
 
-Ceci effectué, une boucle itèrera à travers chaque volume.
-Pour chacun d'entre eux, leurs **coordonnées seront préalablement converties** des degrés de latitude/longitude en mètres grâce au module
-*utm*. Une **polyligne** peut ainsi être tracée à partir des points aux coordonnées converties pour représenter l'emprise de chaque volume,
-puis affectée au calque correspondant à la hauteur du volume.
-Enfin, le document est exporté au format .DXF.
+Ceci effectué, une boucle itèrera à travers chaque volume du jeu de données (grâce à la fonction *iterrows()* de *GeoPandas*).
+Pour chacun d'entre eux, une **polyligne** peut être tracée à partir des coordonnées des points pour représenter l'emprise de chaque volume,
+puis être affectée au calque correspondant à la hauteur du volume.
 
+```{r echo=FALSE}
+l = "Traçage des volumes et affectation dans les calques"
+```
 ```{python  results='hide'}
-for volume in volumes:
-    coords_cart = []
-    # Conversion des coordonnées géodésiques (lat/lon) en cartésiennes (x/y)
-    for coords in volume["coords"]:
-        c = utm.from_latlon(coords[1],coords[0])
-        coords_cart.append((c[0],c[1]))
-    
+for row,volume in data.iterrows():
+    # Extraction des coordonnées des points du polygone
+    coords = list(zip(*volume["geometry"].exterior.coords.xy))
+    # Affectation au sein du calque correspondant à sa hauteur
     calque = str(volume["hauteur"]) + "m"
-    msp.add_polyline2d(coords_cart, dxfattribs={'layer': calque})
+    msp.add_polyline2d(coords, dxfattribs={'layer': calque})
 
 doc.saveas("OUTPUT/plan_bati.dxf")
 ```
@@ -920,10 +1065,10 @@ include_graphics("__imgs/cad_1.png")
 
 Le document fourni en sortie peut ensuite être importé dans n'importe quel logiciel 
 supportant le format DXF, ce qui est le cas pour la majorité des outils de dessin vectoriel des agences d'architecture.
-Ce document est d'autant plus exploitable qu'il reste **géoréférencé** (les volumes conservent leurs coordonnées UTM dans le dessin),
-et **à l'échelle** (puisque exprimés en mètres).
+Ce document est d'autant plus exploitable qu'il reste **géoréférencé** (les volumes conservent leurs coordonnées *Lambert93* dans le dessin),
+et **à l'échelle** (puisque ces coordonnées sont exprimés en mètres).
 \
-De plus, les options de **personnalisation** des calques permettent d'organiser les données
+De plus, les options de **personnalisation** des calques permettent de hiérarchiser les données
 dont on dispose en amont d'une exploitation "manuelle".
 
 Ainsi, le langage Python prouve également son efficacité lorsqu'il est question de générer des documents
@@ -957,11 +1102,10 @@ La version Python de cette bibliothèque permet en l'occurrence de connecter une
 Autrement dit, il sera possible directement dans un même script de créer un fichier au format natif de Rhinoceros (.3DM), puis y dessiner et extruder des tracés pour enfin le sauvegarder sur son disque dur.
 \
 
+```{r echo=FALSE}
+l = "Chargement d'une instance de RhinoInside"
+```
 ```{python}
-import json
-import utm
-volumes = json.load(open("DONNEES/liste_apuree.json","r"))
-# chargement d'une instance de RhinoInside
 import rhinoinside
 from pathlib import Path
 rhino_path = Path("C:/Program Files/Rhino 7/System")
@@ -971,10 +1115,11 @@ import System
 import Rhino
 ```
 
-La séquence d'import est un peu plus conséquente, puisqu'il faut ici spécifier le chemin d'installation de Rhino 7.
-Le module *utm* sera également utilisé ici.
+La séquence d'import ci-dessus est plus conséquente, puisqu'il faut ici spécifier le chemin d'installation de Rhino 7.
 
-
+```{r echo=FALSE}
+l = "Initialisation du nouveau fichier Rhino et d'un calque principal"
+```
 ```{python  results='hide'}
 # Création du document
 DOC = Rhino.RhinoDoc.Create("")
@@ -989,44 +1134,51 @@ c_actuel = DOC.Layers.FindByFullPath("calque_bati",-1)
 DOC.Layers.SetCurrentLayerIndex(c_actuel,False)
 ```
 
-Une première étape consiste à créer une **nouvelle instance d'un document rhino**, spécifier ses unités (ici, en accord avec les unités des coordonnées UTM, soit le *mètre*),
+Une première étape consiste à créer un **nouveau document rhino**, spécifier ses unités (ici, en accord avec les unités des coordonnées *Lambert93*, soit le *mètre*),
 ainsi que créer un calque dans lequel seront dessinés les volumes. Ce dernier se verra attribuer un **nom** et une **couleur**.
 
+```{r echo=FALSE}
+l = "Construction des volumes en 3D et export au format .3DM"
+```
 ```{python  results='hide'}
-for volume in volumes:
+for row,volume in data.iterrows():
+  # Liste de points vide pour créer une polyligne
   pts = System.Collections.Generic.List[Rhino.Geometry.Point3d]()
-  # Conversion des coordonnées géodésiques (lat/lon) en cartésiennes (x/y)
-  for coords in volume["coords"]:
-    c = utm.from_latlon(coords[1],coords[0])
+  # Extraction des coordonnées des points du polygone
+  coords = list(zip(*volume["geometry"].exterior.coords.xy))
+  for c in coords:
+    # Ajout des points du polygone
     pts.Add(Rhino.Geometry.Point3d(c[0],c[1],0.0))
-  
+  # Création de la polyligne
   poly = Rhino.Geometry.Polyline(pts)
-  try:
+  if volume["hauteur_paf"] == None:
+    # Si le volume repose au rdc
+    polyz = poly.ToPolylineCurve()
+    # Création de l'extrusion
+    extr = Rhino.Geometry.Extrusion.Create(polyz,-1*float(volume["hauteur"]),True)
+    DOC.Objects.AddExtrusion(extr)
+  else:
     # Si le volume est en porte à faux
+    # Itération à travers les intervalles
     for intervalle in volume['hauteur_paf']:
       poly.SetAllZ(float(intervalle[0]))
       polyz = poly.ToPolylineCurve()
       h_cible = float(intervalle[1])-float(intervalle[0])
+      # Création de l'extrusion entre les limites de l'intervalle
       extr = Rhino.Geometry.Extrusion.Create(polyz,-1*h_cible,True)
       DOC.Objects.AddExtrusion(extr)
-  except KeyError:
-    # Si le volume repose au rdc
-    polyz = poly.ToPolylineCurve()
-    extr = Rhino.Geometry.Extrusion.Create(polyz,-1*float(volume["hauteur"]),True)
-    DOC.Objects.AddExtrusion(extr)
-
+  
 success = DOC.SaveAs('OUTPUT/modele.3dm')
 ```
 
 La boucle ci-dessus effectue deux opérations distinctes sur chaque volume.
 \
-La première étape consiste à **convertir les coordonnées** en latitude/longitude en coordonnées *utm* afin de pouvoir les exploiter dans le repère de Rhino, 
-puis de les grouper au sein d'une liste (nommée *pts*) afin d'en générer une **polyligne**.
+La première étape consiste à **extraire les points de chaque polygone** et de les grouper au sein d'une liste (nommée *pts*) afin d'en générer une **polyligne**.
 \
-Ensuite, si le volume est en **porte à faux**, les différents **intervalles de hauteur** qu’il occupe dans son emprise en plan (exemple : 6 à 15 mètres) sont récupérés.
+Ensuite, si le volume repose simplement en rez-de-chaussée, une seule extrusion sera créée afin d’atteindre la hauteur définie par l’attribut *hauteur*, puis sera écrite dans le fichier.
+En revanche, si le volume est en **porte à faux**, les différents **intervalles de hauteur** qu’il occupe dans son emprise en plan (exemple : 6 à 15 mètres) sont traités à travers une boucle.
 Pour chacun d'entre eux, la polyligne créée précédemment sera déplacée en hauteur pour atteindre la borne "basse" de l’intervalle. 
 Une **extrusion** est alors créée depuis cette base pour atteindre la hauteur définie par la borne "haute" de l’intervalle, et sera enfin écrite dans le fichier Rhinoceros.
-En revanche, en cas d’un volume simple reposant au rez-de-chaussée, une seule extrusion sera créée afin d’atteindre la hauteur définie par l’attribut *hauteur*, puis sera écrite dans le fichier.
 \
 \
 Enfin, le fichier est sauvegardé au format 3DM, que l'on peut ensuite visualiser et parcourir directement dans Rhinoceros.
@@ -1059,16 +1211,15 @@ et surtout de la manière logique de résoudre un problème de modélisation dan
 **Cette solution a donc permis d’exploiter les données collectées à leur plein potentiel.**
 \
 \
-\
 **Ainsi, au-delà de permettre une simple visualisation statistique des jeux de données en Open Data, 
 le langage Python apporte à l’architecte des solutions techniques variées afin de convertir les jeux de données bruts en 
 fichiers synthétiques dans des formats pleinements exploitables dans son environnement de travail, de la visualisation des données interactives au modèle 3D.**
 \
 \
-En outre, toutes ces solutions permettent d’obtenir chacun de ces éléments en **un temps d'éxécution très faible (quelques minutes d’exécution tout au plus)**, 
-permettant un **gain de temps considérable** une fois qu'ils ont été développés, qui ne fera que **s'accroître** à mesure qu'on le **réutilise**.
-De plus, les scripts présentés au cours de ce chapitre démontrent de par leur **longueur maîtrisée** (50 lignes maximum) que ce genre de manipulations complexes 
-peuvent être mises en place de manière clarifiée, en prolongement des concepts basiques abordés dans le chapitre 1.
+En outre, tous les scripts présentés permettent d’obtenir chacun de ces éléments en **un temps d'éxécution très faible (quelques minutes tout au plus)**, 
+permettant un **gain de temps considérable** une fois qu'ils ont été développés, qui ne fera que **s'accroître** à mesure qu'on les **réutilise**.
+De plus, ils démontrent par leur **longueur maîtrisée** (50 lignes maximum) que ce genre de manipulations complexes 
+peuvent être mises en place de manière clarifiée (grâces aux bibliothèques comme *GeoPandas*), en prolongement des concepts abordés dans le chapitre 1.
 \
 \
 Jusqu’à lors, l’exercice a été de manipuler une infime portion d’un jeu de données ciblé autour d’un site, dans une optique « traditionnelle » de se renseigner sur un contexte immédiat.
@@ -1266,28 +1417,21 @@ l = "Extraits des tables des matériaux pour les murs (gauche) et les toitures (
 s = "\\url{http://piece-jointe-carto.developpement-durable.gouv.fr/NAT004/DTerNP/html3/annexes/}"
 udfig(l=l,s=s)
 ```
-```{r mats, echo=FALSE, fig.align = 'center', out.height = "25%",fig.show='hold'}
+```{r mats, echo=FALSE, fig.align = 'center', out.height = "30%",fig.show='hold'}
 include_graphics("__imgs/matmur.png")
 include_graphics("__imgs/mattoit.png")
 ```
 
 La plateforme d'IGN ne proposant pas de moyens de prévisualiser les données sous la forme d'une carte, un petit script Python sera ici utilisé afin
-de visualiser les données associées à un bâtiment en l'exportant au format JSON pour plus de clarté. Ceci sera réalisé grâce au module **GeoPandas**, spécialisé dans la manipulation de données géographiques,
-à partir du fichier des bâtiments au format "shapefile" (SHP) contenu dans la base de données une fois téléchargée.
+de visualiser les données associées à un bâtiment grâce au module *GeoPandas* à partir du fichier des bâtiments au format ShapeFile 
+contenu dans la base de données une fois téléchargée.
 
-```{python eval=FALSE}
+```{python}
 import geopandas as gpd
-data = gpd.read_file("F:\\BD_TOPO_IDF\\BATI\\BATIMENT.shp")
-data.head(1).to_file("F:\\BD_TOPO_IDF\\BATI\\BATIMENT.json", driver="GeoJSON")
+data = gpd.read_file("F:\\BD_TOPO_IDF_\\BATI\\BATIMENT.shp")
+print(data.head(1))
 ```
-```{r echo=FALSE}
-l = "Visualisation d'un bâtiment et de ses données dans la BD TOPO d'IGN"
-s = "Réalisation personnelle"
-udfig(l=l,s=s)
-```
-```{r donnee_ign, echo=FALSE, fig.align = 'center', out.width = "90%",fig.show='hold'}
-include_graphics("__imgs/donnee_ign.png")
-```
+
 Dès lors, le jeu actuel ne possédant aucun attribut à caractère identifiant en commun avec le jeu de données de l'*APUR*,
 les **coordonnées terrestres** de l'emprise représentent **le seul moyen** envisageable de les recouper, de sorte à ce que les attributs concernant les matériaux dans la *BD TOPO* soient
 ajoutés au jeu de l'*APUR*. En l'occurrence, les coordonnées ci-dessus sont exprimées selon la notation **UTM**, que l'on peut aisément manipuler grâce à Python comme l'ont montré les
@@ -1333,6 +1477,36 @@ des **images** viendront compléter des données **alphanumérique** (tel que le
 L'enjeu du langage Python est donc de permettre ce **recoupement géométrique** entre les différents bâtiments.
 
 ### Le recoupement géométrique
+
+```{r echo=FALSE}
+l = "Principe de l'aggrégation géométrique"
+s = "Réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r principe_agg, echo=FALSE, fig.align = 'center', out.width = "45%",fig.show='hold'}
+include_graphics("__imgs/principe_agg.png")
+```
+
+En l'absence d'identifiant en commun, il est nécessaire de réaliser une agrégation de données basées sur les **coordonnées** 
+de deux entités identiques appartenant à des jeux différents.
+Dans un premier temps, elle sera appliquée entre les jeux de données de l'**APUR** et de la **BD TOPO**. L'extraction des images sera quant à lui 
+réalisé dans un second temps.
+\
+\
+Dès lors, pour une même entité réelle (ici, un bâtiment), deux formes géométriques géolocalisées peuvent légèrement différer, et ce
+pour plusieurs raions telles que la précision du relevé ou encore une éventuelle différence de mises à jour.
+L'un des deux objets géométriques sera donc réduit en un point, son **centroïde** (soit l'approximation géométrique de son centre).
+Ainsi, il suffit alors de déterminer **quel polygone** contient le centroïde en question, afin de retrouver son homologue
+dans le second jeu de données.
+\
+\
+La première étape consiste donc à déterminer quel jeu de données sera réduit à ses centroïdes, et lequel conservera ses polygones.
+En l'occurence, puisque le jeu de données de l'**APUR** contient la majorité des données à extraire, c'est celui de la
+**BD TOPO** qui sera réduit à ses centroïdes.
+
+
+
+
 
 \newpage
 
