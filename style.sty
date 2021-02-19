@@ -7,7 +7,8 @@
 \usepackage{setspace}\linespread{2.0}
 \usepackage{chngcntr}
 
-\usepackage[font={it,small}]{caption}
+\usepackage[font={it,tiny}]{caption}
+\DeclareCaptionLabelFormat{blank}{}
 
 \counterwithin{figure}{section}
 
@@ -35,12 +36,12 @@
 
 \titleformat{\subsection}
 {\color{red}\headingfont\Large\singlespacing}
-{\thesubsection}{1.5em}{}
+{\thesubsection}{2em}{}
 
 % !TeX encoding=UTF-8
 \titleformat{\subsubsection}
 {\color{red}\headingfont\Large\singlespacing}
-{\thesubsubsection}{1.5em}{}
+{\thesubsubsection}{2em}{}
 
 \titleformat{\paragraph}
 {\color{black}\normalfont}
@@ -51,8 +52,8 @@
 \tcbuselibrary{listingsutf8}
 \tcbset{
     colback=white,
-    colframe=red,
-    fonttitle=\it,
+    colframe=black!50,
+    fonttitle=\it\small,
     boxrule=0.3mm
 }
 
@@ -89,8 +90,8 @@
 language=Python,
 backgroundcolor=\color{boitecode},  
 numbers=none,
-breaklines=true,     
-basicstyle=\footnotesize\codefont\singlespacing,
+breaklines=true,
+basicstyle=\scriptsize\codefont\singlespacing,
 commentstyle=\it\color{grisclair},
 keywordstyle=\bf\color{red},
 numberstyle=\color{red},
@@ -101,8 +102,8 @@ stringstyle=\color{red}
 language=python,
 backgroundcolor=\color{boiteout},  
 numbers=none,
-breaklines=true,     
-basicstyle=\footnotesize\codefont\singlespacing\color{black},
+breaklines=true,
+basicstyle=\scriptsize\codefont\singlespacing\color{black},
 numberstyle=\color{red},
 stringstyle=\color{red}
 }

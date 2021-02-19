@@ -1,13 +1,14 @@
 import geopandas as gpd
 from shapely import speedups
+import shapely
 speedups.enabled
-
+"""
 apur = gpd.read_file("F:\\DATABASE\\APUR\\BESOIN_THEORIQUE_CHAUFFAGE_ET_TYPOLOGIE_AU_BATI.geojson")
 apur.crs = 4326
-apur.to_crs(2154)
+apur = apur.to_crs(2154)
 
 attributs_apur = [
-    "geometry"
+    "geometry",
     "SURFACE_VITRAGE",
     "SURFACE_HABITABLE",
     "C_PERCONST_APUR",
@@ -18,41 +19,76 @@ attributs_apur = [
     "Typologie_apur"
     ]
 
-for attribut in attributs_apur:
-    apur = apur[~apur[attribut].isna()]
+apur = apur[attributs_apur].dropna()
 
-apur = apur[(apur["NB_NIV"] > 1) & (apur["C_PERCONST_APUR"].isin([99,"99"]))]
+apur = apur[(apur["NB_NIV"] > 1) & (~apur["C_PERCONST_APUR"].isin([99,"99"]))]
 
-bdtopo = gpd.read_file("F:\\BD_TOPO_IDF\\BATI\\BATIMENT.shp")
+apur.to_file("F:\\BASES_APUREES\\APUR_APURÉ")
 
-bdtopo = bdtopo[["geometry","MAT_MURS","MAT_TOITS"]]
 bdtopo = bdtopo[
     (~bdtopo["MAT_MURS"].isna()) & 
     (~bdtopo["MAT_TOITS"].isna()) & 
-    (~bdtopo["MAT_MURS"].isin(["9","09","90","99"])) & 
-    (~bdtopo["MAT_TOITS"].isin(["9","09","90","99"])) & 
+    (~bdtopo["MAT_MURS"].isin(["9","09","90","99","00","0"])) & 
+    (~bdtopo["MAT_TOITS"].isin(["9","09","90","99","00","0"])) & 
     (bdtopo["LEGER"] == "Non")
     ]
 
-bdtopo["geometry"] = bdtopo["geometry"].apply(lambda poly : poly.centroid)
+bdtopo = bdtopo[["geometry","MAT_MURS","MAT_TOITS"]]
 
-mats_murs = []
-mats_toits = []
+bdtopo = gpd.read_file("F:\\BASES_APUREES\\BDTOPO_APURÉ")
+def decodage_mur(mat_mur):
+  # Pierre
+  if mat_mur in ["1","01","10","11","19","91"]:
+      mat_mur = "Pierre"
+  # Meulière
+  elif mat_mur in ["2","02","12","20","21","22","29","92"]:
+      mat_mur = "Meulière"
+  # Béton
+  elif mat_mur in ["3","03","13","23","30","31","32","33","34","36","39","43","63","93"]:
+      mat_mur = "Béton"
+  # Briques
+  elif mat_mur in ["4","04","14","24","40","41","42","44","49","94"]:
+      mat_mur = "Briques"
+  # Aggloméré
+  elif mat_mur in ["5","05","15","25","35","45","50","51","52","53","54","55","56","59","65","95"]:
+      mat_mur = "Aggloméré"
+  # Bois
+  elif mat_mur in ["6","06","16","26","46","60","61","62","64","66","96"]:
+      mat_mur = "Bois"  
+  return mat_mur
 
-for bati in apur["geometry"]:
-    isinside = bdtopo.within(bati)
-    pt = bdtopo.loc[isinside]
-    if len(pt) == 1:
-        mats_murs.append(pt.iloc[0]["MAT_MURS"])
-        mats_toits.append(pt.iloc[0]["MAT_TOITS"])
-    else:
-        mats_murs.append(None)
-        mats_toits.append(None)
+def decodage_toit(mat_toit):
+  # Tuiles
+  if mat_toit in ["1","01","10","11","13","19","31","91"]:
+      mat_toit = "Tuiles"
+  # Ardoises
+  elif mat_toit in ["2","02","12","20","21","22","23","24","29","32","42","92"]:
+      mat_toit = "Ardoises"
+  # Zinc/Aluminium
+  elif mat_toit in ["3","03","30","33","39","93"]:
+      mat_toit = "Zinc/Aluminium"
+  # Béton
+  elif mat_toit in ["4","04","14","34","40","41","43","44","49","94"]:
+      mat_toit = "Béton_toit"  
+  return mat_toit
 
-apur["MAT_MURS"] = mats_murs
-apur["MAT_TOITS"] = mats_toits
-apur = apur[(apur["MAT_MURS"] != None) & (apur["MAT_TOITS"] != None)]
+# Application des fonctions de decodage
+bdtopo["MAT_TOITS"] = bdtopo["MAT_TOITS"].map(decodage_toit)
+bdtopo["MAT_MURS"] = bdtopo["MAT_MURS"].map(decodage_mur)
 
-apur.to_file("F:\\BASES_APUREES\\JEU_APURÉ.geojson")
+bdtopo.to_file("F:\\BASES_APUREES\\BDTOPO_APURÉ")
+
+"""
+apur = gpd.read_file("F:\\BASES_APUREES\\APUR_APURÉ\\APUR_APURÉ.shp")
+bdtopo = gpd.read_file("F:\\BASES_APUREES\\BDTOPO_APURÉ\\BDTOPO_APURÉ.shp")
+
+bdtopo["geometry"] = bdtopo["geometry"].apply(lambda poly : poly.centroid.buffer(0.1))
+
+intersection = gpd.sjoin(apur,bdtopo, how='inner')
+intersection = intersection.drop(columns=["index_right"])
+intersection['id'] = intersection.index
+
+intersection.to_file("F:\\BASES_APUREES\\JEU_AGG")
+
 
 

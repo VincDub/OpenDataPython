@@ -181,3 +181,76 @@ for volume in data:
 print(liste[1])
 print(liste[7])
 ```
+
+
+
+A l'instar du jeu de données étudié au cours des chapitres précédents dont un échantillon spécifique a été prélevé, 
+la **massivité d'un jeu de données** est une caractéristique courante en Open Data.
+Dès lors, au vu de leur grande taille, certains jeux peuvent être considérés comme suffisamment **représentatifs** vis à vis de ce qu'ils recensent.
+Autrement dit, c'est une véritable source de connaissances numérique.
+\
+\
+Or, le domaine de **l'Intelligence Artificielle**, et tout particulièrement le **Machine Learning** se reposent sur des données disponibles 
+en grande quantité pour pouvoir entraîner des algorithmes. En effet, la précision d'un algorithme étant lié à sa capacité à **généraliser** les connaissances 
+qu'on lui fournit lors d'une session d'entraînement, il convient de disposer de données suffisamment **variées et exhaustives**, tout en étant **en grand nombre**
+afin de permettre un apprentissage optimal.
+\
+\
+Il s'avère également que le langage de programmation Python figure parmi les langages les mieux équipés pour le Machine Learning, disposant de bibliothèques 
+comme **Scikit-Learn**[@sklearn] proposant une approche simplifiée à travers des algorithmes primaires, 
+jusqu'aux plateformes majeures du secteur comme **TensorFlow**[@tensorflow] ou **PyTorch**[@pytorch] majoritairement basées sur ce langage proposant des 
+fonctionnalités plus approfondies.
+\
+\
+**Un enjeu de taille apparaît alors, celui d'être en capacité d'entraîner un modèle de prédiction exploitable dans la pratique professionnelle de l'architecte
+basé sur des donnéees accessibles en Open Data**
+\
+\
+Ce chapitre sera justement centré sur un algorithme que j'ai développé au cours du Semestre 9 dans le cadre de mon Projet de Fin d'Études,
+**capable d'approcher quantitativement des gisements de matériaux sur l'existant**, en particulier sur la phase initiale concernant 
+**l'état des lieux des données** ainsi que leur **exploitation avec le langage Python** .
+
+## Problématique du modèle de prédiction
+
+Le développement de cet outil ayant émergé selon un besoin précis dans le cadre d'une intervention architecturale, 
+cette première section aura pour but de présenter le cadre de la démarche ainsi que les données mobilisées.
+
+### Du contexte à la démarche
+
+La volonté de mettre en place un algorithme prend ses racines sur une problématique contextuelle liée au site 
+d'intervention ciblé.
+\
+Le site en question est celui des anciens entrepôts du BHV (Bazar de l'Hotel de Ville) à Ivry sur Seine.
+Cet immense terrain laissé à l'état de friche depuis 2013 est situé au sein de la **ZAC Ivry-Confluences**, ancien
+territoire fortement industrialisé **en renconversion** depuis une dizaine d'années.
+\
+\
+```{r echo=FALSE}
+l = "Photographie aérienne de la ZAC Ivry Confluences, contexte du site choisi"
+s = "Google Earth"
+udfig(l=l,s=s)
+```
+```{r zac_photo, echo=FALSE, fig.align = 'center', out.width = "90%",fig.show='hold'}
+include_graphics("__imgs/zac_photo.png")
+```
+\
+\
+Bien que cette reconversion aie pour volonté de conserver un maximum de bâti industriel existant, elle sera malgré tout
+à l'origine de nombreuses **démolitions**, notamment à cause de la vétusté d'une partie de ce patrimoine et le nouveau tissu urbain
+induisant une multitude de nouvelles voies de circulation découpant les grands îlots existants.
+\
+\
+```{r echo=FALSE}
+l = "Transformation de la ZAC et temporalitée des démolitions"
+s = "Réalisation personnelle"
+udfig(l=l,s=s)
+```
+```{r zac_schema, echo=FALSE, fig.align = 'center', out.width = "90%",fig.show='hold'}
+include_graphics("__imgs/zac_schema.png")
+```
+\
+\
+Dès lors, il existe un véritable enjeu autour de la **valorisation** de ces gisements de métariaux de réemploi issus de la démolition,
+dont j'ai alors immédiatement envisagé de me saisir comme ressources de construction.
+Inévitablement, il est nécessaire de les approcher à la fois de manière **qualitative et quantitative** afin de pouvoir les exploiter
+pleinement au sein d'un projet.
