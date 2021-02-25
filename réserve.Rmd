@@ -1,3 +1,10 @@
+---
+title: 
+  \headingfont\bfseries\singlespacing\LARGE\color{red}{Exploitation de l’Open Data avec Python}
+subtitle: 
+  \normalfont\singlespacing\Large\color{red}{Démonstration par la pratique des apports potentiels au sein de la conception architecturale}
+---
+
 ```{r echo=FALSE}
 l = "Import de données au format CSV dans Python via Pandas"
 s = "Réalisation personnelle"

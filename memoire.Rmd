@@ -1,8 +1,8 @@
 ---
-title: 
-  \headingfont\bfseries\singlespacing\LARGE\color{red}{Exploitation de l’Open Data avec Python}
-subtitle: 
-  \normalfont\singlespacing\Large\color{red}{Démonstration par la pratique des apports potentiels au sein de la conception architecturale}
+title: |
+  ![](__imgs/couverture.png){width=88%}
+  \thispagestyle{empty}
+  \newpage
 fontsize : 11pt
 mainfont: Roboto Light
 highlight: ""
@@ -17,7 +17,7 @@ geometry: "left=1.5cm,right=1.5cm,top=1.5cm,bottom=2cm"
 bibliography: ref.bib
 csl: iso690-note-fr.csl
 lang: fr-FR
-no-cite: "@iavulga"
+no-cite: ["@iavulga","@intelarchi","@ptarchisuper"]
 indent: true
 ---
 
@@ -44,7 +44,7 @@ knit_hooks$set(source = function(x, options) {
 }, boite = function(before,options,envir,...){
   if (options$echo != FALSE || options$fig.align == "center") {
     if (options$fig.align == "center") {
-      if (before) {paste("\\begin{figure}\\linespread{0.0}\\captionsetup{textformat=empty,labelformat=blank}\\caption{",options$fig.scap,"}\\end{figure}\\linespread{2.0}\\begin{tcolorbox}[title= Fig \\arabic{section}.\\arabic{figure} : ",options$boite,"]\n")} else {paste("\\end{tcolorbox}\n")}
+      if (before) {paste("\\begin{tcolorbox}[title=\\begin{customfigs}",options$boite,"\\end{customfigs}]\\masked{\\captionof{figure}{",options$fig.scap,"}}")} else {paste("\\end{tcolorbox}\n")}
       } 
       else {
         if (before) {paste("\\begin{tcolorbox}[title=",options$boite,",colback=boitecode]\n")} else {paste("\\end{tcolorbox}\n")}
@@ -98,8 +98,6 @@ library(reticulate)
 use_virtualenv("ri37")
 ```
 
-
-\newpage
 
 &nbsp;
 
@@ -1023,7 +1021,8 @@ include_graphics("__imgs/carte_hauteurs_2.png")
 
 Dès lors, une telle capacité à cartographier avec souplesse des données brutes présente un intérêt certain
 au sein de la pratique architecturale.
-
+\
+\
 **Ainsi, ces aperçus attestent de la capacité du langage Python à produire facilement de multiples
 représentations graphiques synthétiques à partir de données brutes, du graphique statistique 
 aux cartes interactives, renforçant ainsi la pertinence de son utilisation dans le cadre de l'exploitation
@@ -1127,9 +1126,11 @@ supportant le format DXF, ce qui est le cas pour la majorité des outils de dess
 Ce document est d'autant plus exploitable qu'il reste **géoréférencé** (les volumes conservent leurs coordonnées *Lambert93* dans le dessin),
 et **à l'échelle** (puisque ces coordonnées sont exprimées en mètres).
 \
+\
 De plus, les options de **personnalisation** des calques permettent de hiérarchiser les données
 dont on dispose en amont d'une exploitation "manuelle".
-
+\
+\
 Ainsi, le langage Python prouve également son efficacité lorsqu'il est question de générer des documents
 vectoriels graphiques, pleinement exploitables comme support de travail.
 
@@ -1150,13 +1151,16 @@ dans des formats possédant des **capacités d'organisation du modèle** (comme 
 afin de les rendre compatibles avec l'usage qu'en ferait un architecte. Ce n'est pas le cas ici, les bibliothèques citées
 privilégiant les formats d'échange maillés comme le format OBJ.
 \
+\
 De plus, même si ce retard a tendance à diminuer avec leur évolution, la quasi-totalité des bibliothèques orientées 3D pour Python sont basées sur des versions codées dans des langages de programmation plus complexes
 comme le *C++* pour des raisons de performances, ce qui fait qu'il persiste toujours un "retard" entre le moteur natif
 et son intégration destinée à Python, comme le présente plus en détail l'ouvrage *Python & OpenGL for Scientific Visualization* (P.ROUGIER,2018) [@pyopenglcrit].
 \
+\
 C'est pourquoi la bibliothèque **RhinoInside** [@rhinoinside] sera ici utilisée. 
 C'est un outil Open Source développé sous l'initiative de la société Mcneel, intégré au logiciel de modélisation 3D **Rhinocéros** depuis la version 7.
 Il a en effet pour but de **connecter Rhinocéros à un autre programme exécuté en parallèle**, afin de mettre en place un moyen d'échange direct de données.
+\
 \
 La version Python de cette bibliothèque permet en l'occurrence de connecter une instance de Rhinocéros sans interface graphique à un script
 (mais permettant tout de même toute opération possible manuellement dans le logiciel).
@@ -1805,8 +1809,8 @@ fichiers = os.listdir(dossier_bdortho)
 Une bibliothèque nommée **Rasterio**, spécialisée dans la manipulation de données géographiques sous forme d'images,
 sera ici importée afin de gérer le chargement des photographies de la **BD ORTHO**, la sauvegarde des images de chaque bâtiment
 ainsi que l'application des masques puis le rognage automatique.
-Deux dossiers, l'un référençant l'emplacement où sont stockés les différents carreaux de la **BD ORTHO**,
-tandis que l'autre référence le répertoire d'enregistrement des images.
+Deux dossiers, l'un désignant l'emplacement où sont stockés les différents carreaux de la **BD ORTHO** et l'autre le répertoire d'enregistrement des images,
+seront également référencés.
 Enfin, la fonction *listdir()* de la bibliothèque **os** permet d'énumérer les différents fichiers contenus dans le dossier 
 de la *BD ORTHO*, dont les carreaux.
 
@@ -2291,7 +2295,7 @@ l = "Outils et formats intermédiaires utilisés pour générer un fichier PDF"
 s = "https://markdown-it.github.io/"
 udfig(l=l,s=s)
 ```
-```{r pandoc, echo=FALSE, fig.align = 'center', out.width = "100%",fig.show='hold'}
+```{r pandoc, echo=FALSE, fig.align = 'center', out.width = "60%",fig.show='hold'}
 include_graphics("__imgs/pandoc1.png")
 ```
 
@@ -2302,5 +2306,14 @@ que l'on paye parfois au prix **d'incompatibilités entre certaines options pré
 aux forums de discussion entre autres, cela représente l'antithèse de la simplicité du *Markdown*, dont la documentation de qualité foisonne sur internet.
 
 Malgré ces défauts, cela reste un moyen efficace de rédiger un document de recherche tel qu'un mémoire, et encore davantage pour des documents plus conséquents comme une thèse.
-Cependant, je souhaiterais explorer d'autres outils similaires moins répandus, mais plus minimalistes dans leur approche comme le **Groff**, afin de déterminer quelle solution
+Cependant, je souhaiterais explorer d'autres outils similaires moins répandus, mais plus minimalistes dans leur approche comme le **Groff** (intégré de base aux systèmes Linux), afin de déterminer quelle solution
 est à la fois complète, simple et souple.
+
+```{r echo=FALSE}
+l = "Le Groff, alternative minimaliste intégrée aux systèmes Linux"
+s = "https://www.youtube.com/watch?v=kJ_TXZB4Gm4"
+udfig(l=l,s=s)
+```
+```{r groff, echo=FALSE, fig.align = 'center', out.width = "90%",fig.show='hold'}
+include_graphics("__imgs/groff.png")
+```

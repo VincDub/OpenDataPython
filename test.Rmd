@@ -92,7 +92,7 @@ knit_hooks$set(source = function(x, options) {
     x <- strip_white2(x)
     x <- paste(x, sep = '', collapse = '\n')
     hook_source(x, options)
-  })
+})
 
 library(reticulate)
 use_virtualenv("ri37")

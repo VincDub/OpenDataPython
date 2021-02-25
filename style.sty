@@ -4,13 +4,23 @@
 \usepackage{listings}
 \usepackage{float}
 \floatplacement{figure}{H}
-\usepackage{setspace}\linespread{2.0}
+\usepackage{setspace}\linespread{1.7}
+\usepackage{fontspec}
 \usepackage{chngcntr}
+\usepackage{graphicx}
 
-\usepackage[font={it,tiny}]{caption}
+\usepackage[font={it,tiny},labelsep=none,textformat=empty,labelformat=empty]{caption}
 \DeclareCaptionLabelFormat{blank}{}
 
 \counterwithin{figure}{section}
+
+\newcounter{customfigs}[section]
+
+\newenvironment{customfigs}[1][] {
+    \stepcounter{customfigs}
+    Fig \arabic{section}. \arabic{customfigs} : }
+
+\newcommand{\masked}{\vspace*{-\baselineskip}}
 
 %\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}%
 
