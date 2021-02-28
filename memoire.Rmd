@@ -1,8 +1,4 @@
 ---
-title: |
-  ![](__imgs/couverture.png){width=88%}
-  \thispagestyle{empty}
-  \newpage
 fontsize : 11pt
 mainfont: Roboto Light
 highlight: ""
@@ -25,7 +21,7 @@ indent: true
 library(knitr)
 
 udfig <- function(l=" ",s=" ",sep=" - ",...){
-  opts_chunk$set(fig.cap=NULL,collapse=TRUE,fig.scap=paste(l,sep,s),boite=paste(l),out.lines=10)
+  opts_chunk$set(fig.cap=NULL,collapse=TRUE,fig.scap=paste(l,sep,s),boite=paste(l),out.lines=10,dpi=300)
 }
 
 
@@ -44,10 +40,10 @@ knit_hooks$set(source = function(x, options) {
 }, boite = function(before,options,envir,...){
   if (options$echo != FALSE || options$fig.align == "center") {
     if (options$fig.align == "center") {
-      if (before) {paste("\\begin{tcolorbox}[title=\\begin{customfigs}",options$boite,"\\end{customfigs}]\\masked{\\captionof{figure}{",options$fig.scap,"}}")} else {paste("\\end{tcolorbox}\n")}
+      if (before) {paste("\\vskip 11pt\n\\begin{tcolorbox}[title=\\begin{customfigs}",options$boite,"\\end{customfigs}]\\masked{\\captionof{figure}{",options$fig.scap,"}}")} else {paste("\\end{tcolorbox}\n\\vskip 11pt\n")}
       } 
       else {
-        if (before) {paste("\\begin{tcolorbox}[title=",options$boite,",colback=boitecode]\n")} else {paste("\\end{tcolorbox}\n")}
+        if (before) {paste("\\vskip 11pt\n\\begin{tcolorbox}[title=",options$boite,",colback=boitecode]\n")} else {paste("\\end{tcolorbox}\n\\vskip 11pt\n")}
       }
     }})
     
@@ -98,6 +94,13 @@ library(reticulate)
 use_virtualenv("ri37")
 ```
 
+\begin{titlepage}
+\includepdf[pages={1},pagecommand={\thispagestyle{empty}}]{__imgs/couverture.pdf}
+\end{titlepage}
+
+&nbsp;
+
+\newpage
 
 &nbsp;
 
@@ -108,6 +111,8 @@ use_virtualenv("ri37")
 Ce mémoire a pour but d’aborder les enjeux de l’appropriation d'un langage de programmation par les architectes afin 
 d’exploiter les données aujourd'hui disponibles sur les plateformes en Open Data, tel que des données concernant la morphologie de l'existant,
 caractérisant leurs besoins énergétiques ou encore leurs matériaux.
+\
+\
 Plus précisément, ce mémoire se concentrera sur l'emploi du **langage Python** avec lequel je travaille régulièrement, choisi ici pour sa syntaxe claire et simplifiée 
 par rapport à d'autres langages, à travers une **approche pratique constituée de plusieurs scripts** répondant aux principaux enjeux autour de l’appropriation des données ouvertes 
 par les architectes. En quoi un langage comme Python est-il indispensable aujourd'hui pour exploiter les données en Open Data ? De quelle manière peut-on les intégrer dans l’environnement de travail de la conception 
@@ -115,10 +120,18 @@ architecturale ? Quel usage approfondi vis-à-vis de ces données est-il alors p
 
 \newpage
 
+&nbsp;
+
+\newpage
+
 # SOMMAIRE {-}
 
 \renewcommand{\contentsname}{}
 \tableofcontents
+
+\newpage
+
+&nbsp;
 
 \newpage
 
@@ -130,16 +143,16 @@ Au cours des dernières années, un déploiement prolifique de jeux de données 
 Le gouvernement définit ce terme comme « l'effort que font les institutions, notamment gouvernementales, qui partagent les données dont elles disposent » [@ouvdonpub]. 
 En effet, c’est avant tout une stratégie prônant l’ouverture du plus grand nombre de bases de données au public, les rendant ainsi totalement accessibles. 
 À l’instar des autres mouvements du même type, tel que « l’Open Source », le traitement et la rediffusion des données sont autorisées, voir même encouragées comme c’est le cas par 
-le gouvernement français : **« les données partagées trouvent des réutilisateurs qui les intègrent dans de nouveaux services à forte valeur ajoutée économique ou sociale. »**.
+le gouvernement français : **« les données partagées trouvent des ré utilisateurs qui les intègrent dans de nouveaux services à forte valeur ajoutée économique ou sociale. »**.
 \
 \
-Comme le précise Oracle France [@oracle], "Une base de données publique contient des données qui sont et doivent être disponibles au public pour des raisons d’intérêt général (service public, environnemental…).". 
+Comme le précise Oracle France [@oracle], « Une base de données publique contient des données qui sont et doivent être disponibles au public pour des raisons d’intérêt général (service public, environnemental…) ». 
 Cependant, une donnée accessible en Open Data ne provient pas forcément d'un organisme public, comme la société *Uber*,
 permettant d'accéder publiquement à des données anonymisées sur ses taxis [@uberopen].
 \
 \
 Dès lors, un point essentiel est l'**accès public** (sans authentification ou contrepartie par exemple), indépendamment de sa source.
-Enfin, Oracle France précise que "Le terme **« publique »** ne doit pas être confondu avec **« libre de droits »**."
+Enfin, Oracle France précise que « Le terme **« publique »** ne doit pas être confondu avec **« libre de droits »** ».
 En effet, les règles relatives à la réutilisation des données font l’objet d’une licence publique et universelle (tel que la *Licence ouverte d'Etalab* pour l'immense majorité des données publiques en France), ne réclament pas ou peu de démarches pour se l’approprier.
 \
 \
@@ -150,45 +163,61 @@ les données géographiques comme l’Institut national de l'information géogra
 en passant par l’environnement et l’écologie telle que l'ADEME [@ademe].
 \
 \
-Bien que cette nécessité étatique de partager l’information publique ne date pas de l’apparition du Web (comme l’explique la loi Cada de 1978), ce dernier a permis, au-delà de la dispense de tout intermédiaire (notamment humain) entre le fournisseur et l’utilisateur, d’exploiter de nouvelles formes d’accès et surtout de consommation, en particulier grâce à des scripts ou des algorithmes écrits dans un langage de programmation afin d’automatiser la récupération de données depuis les formats de fichiers ouverts.
+Bien que cette nécessité étatique de partager l’information publique ne date pas de l’apparition du Web (comme l’explique la loi Cada de 1978), 
+ce dernier a permis, au-delà de la **dispense de tout intermédiaire** (notamment humain) **entre le fournisseur et l’utilisateur**, 
+d’exploiter de nouvelles formes d’accès et surtout de consommation, en particulier grâce à **des scripts ou des algorithmes** écrits dans un langage de programmation 
+afin d’**automatiser la récupération de données depuis les formats de fichiers ouverts**.
 \
 \
-Ainsi, quiconque cherche à mettre en place un travail d’analyse le plus exhaustif possible d’un contexte donné peut, grâce aux plateformes et moyens cités ci-dessus, disposer très rapidement de données riches et abondantes.
+Ainsi, quiconque cherche à mettre en place un travail d’analyse le plus exhaustif possible d’un contexte donné peut, 
+grâce aux plateformes et moyens cités ci-dessus, **disposer très rapidement de données riches et abondantes**.
 \
 \
-De ce point de vue là, il paraît extrêmement pertinent pour les métiers issus de l’architecture et de l’urbanisme, et en particulier le métier d’architecte, de se saisir des données issues de l’Open Data afin de renforcer leur compréhension du territoire sur lequel ils construisent, que cela soit par la simple analyse statistique ou bien la récupération d’informations géométriques d’un site.
+De ce point de vue là, il paraît extrêmement pertinent pour les métiers issus de l’architecture et de l’urbanisme, 
+et en particulier le **métier d’architecte**, de se saisir des données issues de l’Open Data afin de **renforcer leur compréhension du territoire sur lequel ils construisent**, 
+que cela soit par la simple analyse statistique ou bien la récupération d’informations géométriques d’un site.
 \
 \
-Or, les architectes ont tendance à préférer, de par leur expertise orientée sur la conception, réclamant un esprit de synthèse affûté, les résultats explicites d’analyse de données plutôt que les données en elles-mêmes. De plus, les outils numériques sur lesquels les architectes se forment relèvent très majoritairement des domaines du dessin, de la modélisation ou de la communication plutôt que de l’analyse en elle-même, qui accentue leur besoin de résultats synthétiques « préfabriqués ».
+Or, les architectes ont tendance à préférer, par leur expertise orientée sur la conception réclamant un esprit de synthèse affûté, 
+les résultats explicites d’analyse de données plutôt que les données en elles-mêmes. De plus, 
+les outils numériques sur lesquels les architectes se forment relèvent très majoritairement des domaines du dessin, de la modélisation ou de la communication plutôt que de l’analyse, ce 
+qui accentue leur besoin de résultats synthétiques « préfabriqués ».
 \
 \
-Cependant, il existe depuis les années 2010 un certain essor des travaux de recherche basés sur des données issues en partie ou totalement de l’Open Data, et ce, grâce à un langage de programmation en particulier, dont la simplicité de la syntaxe couplée à une profusion de bibliothèques (comparables à des « plug-in ») spécialisées dans le traitement de données informatiques en ont fait un outil populaire pour la recherche d’aujourd’hui, le Python.
-À juste titre, ce langage est aujourd'hui très répandu au sein des Systèmes d'Informations géographiques (SIG) tels que ArcGIS, où ses caractéristiques mentionnées ci-dessus permettent de manière accessible de mener des travaux complexes autour des données géographiques ouvertes, de l'analyse et la visualisation [@arcgis1] à l'entraînement de modèles de prédiction [@arcgis2].
+Cependant, il existe depuis les années 2010 un certain **essor des travaux de recherche** basés sur des données issues en partie ou totalement de l’Open Data, et ce, grâce à un **langage de programmation** en particulier, 
+dont la **simplicité de la syntaxe** couplée à une **profusion de bibliothèques** (comparables à des « plug-in ») spécialisées dans le traitement de données informatiques en ont fait un **outil populaire pour la recherche** d’aujourd’hui, le **Python**.
+À juste titre, ce langage est aujourd'hui très répandu au sein des Systèmes d'Informations géographiques (SIG) tels que ArcGIS, 
+où ses caractéristiques mentionnées ci-dessus permettent de manière accessible de mener des travaux complexes autour des données géographiques ouvertes, 
+de l'analyse et la visualisation [@arcgis1] à l'entraînement de modèles de prédiction [@arcgis2].
 \
 \
-Comme l’illustre le travail de recherche « CityEngine - Twitter » mené au « Centre for Advanced Spatial Analysis » de Londres [@hugel_cityengine-twitter_2014] , proposant une cartographie urbaine de densité basée sur des Tweets géolocalisés dans cette même ville, un seul et unique script en Python permet à la fois de récupérer les messages sur une plage de 24 heures (via une bibliothèque , nommée "Tweepy" , permettant au code d’interagir avec l’API de Twitter), de les trier et d’en extraire leurs coordonnées et leur horaire de publication, et enfin de fournir ces données directement à l’outil de génération de modèles 3D urbains « CityEngine » (publié par l’ESRI) afin que ce dernier puisse constituer une carte procédurale (animée selon le nombre de "tweets" sur une plage de 24 heures).
+Comme l’illustre le travail de recherche « CityEngine - Twitter » mené au « Centre for Advanced Spatial Analysis » de Londres [@hugel_cityengine-twitter_2014], 
+proposant une cartographie urbaine de densité basée sur des Tweets géolocalisés dans cette même ville, **un seul et unique script** en Python permet à la fois de récupérer les messages sur une plage de 24 heures 
+(via une bibliothèque , nommée « Tweepy » , permettant au code d’interagir avec l’API de Twitter), de les trier et d’en extraire leurs coordonnées et leur horaire de publication, 
+et enfin de fournir ces données directement à l’outil de génération de modèles 3D urbains « CityEngine » (publié par l’ESRI) afin que ce dernier puisse constituer une carte procédurale 
+(animée selon le nombre de "tweets" sur une plage de 24 heures).
 \
 \
-Certaines agences d'architecture telles que MVRDV [@mvrdv] promeuvent et expérimentent déjà le fait de concevoir à partir d'une masse de données, plus communément appelé *"Design by data"*, et ce depuis les années 2000.
-*Metacity/Datatown*[@metacity], projet de recherche datant de 1999 abordait déjà cette question des données pour aborder la conception urbaine, où il y était affirmé à plusieurs reprises : "Datatown is based only upon data".
+Certaines **agences d'architecture** telles que MVRDV [@mvrdv] promeuvent et expérimentent déjà le fait de **concevoir à partir d'une masse de données**, plus communément appelé *« Design by data »*, et ce depuis les années 2000.
+*Metacity/Datatown*[@metacity], projet de recherche datant de 1999 abordait déjà cette question des données pour aborder la conception urbaine, où il y était affirmé à plusieurs reprises : « Datatown is based only upon data ».
 \
 \
 Une telle étude étant désormais possible sur des données massives privées, ce type d’exploitation peut encore plus aisément être mis en place lorsque les données utilisées sont totalement ouvertes et avec accès illimité.
-Ainsi, grâce à des données massives accessibles (tant en termes de tarifs qu’en termes de facilité d’extraction) couplées à un langage de programmation comme Python, développer ses propres analyses par exploitation de données brutes est désormais à la portée des chercheurs, sans avoir besoin d’un bagage informatique conséquent.
+Ainsi, grâce à des données massives accessibles (tant en termes de tarifs qu’en termes de facilité d’extraction) couplées à un langage de programmation comme Python, 
+développer ses propres analyses par exploitation de données brutes est désormais à la portée des chercheurs, sans avoir besoin d’un bagage informatique conséquent.
 \
 \
-Dès lors, face à la complexité des enjeux auxquels la conception architecturale fait appel (climatique, socio-économique, écologique ou structurel par exemple), il semble pertinent d’envisager que des architectes se saisissent de ce type d’outil, dans le but de construire, 
-au prisme de leur propre volonté d’intervention (même complexes), leurs propres modèles de compréhension du territoire.
-Ce nouveau regard, personnalisé par l’architecte, pourrait alors apporter à ce dernier des éléments susceptibles de le guider de manière bien plus significative, en particulier dans les premières phases d’esquisse, afin d’améliorer la qualité de sa production. 
+Dès lors, face à la **complexité des enjeux** auxquels la **conception architecturale** fait appel (climatique, socio-économique, écologique ou structurel par exemple), il semble pertinent d’envisager que des architectes se saisissent de ce type d’outil, dans le but de construire, 
+au prisme de leur propre volonté d’intervention (même complexes), leurs **propres modèles de compréhension du territoire**.
+Ce nouveau regard, personnalisé par l’architecte, pourrait alors apporter à ce dernier des éléments susceptibles de le guider de manière bien plus significative, en particulier dans les premières phases d’esquisse, afin d’**améliorer la qualité de sa production**. 
 \
 \
-\
-\bfseries\color{red}{Ainsi, dans quelle mesure l’exploitation de données issues de l’Open Data grâce au langage Python représente-t-elle un avantage certain pour l’architecte ?}
+\bfseries\color{red}Ainsi, dans quelle mesure l’exploitation de données issues de l’Open Data grâce au langage Python représente-t-elle un avantage certain pour l’architecte ?
 \
 \newline
 \newline
 \
-\normalfont\color{black}{Après} avoir initialement démontré l’intérêt du langage Python dans l’extraction et la manipulation des données issues des plateformes accessibles en Open Data à travers l’élaboration complète d’un script de récolte de données, ce dernier sera complété à travers un aperçu constitué d’exemples clés de la capacité de Python à produire des documents de travail utiles à l’architecte (cartographie, dessin et modélisation). Enfin, ce travail d’exploitation sera abouti en montrant la prodigieuse capacité du langage Python à permettre de manière accessible l’analyse complexe de ces données ainsi que la mise en place d’algorithmes de prédiction.
+\normalfont\color{black}Après avoir initialement démontré l’intérêt du langage Python dans l’extraction et la manipulation des données issues des plateformes accessibles en Open Data à travers l’élaboration complète d’un script de récolte de données, ce dernier sera complété à travers un aperçu constitué d’exemples clés de la capacité de Python à produire des documents de travail utiles à l’architecte (cartographie, dessin et modélisation). Enfin, ce travail d’exploitation sera abouti en montrant la prodigieuse capacité du langage Python à permettre de manière accessible l’analyse complexe de ces données ainsi que la mise en place d’algorithmes de prédiction.
 
 \newpage
 
@@ -209,13 +238,17 @@ Au sein de cette section, le jeu de données « Volumes bâtis » de la platefor
 
 \newpage
 
+&nbsp;
+
+\newpage
+
 ## L’Open Data : entre nomenclature et variables
 
 La plupart des plateformes distribuant des données en Open Data proposant directement en ligne des moyens de prévisualiser un jeu de données, 
 cela semble constituer un moyen pratique de discerner et comprendre son contenu en détail.
 C'est le cas sur la plateforme Open Data Paris, qui nous permet de prévisualiser le jeu de données des volumes bâtis sous la forme d'un tableau, mais aussi d'une carte,
 laquelle formera un premier contact avec les données en elles-mêmes.
-\
+
 ```{r echo=FALSE}
 l = "Prévisualisation cartographique du jeu de données des volumes bâtis."
 s = "https://opendata.paris.fr/"
@@ -234,8 +267,7 @@ Le premier constat que l'on peut réaliser après avoir brièvement interagi ave
 sur un fond de carte (en l'occurrence, ce sont des **polygones**, formes géométriques les plus à même de représenter l'emprise en plan des différents bâtiments).
 \
 \
-Afin de permettre une lecture plus complémentaire, il paraît intéressant de consulter le tableau fin d'avoir une vue plus "centrée" sur les différentes variables et leurs valeurs.
-\
+Afin de permettre une lecture plus complémentaire, il paraît intéressant de consulter le tableau fin d'avoir une vue plus « centrée » sur les différentes variables et leurs valeurs.
 
 ```{r echo=FALSE}
 l = "Prévisualisation  du jeu de données des volumes bâtis sous forme de tableau."
@@ -245,12 +277,10 @@ udfig(l=l,s=s)
 ```{r odp_tbl, echo=FALSE, fig.align = 'center', out.width = "100%"}
 include_graphics("__imgs/site_odp_tableau.jpg")
 ```
-\
 Chacune d'entre elles est ici représentée par une **colonne**, chaque ligne correspondant à un **volume bâti**.
 Tout d'abord, la variable *geom* est celle qui contient les informations géométriques, nous renseignant sur le type de géométrie employée,
-ainsi que les coordonnées des points qui la définissent. En l'occurrence, la typologie géométrique "Polygon" se base sur les types primitifs de références des systèmes d'informations géographiques (SIG),
+ainsi que les coordonnées des points qui la définissent. En l'occurrence, la typologie géométrique « Polygon » se base sur les types primitifs de références des systèmes d'informations géographiques (SIG),
 et ses coordonnées sont définies en **latitude/longitude** (ce que confirme la variable *geom_x_y*). 
-\
 
 
 ```{r echo=FALSE}
@@ -261,8 +291,7 @@ udfig(l=l,s=s)
 ```{r prim_geom, echo=FALSE, fig.align = 'center', out.width = "100%"}
 include_graphics("__imgs/primitives_geometriques.png")
 ```
-\
-Nous pouvons également noter que certaines variables comme *L_NAT_B* ou *L_SRC* sont exprimées sous forme de texte, qualifié alors de **"chaîne de caractères"** ("string" ou "str" en anglais) d'un point de vue
+Nous pouvons également noter que certaines variables comme *L_NAT_B* ou *L_SRC* sont exprimées sous forme de texte, qualifié alors de **« chaîne de caractères »** (« string » ou « str » en anglais) d'un point de vue
 informatique. Elles semblent également **catégoriques**, c'est-à-dire ne pouvant prendre qu'un nombre défini de valeurs possibles.
 Bien que les noms de ces variables ne soient pas explicites, leurs valeurs permettent d'avoir une première idée de ce qu'elles renseignent.
 \
@@ -271,8 +300,8 @@ Bien que les noms de ces variables ne soient pas explicites, leurs valeurs perme
 sous forme d'**entiers**.
 \
 \
-Enfin, d'autres variables comme *M2* ou *NB_PL* sont notées **numériquement**, pouvant à priori prendre une infinité de valeurs
-, respectivement sous la forme de **réels** (ou nombres à virgule, qualifiés de *float* en anglais), et d'**entiers** (*int*). Bien que l'on puisse 
+Enfin, d'autres variables comme *M2* ou *NB_PL* sont notées **numériquement**, pouvant à priori prendre une infinité de valeurs, 
+respectivement sous la forme de **réels** (ou nombres à virgule, qualifiés de *float* en anglais), et d'**entiers** (*int*). Bien que l'on puisse 
 deviner que *M2* semble représenter la surface d'un volume bâti, cela reste une supposition.
 \
 \
@@ -283,7 +312,6 @@ plus loin dans le tableau peuvent encore échapper à cette lecture préliminair
 Dès lors, chaque variable possédant sa **propre nomenclature**, et étant plus ou moins explicite dans sa dénomination, une première
 difficulté de lecture émerge. Heureusement, les jeux de données en Open Data disposent généralement d'informations complémentaires 
 capables de renseigner l'utilisateur sur ces nomenclatures.
-\
 
 \newpage
 
@@ -296,7 +324,6 @@ le jeu de données en question. Ce sont **les métadonnées**.
 \
 Elles peuvent également contenir des informations complémentaires concernant le fournisseur, la manière dont les données ont été acquises 
 ou encore d'éventuelles limites de précision et recommandations d'utilisation par exemple.
-\
 
 ```{r echo=FALSE}
 l = "Page descriptive issue des métadonnées"
@@ -306,17 +333,15 @@ udfig(l=l,s=s)
 ```{r odp_meta_1, echo=FALSE, fig.align = 'center', out.height = "49%"}
 include_graphics("__imgs/odp_meta1.jpg")
 ```
-\
 En l'occurrence, la première page nous renseigne de manière plus exhaustive sur la manière dont ont été tracés les différents polygones,
 à travers quelques schémas, ainsi qu'un paragraphe exprimant la source de ces tracés.
-Premièrement, ce document explique sa logique de séparer un bâtiment "réel" en plusieurs volumes fictifs, suivant s'ils sont 
+Premièrement, ce document explique sa logique de séparer un bâtiment « réel » en plusieurs volumes fictifs, suivant s'ils sont 
 en porte à faux ou non, permettant d'apporter une certaine précision.
 \
 \
 Dès lors, les deux informations primordiales associées à chaque polygone sont sa **hauteur**, ainsi que ses différents **intervalles de hauteur** s'il est en porte à faux.
-Cette fiche indique également le contexte géographique, ainsi que les limitations géométriques (empêchant ici de représenter un polygone "évidé",
+Cette fiche indique également le contexte géographique, ainsi que les limitations géométriques (empêchant ici de représenter un polygone « évidé »,
 obligeant à le sectionner si l'on veut représenter de manière correcte un patio par exemple). 
-\
 
 ```{r echo=FALSE}
 l = "Table descriptive des variables issue des métadonnées"
@@ -326,7 +351,6 @@ udfig(l=l,s=s)
 ```{r odp_meta_2, echo=FALSE, fig.align = 'center', out.height = "49%"}
 include_graphics("__imgs/odp_meta2.jpg")
 ```
-\
 Enfin, la seconde page contient les informations cruciales concernant les données à exploiter.
 \
 En effet, le tableau ci-dessus renseigne sur le **libellé** de chaque variable (son contenu explicite), son **type** (ici, **C*n*** où *n* est un entier
@@ -351,7 +375,6 @@ Comme mentionné dans l'introduction, ce dernier possède toutes les fonctionnal
 \
 La plateforme Open Data Paris permettant de définir un périmètre afin de restreindre le jeu de données directement sur la carte, 
 cette fonction sera utilisée afin d'en télécharger un échantillon (en l'occurrence localisé autour de l'ENSAPVS).
-\
 
 ```{r echo=FALSE}
 l = "Définition d'une zone d'extraction de données des volumes bâtis"
@@ -375,9 +398,9 @@ include_graphics("__imgs/site_odp_formats.jpg")
 téléchargement.
 \
 \
-Dès lors, grâce à son large éventail de **bibliothèques** (comparables à des "extensions") le langage Python se révèle ici précieux
+Dès lors, grâce à son large éventail de **bibliothèques** (comparables à des « extensions ») le langage Python se révèle ici précieux
 car il est **capable de manipuler tous les formats de fichiers proposés**.
-Or, le choix d'un format en particulier pourrait alors être perçu comme un "non-problème", étant donné de telles capacités.
+Or, le choix d'un format en particulier pourrait alors être perçu comme un « non-problème », étant donné de telles capacités.
 Ainsi, une **brève entrevue** sera apportée sur chacun de ces formats grâce à Python, afin de déterminer lequel choisir.
 \
 
@@ -438,13 +461,11 @@ data = json.load(open("DONNEES/volumesbatisparis.json","r"))
 # Objet au hasard dans la liste
 print(data[22]["fields"]["geom"]["coordinates"])
 ```
-
 Ensuite, le format **JSON** semble adapté à la structure de la variable **GEOM**, permettant ici d'en extraire les sous-informations.
 Cependant, il est nécessaire au préalable de **lire le fichier en lui-même** via un éditeur de texte, afin d'en repérer la hiérarchie.
 Cette dernière se repose sur la **notation objet**, une syntaxe commune à de nombreux langages de programmation modernes comme le Python.
 Elle est constituée d'ensembles (listes) de couples **attribut : valeur**, que l'on peut **hiérarchiser** en les imbriquant.
-\
-\
+
 ```{r echo=FALSE}
 l = "Structure d'un volume et de ses données au format JSON"
 udfig(l=l)
@@ -495,8 +516,7 @@ expl = {
             "x": 603542.699385
   }}
 ```
-\
-\
+
 Dès lors, une fois cette notation assimilée, ce format permet une lecture relativement **aisée** pour l'utilisateur, tout en restant **simple** à lire par la machine. 
 Le code d'extraction découle donc naturellement de la lecture humaine.
 
@@ -568,7 +588,6 @@ Cependant, son véritable intérêt réside dans son statut de langage de progra
 ## Aperçu de la souplesse des fonctions de manipulation de données
 
 Après la phase d'extraction précédente, il est nécessaire que les données extraites en l'état soient exploitables pour la suite.
-
 Premièrement, le jeu de données sera réduit aux variables identifiées lors de la lecture des métadonnées (à savoir **GEOM**,**M2_PL_TOT**,**H_ET_MAX** ainsi que **L_B_U**),
 et ces dernières seront renommées afin d'être plus facilement lisibles par la suite.
 
@@ -597,9 +616,7 @@ h_etage = 3
 print(data["hauteur"][0] * h_etage)
 ```
 Cette opération est triviale pour l'attribut **hauteur**, étant exprimée numériquement. Il suffit alors de définir une **hauteur d'étage type** et
-d'effectuer une multiplication.
-\
-Cependant, l'attribut **hauteur_paf** étant exprimé sous la forme de **texte** (chaînes de caractères) décrivant les plages de hauteur,
+d'effectuer une multiplication. Cependant, l'attribut **hauteur_paf** étant exprimé sous la forme de **texte** (chaînes de caractères) décrivant les plages de hauteur,
 il est nécessaire de convertir cette notation numériquement afin d'effectuer cette multiplication.
 
 \newpage
@@ -633,9 +650,9 @@ udfig(l=l)
 # Dictionnaire à deux objets
 d = {"A" : 10, "B" : 15}
 # Récupération de la valeur associée à "A"
+# et changement de la valeur associée à "B"
 print(d["A"])
 
-# Changement de la valeur associée à "B"
 d["B"] = 30
 print(d["B"])
 ```
@@ -657,7 +674,6 @@ Comme le montre le code ci-dessous, pour chaque objet (**for** *objet*)  contenu
 permettant d'opérer sur chaque objet individuellement. 
 \
 \
-
 Ainsi, en itérant à travers chaque notation contenue dans la colonne **hauteur_paf**, un **exemple de notation** sera affecté au dictionnaire vide créé précédemment en prenant
 comme attribut sa **longueur**. En réalité, pour chaque longueur, c'est la dernière notation qui sera conservée, chacune d'elle écrasant la précédente.
 Enfin, la fonction *dropna()* est employée ici pour supprimer les valeurs nulles pour les volumes non concernés.
@@ -680,7 +696,7 @@ Dès lors, certains éléments constituants peuvent être notés :
 
 * Une plage de hauteur est principalement renseignée par ses **deux niveaux de hauteur** séparés par un *a*
 * *_et_* est utilisée pour renseigner **plusieurs plages de hauteur**.
-* *"encorbt_au_N"* désigne une plage de hauteur du niveau **N** au niveau maximal (exprimé par la variable "hauteur").
+* *encorbt_au_N* désigne une plage de hauteur du niveau **N** au niveau maximal (exprimé par la variable *hauteur*).
 S'ils désignent le même niveau, la plage sera du niveau **N^-1^** au niveau maximal.
 * *auvent* désigne une plage du niveau **N** à **N^+1^**. 
 * Enfin, la présence de *R* exprimé seul suggère que **R** désigne une plage d'une **seule hauteur d'étage partant du sol**, tandis que
@@ -801,7 +817,11 @@ ne peut l’intégrer dans son environnement de travail, ce à quoi le prochain 
 
 \newpage
 
-# Intégrer des données ouvertes au sein du "workflow" de l’architecte
+&nbsp;
+
+\newpage
+
+# Intégrer des données ouvertes au sein du « workflow » de l’architecte
 
 La production de documents synthétiques, en particulier les éléments graphiques 
 faisant partie intégrante du « workflow » de l’architecte, 
@@ -1030,6 +1050,10 @@ de données issues de l'Open Data pour les architectes.**
 
 \newpage
 
+&nbsp;
+
+\newpage
+
 ## Génération automatique de documents techniques.
 
 Les capacités de synthèse graphique et de cartographie des données montrées précédemment sont certes intéressantes,
@@ -1128,7 +1152,7 @@ et **à l'échelle** (puisque ces coordonnées sont exprimées en mètres).
 \
 \
 De plus, les options de **personnalisation** des calques permettent de hiérarchiser les données
-dont on dispose en amont d'une exploitation "manuelle".
+dont on dispose en amont d'une exploitation « manuelle ».
 \
 \
 Ainsi, le langage Python prouve également son efficacité lorsqu'il est question de générer des documents
@@ -1153,7 +1177,7 @@ privilégiant les formats d'échange maillés comme le format OBJ.
 \
 \
 De plus, même si ce retard a tendance à diminuer avec leur évolution, la quasi-totalité des bibliothèques orientées 3D pour Python sont basées sur des versions codées dans des langages de programmation plus complexes
-comme le *C++* pour des raisons de performances, ce qui fait qu'il persiste toujours un "retard" entre le moteur natif
+comme le *C++* pour des raisons de performances, ce qui fait qu'il persiste toujours un « retard » entre le moteur natif
 et son intégration destinée à Python, comme le présente plus en détail l'ouvrage *Python & OpenGL for Scientific Visualization* (P.ROUGIER,2018) [@pyopenglcrit].
 \
 \
@@ -1245,8 +1269,8 @@ La première étape consiste à **extraire les points de chaque polygone** et de
 \
 Ensuite, si le volume repose simplement en rez-de-chaussée, une seule extrusion sera créée afin d’atteindre la hauteur définie par l’attribut *hauteur*, puis sera écrite dans le fichier.
 En revanche, si le volume est en **porte à faux**, les différents **intervalles de hauteur** qu’il occupe dans son emprise en plan (exemple : 6 à 15 mètres) sont traités à travers une boucle.
-Pour chacun d'entre eux, la polyligne créée précédemment sera déplacée en hauteur pour atteindre la borne "basse" de l’intervalle. 
-Une **extrusion** est alors créée depuis cette base pour atteindre la hauteur définie par la borne "haute" de l’intervalle, et sera enfin écrite dans le fichier Rhinocéros.
+Pour chacun d'entre eux, la polyligne créée précédemment sera déplacée en hauteur pour atteindre la borne « basse » de l’intervalle. 
+Une **extrusion** est alors créée depuis cette base pour atteindre la hauteur définie par la borne « haute » de l’intervalle, et sera enfin écrite dans le fichier Rhinocéros.
 \
 \
 Enfin, le fichier est sauvegardé au format 3DM, que l'on peut ensuite visualiser et parcourir directement dans Rhinocéros.
@@ -1270,7 +1294,7 @@ udfig(l=l,s=s)
 ```{r modele_3d_zoom, echo=FALSE, fig.align = 'center', out.width = "100%",fig.show='hold'}
 include_graphics("__imgs/3d_autres.png")
 ```
-
+\
 Bien que la syntaxe de **Rhinoinside** soit plus ardue que celle de la section précédente (dû au fait qu'il est nécessaire de s'appuyer sur de la documentation
 écrite pour le langage de programmation natif de Rhinocéros, le *C#*), un architecte possédant une bonne connaissance du logiciel Rhinocéros,
 et surtout de la manière logique de résoudre un problème de modélisation dans cet outil précis (surtout vis-à-vis des commandes) peut établir une stratégie viable.
@@ -1294,9 +1318,13 @@ Le prochain chapitre sera dédié à une approche plus approfondie de l’utilis
 
 \newpage
 
+&nbsp;
+
+\newpage
+
 # Agréger l'Open Data pour corréler et prédire
 
-Comme l'a montré le jeu de données des "volumes bâtis" au sein des chapitres précédents, les jeux de données rencontrés en 
+Comme l'a montré le jeu de données des « volumes bâtis » au sein des chapitres précédents, les jeux de données rencontrés en 
 Open Data contiennent des informations sur **un seul thème**, de sorte à réduire leur taille et leur complexité afin de garder
 l'ensemble le plus exploitable possible.
 \
@@ -1337,7 +1365,7 @@ caractérisant des bâtiments de Paris et sa petite couronne** sous plusieurs as
 
 * Des informations relatives à la **typo morphologie** (nature, date de construction,hauteur, emprise géoréférencée, surface vitrée,etc.).
 * Des informations relatives à leur **matérialité**
-* Des **photographies**
+* Des **photographies** récentes de ces bâtiments
 
 Enfin, un aperçu des **exploitations possibles** d'un tel jeu de données sera finalement restitué au regard des capacités de Python. 
 
@@ -1363,7 +1391,7 @@ Dès lors, je me suis intéressé de près à la plateforme Open Data de l'**APU
 dans le contexte géographique à savoir le Grand Paris.
 \
 \
-J'ai alors identifié le jeu de données intitulé **"BESOIN THEORIQUE CHAUFFAGE ET TYPOLOGIE AU BATI"** comme le plus apte à fournir des informations morphologiques.
+J'ai alors identifié le jeu de données intitulé **« BESOIN THEORIQUE CHAUFFAGE ET TYPOLOGIE AU BATI »** comme le plus apte à fournir des informations morphologiques.
 Bien que l'objectif principal de ce jeu soit de fournir des estimations de besoins énergétiques par bâtiment sur l'existant (conformément à sa dénomination), il inclut également les **données volumiques et surfaciques**
 utilisées pour le calcul de ces estimations.
 Comme pour le jeu de données des volumes bâtis de l'Open Data Paris, les **polygones géolocalisés** décrivant l'emprise au sol exprimée en latitude/longitude de chaque bâtiment existant
@@ -1429,7 +1457,7 @@ l = "Extraits des tables des matériaux pour les murs (gauche) et les toitures (
 s = "\\url{http://piece-jointe-carto.developpement-durable.gouv.fr/NAT004/DTerNP/html3/annexes/}"
 udfig(l=l,s=s)
 ```
-```{r mats, echo=FALSE, fig.align = 'center', out.width = "100%",fig.show='hold'}
+```{r mats, echo=FALSE, fig.align = 'center', out.width = "70%",fig.show='hold'}
 include_graphics("__imgs/table_matmur.png")
 ```
 
@@ -1483,13 +1511,16 @@ udfig(l=l,s=s)
 ```{r bd_ortho, echo=FALSE, fig.align = 'center', out.width = "100%",fig.show='hold'}
 include_graphics("__imgs/bd_ortho_tot.png")
 ```
-\
-\
+
 Ainsi, dans l'objectif de créer un jeu de données regroupant suffisamment d'informations concernant les caractéristiques
 géométriques des bâtiments existants et la nature de leurs principaux matériaux, il s'avère nécessaire de recouper des jeux de données produits par des
 **organismes différents**. De plus, les **types de données** à manipuler sont hétérogènes, puisque
 des **images** viendront compléter des données **alphanumériques** (sous forme de texte ou de nombres).
 L'enjeu du langage Python est donc ici de permettre ce **recoupement** de manière accessible.
+
+\newpage
+
+&nbsp;
 
 \newpage
 
@@ -1620,8 +1651,6 @@ concernant leur **matérialité** (de sorte qu'elles soient définies). C'est po
 de même que le bâti léger (non dur).
 \
 \
-
-
 Le jeu de données peut ensuite être réduit aux colonnes correspondantes à l'emprise, aux matériaux de façade ainsi qu'aux matériaux
 de toiture.
 
@@ -1672,7 +1701,6 @@ bdtopo["MAT_MURS"] = bdtopo["MAT_MURS"].map(decodage_mur)
 # Enregistrement du jeu apuré dans un nouveau fichier
 bdtopo.to_file("F:\\BASES_APUREES\\BDTOPO_APURÉ")
 ```
-
 Enfin, le code ci-dessus effectue une dernière opération, visant à **expliciter** chaque matériau, en ne conservant que le matériau principal,
 d'après les tables des matériaux montrées dans la section précédente.
 Ces transformations sont effectuées par deux fonctions appliquées aux colonnes *MAT_MURS* et *MAT_TOITS*, dans lesquelles les conditionnels
@@ -1700,7 +1728,6 @@ udfig(l=l,s=s)
 include_graphics("__imgs/principe_agg.png")
 ```
 
-\
 Dès lors, pour une même entité réelle (ici, un bâtiment), deux formes géométriques géolocalisées peuvent légèrement différer, et ce
 pour plusieurs raisons, telles que la précision du relevé ou encore une éventuelle différence de mises à jour.
 L'un des deux objets géométriques sera donc réduit en un point, son **centroïde** (soit l'approximation géométrique de son centre).
@@ -1733,7 +1760,7 @@ bdtopo["geometry"] = bdtopo["geometry"].apply(lambda poly : poly.centroid.buffer
 
 
 Une fois cette étape effectuée, la seule commande *sjoin()* de *GeoPandas* suffit à effectuer l'intersection des deux jeux,
-en spécifiant l'argument *"inner"*. 
+en spécifiant l'argument *« inner »*. 
 Afin de faire sorte que seuls les éléments géométriques du jeu de données de l'APUR soit gardés (ici, les bâtiments),
 celui-ci sera référencé en premier dans la fonction *sjoin()* suivi de celui de la BD TOPO.
 
@@ -1754,7 +1781,7 @@ Enfin, *GeoPandas* créant automatiquement une colonne référençant la positio
 dans le second jeu de données (ici, la BD TOPO), elle sera supprimée, car superflue, et remplacée
 dans la ligne suivante par une colonne *id*, numérotant simplement chaque bâtiment du nouveau jeu, qui 
 peut enfin être sauvegardé. Un aperçu est présenté dans le code ci-dessous.
-\
+
 ```{r echo=FALSE}
 l = "Aperçu du jeu de données agrégé"
 udfig(l=l)
@@ -1763,11 +1790,9 @@ udfig(l=l)
 apur = gpd.read_file("F:\\BASES_APUREES\\JEU_AGG")
 print(apur.head(3))
 ```
-\
-\
+
 Dès lors, les dernières informations à obtenir afin de compléter ce nouveau jeu de données obtenu
 sont les **photographies aériennes** de chacun des bâtiments.
-\
 
 ```{r echo=FALSE}
 l = "Principe de l'extraction des photographies aériennes"
@@ -1784,7 +1809,7 @@ Cependant, étant découpées en **carreaux géoréférencés**, il est nécessa
 carreaux.
 \
 \
-Heureusement, *GeoPandas* permet de charger un jeu de données selon une *"Bounding Box"* définie par quatre points,
+Heureusement, *GeoPandas* permet de charger un jeu de données selon une *« Bounding Box »* définie par quatre points,
 de sorte à ne charger que les entités inscrites au sein de ce rectangle. 
 Ainsi, pour chaque carreau, les coordonnées de ses extrémités seront fournies à *GeoPandas* avant l'application des masques.
 \
@@ -1860,10 +1885,13 @@ udfig(l=l,s=s)
 include_graphics("__imgs/agg_final.png")
 ```
 
-
 Ainsi, cette section a démontré l'aisance avec laquelle le langage Python permet d'effectuer des **apurements** ainsi
 que des **agrégations** complexes (mêlant de nombreux formats de données), à travers un usage plus approfondi néanmoins toujours **clair** des bibliothèques comme
 **GeoPandas**.
+
+\newpage
+
+&nbsp;
 
 \newpage
 
@@ -1901,7 +1929,7 @@ l = "Illustration de l'encodage réalisé"
 s = "Réalisation personnelle"
 udfig(l=l,s=s)
 ```
-```{r encode, echo=FALSE, fig.align = 'center', out.width = "100%",fig.show='hold'}
+```{r encode, echo=FALSE, fig.align = 'center', out.width = "70%",fig.show='hold'}
 include_graphics("__imgs/encode.png")
 ```
 Cette fonction sera également appliquée aux attributs *MAT_MURS*, *MAT_TOITS* ainsi qu'à *C_PERCONST_APUR*.
@@ -2028,7 +2056,7 @@ capable d'identifier **son matériau de toiture**. Ce modèle de prédiction pou
 \
 Bien que cette section ne  détaille pas le fonctionnement d'un tel réseau de neurones, le schéma ci-dessous présentera néanmoins son 
 **principe d'utilisation**, et plus précisément ce qu'il est nécessaire de fournir en **entrée** et ce que l'on obtient en **sortie** lors des différentes phases.
-En effet, je démontrerai plus loin que le réseau en lui-même peut être traité comme une "boîte noire", le langage Python disposant
+En effet, je démontrerai plus loin que le réseau en lui-même peut être traité comme une « boîte noire », le langage Python disposant
 de bibliothèques permettant de gérer automatiquement ses paramètres internes.
 
 ```{r echo=FALSE}
@@ -2179,7 +2207,7 @@ en gérant lui-même les paramètres internes, permettant ainsi même aux plus n
 \
 \
 Au regard de ces outils pouvant d'ores et déjà être appropriés par les architectes,
-les **données disponibles actuellement** sont désormais le "réactif limitant" de l'exploitation de l'Open Data,
+les **données disponibles actuellement** sont désormais le « réactif limitant » de l'exploitation de l'Open Data,
 ouvrant des opportunités qu'il convient d'explorer dans un avenir où les jeux de données sont amenés à
 s'étoffer et s'enrichir.
 
@@ -2196,46 +2224,74 @@ include_graphics("__imgs/matrice_prospective.png")
 
 # CONCLUSION {-}
 
-Grâce à l’approche pratique proposée au sein de ce mémoire, nous avons pu démontrer que le langage de programmation Python constitue un outil souple et performant, permettant d’accompagner l’architecte tout au long de son exploitation des données issues de l’Open Data. 
+Grâce à l’approche pratique proposée au sein de ce mémoire, nous avons pu démontrer que le langage de programmation Python constitue un outil **souple et performant**, 
+permettant d’accompagner l’architecte tout au long de son exploitation des données issues de l’Open Data. 
 \
 \
-En effet, permettant en premier lieu de rendre compréhensibles et manipulables aux plus novices les structures de données couramment rencontrées, et en particulier les données géoréférencées, ce langage est doté de bibliothèques constituant des outils de production de documents synthétiques tout à fait capables de représenter les données extraites dans des formats de fichiers courants pour l’architecte, élément primordial au sein de son "workflow". Ainsi, au-delà des graphiques statistiques, Python permet la génération de cartographies interactives, mais surtout des dessins techniques hiérarchisés et même des modèles 3D de manière automatique et personnalisée, représentant un gain de temps considérable.
+En effet, permettant en premier lieu de **rendre compréhensibles et manipulables aux plus novices les structures de données couramment rencontrées**, 
+et en particulier les données géoréférencées, ce langage est doté de bibliothèques constituant des outils de production de documents synthétiques tout à fait capables de **représenter 
+les données extraites dans des formats de fichiers courants pour l’architecte**, élément primordial au sein de son organisation. Ainsi, au-delà des graphiques statistiques, 
+Python permet la génération de cartographies interactives, mais surtout des dessins techniques hiérarchisés et même des modèles 3D de manière automatique et personnalisée, représentant un **gain de temps** considérable.
 \
 \
-Enfin, l’architecte devient capable grâce à Python de mener ses propres travaux d'agrégation et d'exploitation approfondie de jeux de données multi thèmes, afin de les mettre à profit dans son activité de conception, grâce à une capacité d’identification de corrélations entre ces différentes données agrégées, ou encore celle de pouvoir  entrainer ses propres modèles de prédiction ou de classification, grâce à une approche pratique simplifiée du Machine Learning.
+Enfin, l’architecte devient capable grâce à Python de **mener ses propres travaux d'agrégation et d'exploitation approfondie** de jeux de données multi thèmes, 
+afin de les **mettre à profit dans son activité de conception**, grâce à une capacité d’identification de corrélations entre ces différentes données agrégées, 
+ou encore celle de pouvoir  entrainer ses propres modèles de prédiction ou de classification, grâce à une approche pratique simplifiée du Machine Learning.
 \
 \
-De plus, épaulé par divers modules permettant tous ces usages de manière simplifiée tout au long du processus d’exploitation des données ouvertes, le Python acquiert un véritable caractère universel, autant dans le sens où il est capable de se suffire à lui-même que pour qualifier sa compatibilité extraordinaire avec d’autres outils et services (comme Rhinocéros).
+De plus, épaulé par divers modules permettant tous ces usages de manière simplifiée tout au long du processus d’exploitation des données ouvertes, 
+le Python acquiert un véritable **caractère universel**, autant dans le sens où il est capable de se suffire à lui-même que pour qualifier sa compatibilité extraordinaire avec d’autres outils et services (comme Rhinocéros).
 \
 \
-Au-delà du cadre de l’exploitation des données issues de l’Open Data, ce langage représente un véritable pivot afin d’accompagner les agences vers de nouveaux outils plus intelligents.
+Au-delà du cadre de l’exploitation des données issues de l’Open Data, ce langage représente un véritable pivot afin d’**accompagner les agences vers de nouveaux outils plus intelligents**.
 \
 \
-Premièrement, l’expérience acquise durant la manipulation des jeux de données ouverts (en particulier sur les notions des structures de données) sera extrêmement précieuse lorsqu’il s’agira d’exploiter des jeux de données plus directement liés à la pratique architecturale en elle-même, comme depuis un parc de « Smart Buildings » qu’il faudra surveiller et analyser par exemple.
+Premièrement, l’expérience acquise durant la manipulation des jeux de données ouverts (en particulier sur les notions des structures de données) 
+sera extrêmement précieuse lorsqu’il s’agira d’exploiter des jeux de données plus directement liés à la pratique architecturale en elle-même, 
+comme depuis un parc de « Smart Buildings » qu’il faudra surveiller et analyser par exemple.
 \
 \
-Au-delà de cet aspect, des solutions logicielles émergentes telles que « Générative Design in Revit » publiée par Autodesk [@gdrevit] et désormais intégrée à Revit 2021 proposent déjà à l’architecte de travailler aux côtés d’algorithmes évolutifs et prédictifs, que ce soit de manière simplifiée par interface graphique ou bien personnalisable grâce à des langages de programmation visuelle comme Dynamo. La collaboration entre agences d’architecture et solutions intégrant de l’Intelligence artificielle commence également à se développer, tel que l'illustre l'exemple de l’agence *Valode&Pistre* et son partenariat avec « SpaceMaker AI» [@valodepistre], société norvégienne spécialisée dans la conception urbaine générative.
+Au-delà de cet aspect, des **solutions logicielles émergentes** telles que « Générative Design in Revit » publiée par Autodesk [@gdrevit] et désormais intégrée à *Revit 2021*
+proposent déjà à l’architecte de travailler aux côtés d’algorithmes évolutifs et prédictifs, que ce soit de manière simplifiée par interface graphique ou bien personnalisable grâce à des 
+langages de programmation visuelle comme Dynamo. La collaboration entre **agences d’architecture** et solutions intégrant de l’**Intelligence artificielle** commence également à se développer, 
+tel que l'illustre l'exemple de l’agence *Valode&Pistre* et son partenariat avec « SpaceMaker AI» [@valodepistre], société norvégienne spécialisée dans la conception urbaine générative.
 \
 \
 Ainsi, de nouvelles solutions sont développées chaque année, mais il existera toujours un besoin de **programmer des outils** spécifiques à différents types de projet
-et de problématiques au sein de ces derniers, telles que l'insertion urbaine, la conception de l'enveloppe ou encore la question des usages. 
+et de problématiques au sein de ces derniers, telles que l'insertion urbaine, la conception de l'enveloppe ou encore la question des usages.
+\
+\
+Toutes ces opportunités nouvelles requièrent une certaine **familiarité avec le fonctionnement algorithmique en général**, 
+et surtout une assimilation de leur manière de fonctionner afin de les intégrer efficacement à son « workflow ».
+\
+\
+Dès lors, par son statut de langage de programmation lui conférant un caractère universel quant aux notions de base informatiques et 
+surtout algorithmiques (même avec une syntaxe simplifiée), le Python se présente comme un **atout « futur proof »** face à ces **nouvelles interactions architecte-machine**. De plus, 
+l’adoption massive du Python par les architectes permettrait d’amorcer une **lutte contre la crainte de la montée en puissance de l’Intelligence artificielle** au sein des métiers du bâtiment, 
+par une atténuation considérable de l’effet « Boite noire » qu’elle suscite. Ceci faciliterait donc grandement la transition du corps architectural dans la numérisation du domaine du bâtiment.
+\
+\
+Au-delà de cette appropriation, une certaine motivation de créer des **outils logiciels par les architectes pour les architectes** intégrant ces nouvelles compétences pourrait émerger, 
+permettant alors de réaffirmer la place du métier d’architecte au sein d’un écosystème de plus en plus techno centré.
 
-\
-\
-Toutes ces opportunités nouvelles requièrent une certaine familiarité avec le fonctionnement algorithmique en général, et surtout une assimilation de leur manière de fonctionner afin de les intégrer efficacement à son « workflow »
-.\
-\
-Dès lors, par son statut de langage de programmation lui conférant un caractère universel quant aux notions de base informatiques et surtout algorithmiques (même avec une syntaxe simplifiée), le Python se présente comme un atout « futur proof » face à ces nouvelles interactions architecte-machine. De plus, l’adoption massive du Python par les architectes permettrait d’amorcer  une lutte contre la crainte de la montée en puissance de l’Intelligence artificielle au sein des métiers du bâtiment, par une atténuation considérable de l’effet « Boite noire » qu’elle suscite. Ceci faciliterait donc grandement la transition du corps architectural dans la numérisation du domaine du bâtiment.
-\
-\
-Au-delà de cette appropriation, une certaine motivation de créer des outils logiciels par les architectes pour les architectes intégrant ces nouvelles compétences pourrait émerger, permettant alors de réaffirmer la place du métier d’architecte au sein d’un écosystème de plus en plus techno centré.
+\newpage
+
+&nbsp;
 
 \newpage
 
 # BIBLIOGRAPHIE {-}
 
+\begingroup
+\setlength{\parskip}{15pt}
 
 <div id="refs"></div>
+
+\endgroup
+
+\newpage
+
+&nbsp;
 
 \newpage
 
@@ -2243,9 +2299,22 @@ Au-delà de cette appropriation, une certaine motivation de créer des outils lo
 
 \renewcommand{\listfigurename}{}
 
+\begingroup
+\setlength{\parskip}{11pt}
+
 \listoffigures
 
+\endgroup
+
 \newpage
+
+&nbsp;
+
+\newpage
+
+\setcounter{section}{1}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{customfigs}{0}
 
 # ANNEXE : UN MÉMOIRE RÉDIGÉ EN R MARKDOWN {-}
 
@@ -2310,10 +2379,41 @@ Cependant, je souhaiterais explorer d'autres outils similaires moins répandus, 
 est à la fois complète, simple et souple.
 
 ```{r echo=FALSE}
-l = "Le Groff, alternative minimaliste intégrée aux systèmes Linux"
-s = "https://www.youtube.com/watch?v=kJ_TXZB4Gm4"
+l = "Le Groff : alternative minimaliste intégrée aux systèmes Linux"
+s = "\\url{https://www.youtube.com/watch?v=kJ_TXZB4Gm4}"
 udfig(l=l,s=s)
 ```
 ```{r groff, echo=FALSE, fig.align = 'center', out.width = "90%",fig.show='hold'}
 include_graphics("__imgs/groff.png")
 ```
+
+\newpage
+
+\thispagestyle{empty}
+
+\vspace*{\fill}
+
+La stratégie de l'\color{red}**Open Data**\color{black}, représentant l'initiative de la part d'institutions publiques et privées de partager leurs données
+se déploie actuellement de manière accrue à travers la publication de \color{red}**jeux de données ouverts et massifs** \color{black} 
+dans de multiples domaines.
+Certains d'entre eux commencent à intégrer des \color{red}**données sur les bâtiments existants**\color{black}, des informations morphologiques à leurs matériaux de façade,
+en passant par leurs besoins énergétiques, recelant alors un \color{red}**potentiel certain pour l'architecte**\color{black}.
+\
+\
+Cependant, ces données étant avant tout \color{red}**formatées pour être manipulées de manière algorithmique**\color{black}, cela représente
+un frein conséquent à leur exploitation par des acteurs peu familiers avec le domaine du traitement automatique de données.
+\
+\
+Dès lors, les \color{red}**langages de programmation les plus accessibles**\color{black}, et en particulier le \color{red}**Python**\color{black}, très répandu dans
+le domaine de la science des données tout en arborant une syntaxe simplifiée, se présentent comme une solution potentielle
+permettant de \color{red}**fournir tous les outils nécessaires aux architectes afin d'exploiter les données
+accessibles aujourd'hui en Open Data**\color{black}, en développant une approche \color{red}**concrète et pratique** \color{black} 
+à l'aide de scripts restant \color{red}**clairs et concis**\color{black}.
+
+\vspace*{\fill}
+
+\center
+
+![](__imgs/logo_vd.png){width=20%}
+
+\center
