@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.19)  28 FEB 2021 22:51
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.2.19)  1 MAR 2021 14:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1599,225 +1599,223 @@ LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/it' will be
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/it' will be
 (Font)              scaled to size 10.95pt on input line 298.
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 1168) in paragraph at lines 272--449
+Underfull \hbox (badness 1168) in paragraph at lines 272--448
 \TU/RobotoLight(0)/m/n/10.95 Dès lors, un point essentiel est l’\TU/RobotoLight
 (0)/b/n/10.95 accès public \TU/RobotoLight(0)/m/n/10.95 (sans authentification 
 ou contrepartie par exemple), indé-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 272--449
-\TU/RobotoLight(0)/m/n/10.95 Dès lors, face à la \TU/RobotoLight(0)/b/n/10.95 c
-omplexité des enjeux \TU/RobotoLight(0)/m/n/10.95 auxquels la \TU/RobotoLight(0
-)/b/n/10.95 conception architecturale \TU/RobotoLight(0)/m/n/10.95 fait appel (
-climatique,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
  []
 
 
-Underfull \hbox (badness 1253) in paragraph at lines 272--449
+Underfull \hbox (badness 1253) in paragraph at lines 272--448
 []\TU/RobotoLight(0)/b/n/10.95 Ainsi, dans quelle mesure l’exploitation de donn
 ées issues de l’Open Data grâce au langage Python
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--449
+Underfull \hbox (badness 10000) in paragraph at lines 272--448
 
+ []
+
+
+Underfull \hbox (badness 1142) in paragraph at lines 272--448
+[]\TU/RobotoLight(0)/m/n/10.95 Après avoir initialement démontré l’intérêt d’un
+ langage de programmation comme Python dans l’extrac-
  []
 
 [7] [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 456--493
+Underfull \hbox (badness 10000) in paragraph at lines 455--492
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--493
+Underfull \hbox (badness 10000) in paragraph at lines 455--492
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--493
+Underfull \hbox (badness 10000) in paragraph at lines 455--492
 
  []
 
 [11] [12]
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 513.
+(Font)              scaled to size 10.0pt on input line 512.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 513.
+(caption)                particular \caption on input line 512.
 See the caption package documentation for explanation.
 
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/m/it' will be
-(Font)              scaled to size 6.0pt on input line 513.
+(Font)              scaled to size 6.0pt on input line 512.
 File: __imgs/site_odp_carte.jpg Graphic file (type bmp)
 <__imgs/site_odp_carte.jpg>
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 526--538
+Underfull \hbox (badness 10000) in paragraph at lines 525--537
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 540.
+(caption)                particular \caption on input line 539.
 See the caption package documentation for explanation.
 
 File: __imgs/site_odp_tableau.jpg Graphic file (type bmp)
 <__imgs/site_odp_tableau.jpg>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 558.
+(caption)                particular \caption on input line 557.
 See the caption package documentation for explanation.
 
 File: __imgs/primitives_geometriques.png Graphic file (type bmp)
 <__imgs/primitives_geometriques.png>
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 565--595
+Underfull \hbox (badness 10000) in paragraph at lines 564--595
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--595
+Underfull \hbox (badness 10000) in paragraph at lines 564--595
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--595
+Underfull \hbox (badness 10000) in paragraph at lines 564--595
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--595
+Underfull \hbox (badness 10000) in paragraph at lines 564--595
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 602--613
+Underfull \hbox (badness 10000) in paragraph at lines 602--612
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 615.
+(caption)                particular \caption on input line 614.
 See the caption package documentation for explanation.
 
 File: __imgs/odp_meta1.jpg Graphic file (type bmp)
 <__imgs/odp_meta1.jpg>
 
-Underfull \hbox (badness 10000) in paragraph at lines 622--635
+Underfull \hbox (badness 10000) in paragraph at lines 621--634
 
  []
 
 [16]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 637.
+(caption)                particular \caption on input line 636.
 See the caption package documentation for explanation.
 
 File: __imgs/odp_meta2.jpg Graphic file (type bmp)
 <__imgs/odp_meta2.jpg>
 LaTeX Font Info:    Font shape `TU/RobotoLight(0)/b/it' will be
-(Font)              scaled to size 10.95pt on input line 648.
+(Font)              scaled to size 10.95pt on input line 647.
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--664
+Underfull \hbox (badness 10000) in paragraph at lines 643--663
 
  []
 
 [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 671--681
+Underfull \hbox (badness 10000) in paragraph at lines 670--680
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 683.
+(caption)                particular \caption on input line 682.
 See the caption package documentation for explanation.
 
 File: __imgs/site_odp_carte_zone.jpg Graphic file (type bmp)
 <__imgs/site_odp_carte_zone.jpg>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 691.
+(caption)                particular \caption on input line 690.
 See the caption package documentation for explanation.
 
 File: __imgs/site_odp_formats.jpg Graphic file (type bmp)
 <__imgs/site_odp_formats.jpg>
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 698--708
+Underfull \hbox (badness 10000) in paragraph at lines 697--708
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 698--708
+Underfull \hbox (badness 10000) in paragraph at lines 697--708
 
  []
 
@@ -1920,34 +1918,40 @@ See the caption package documentation for explanation.
 File: __imgs/hpaf.png Graphic file (type bmp)
 <__imgs/hpaf.png>
 [30] [31]
-Underfull \hbox (badness 10000) in paragraph at lines 1274--1287
+Underfull \hbox (badness 10000) in paragraph at lines 1275--1288
 
  []
 
 [32] [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 1298--1327
+Underfull \hbox (badness 10000) in paragraph at lines 1299--1329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1298--1327
+Underfull \hbox (badness 10000) in paragraph at lines 1299--1329
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1298--1327
+Underfull \hbox (badness 1314) in paragraph at lines 1299--1329
+\TU/RobotoLight(0)/m/n/10.95 Or, il s’avère que le langage Python regorge de bi
+bliothèques spécialisées dans la visualisation de don-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1299--1329
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1329.
+(caption)                particular \caption on input line 1331.
 See the caption package documentation for explanation.
 
 File: __imgs/p2.png Graphic file (type bmp)
 <__imgs/p2.png>
 [35] [36] [37]
-Underfull \hbox (badness 10000) in paragraph at lines 1372--1392
+Underfull \hbox (badness 10000) in paragraph at lines 1374--1393
 
  []
 
@@ -1966,7 +1970,7 @@ Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;languag
 [38]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1407.
+(caption)                particular \caption on input line 1408.
 See the caption package documentation for explanation.
 
 File: OUTPUT/graphique_hauteurs.png Graphic file (type bmp)
@@ -1982,7 +1986,7 @@ See the caption package documentation for explanation.
 File: OUTPUT/graphique_repart.png Graphic file (type bmp)
 <OUTPUT/graphique_repart.png>
 [40]
-Underfull \hbox (badness 10000) in paragraph at lines 1496--1506
+Underfull \hbox (badness 10000) in paragraph at lines 1497--1507
 
  []
 
@@ -1995,7 +1999,7 @@ Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;languag
 =dflt;!
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1553.
+(caption)                particular \caption on input line 1554.
 See the caption package documentation for explanation.
 
 File: __imgs/carte_hauteurs_1.png Graphic file (type bmp)
@@ -2003,17 +2007,17 @@ File: __imgs/carte_hauteurs_1.png Graphic file (type bmp)
 File: __imgs/carte_hauteurs_2.png Graphic file (type bmp)
 <__imgs/carte_hauteurs_2.png>
 [42]
-Underfull \hbox (badness 10000) in paragraph at lines 1560--1570
+Underfull \hbox (badness 10000) in paragraph at lines 1561--1571
 
  []
 
 [43] [44] [45]
-Underfull \hbox (badness 10000) in paragraph at lines 1594--1615
+Underfull \hbox (badness 10000) in paragraph at lines 1595--1617
 
  []
 
 
-Underfull \hbox (badness 1231) in paragraph at lines 1594--1615
+Underfull \hbox (badness 1231) in paragraph at lines 1595--1617
 \TU/RobotoLight(0)/m/it/10.95 titude/longitude \TU/RobotoLight(0)/m/n/10.95 en 
 \TU/RobotoLight(0)/b/n/10.95 coordonnées cartésiennes \TU/RobotoLight(0)/m/n/10
 .95 exprimées en unités de grandeur terrestres. Pour cela, la
@@ -2022,43 +2026,43 @@ Underfull \hbox (badness 1231) in paragraph at lines 1594--1615
 [46]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1679.
+(caption)                particular \caption on input line 1681.
 See the caption package documentation for explanation.
 
 File: __imgs/cad_1.png Graphic file (type bmp)
 <__imgs/cad_1.png>
 [47]
-Underfull \hbox (badness 10000) in paragraph at lines 1686--1701
+Underfull \hbox (badness 10000) in paragraph at lines 1688--1703
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1686--1701
+Underfull \hbox (badness 10000) in paragraph at lines 1688--1703
 
  []
 
 [48]
-Underfull \hbox (badness 10000) in paragraph at lines 1708--1760
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1762
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1708--1760
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1762
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1708--1760
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1762
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1708--1760
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1762
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1708--1760
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1762
 
  []
 
@@ -2072,13 +2076,13 @@ Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;languag
 Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;language
 =dflt;!
 [50]
-Underfull \hbox (badness 10000) in paragraph at lines 1835--1853
+Underfull \hbox (badness 10000) in paragraph at lines 1837--1855
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1855.
+(caption)                particular \caption on input line 1857.
 See the caption package documentation for explanation.
 
 File: __imgs/3d_vue1.jpg Graphic file (type bmp)
@@ -2086,101 +2090,107 @@ File: __imgs/3d_vue1.jpg Graphic file (type bmp)
 [51]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1867.
+(caption)                particular \caption on input line 1869.
 See the caption package documentation for explanation.
 
 File: __imgs/3d_autres.png Graphic file (type bmp)
 <__imgs/3d_autres.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1874--1908
+Underfull \hbox (badness 10000) in paragraph at lines 1876--1910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1874--1908
+Underfull \hbox (badness 10000) in paragraph at lines 1876--1910
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1874--1908
+Underfull \hbox (badness 10000) in paragraph at lines 1876--1910
 
  []
 
 [52] [53] [54]
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 1810) in paragraph at lines 1921--1983
+\TU/RobotoLight(0)/m/n/10.95 dispositif (tel qu’un identifiant) permettant d’id
+entifier ces mêmes entités de manière universelle. Autre-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1919--1981
+Underfull \hbox (badness 10000) in paragraph at lines 1921--1983
 
  []
 
 [55] [56]
-Underfull \hbox (badness 10000) in paragraph at lines 2003--2013
+Underfull \hbox (badness 10000) in paragraph at lines 2004--2014
 
  []
 
 [57]
-Underfull \hbox (badness 10000) in paragraph at lines 2020--2040
+Underfull \hbox (badness 10000) in paragraph at lines 2021--2041
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2042.
+(caption)                particular \caption on input line 2043.
 See the caption package documentation for explanation.
 
 File: __imgs/carte_apur.png Graphic file (type bmp)
 <__imgs/carte_apur.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2050.
+(caption)                particular \caption on input line 2051.
 See the caption package documentation for explanation.
 
 File: __imgs/meta_apur.png Graphic file (type bmp)
 <__imgs/meta_apur.png>
 [58]
-Underfull \hbox (badness 10000) in paragraph at lines 2057--2070
+Underfull \hbox (badness 10000) in paragraph at lines 2058--2071
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2057--2070
+Underfull \hbox (badness 10000) in paragraph at lines 2058--2071
 
  []
 
 [59] [60]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2089.
+(caption)                particular \caption on input line 2090.
 See the caption package documentation for explanation.
 
 File: __imgs/meta_ign.png Graphic file (type bmp)
 <__imgs/meta_ign.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2102.
+(caption)                particular \caption on input line 2103.
 See the caption package documentation for explanation.
 
 File: __imgs/meta_ign_2.png Graphic file (type bmp)
@@ -2188,57 +2198,40 @@ File: __imgs/meta_ign_2.png Graphic file (type bmp)
 [61]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2110.
+(caption)                particular \caption on input line 2111.
 See the caption package documentation for explanation.
 
 File: __imgs/table_matmur.png Graphic file (type bmp)
 <__imgs/table_matmur.png>
-[62]
-Underfull \hbox (badness 10000) in paragraph at lines 2139--2148
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2139--2148
-
- []
-
-[63]
-Underfull \hbox (badness 10000) in paragraph at lines 2171--2184
+[62] [63]
+Underfull \hbox (badness 10000) in paragraph at lines 2177--2190
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2186.
+(caption)                particular \caption on input line 2192.
 See the caption package documentation for explanation.
 
 File: __imgs/bd_ortho_tot.png Graphic file (type bmp)
 <__imgs/bd_ortho_tot.png>
 [64] [65] [66] [67]
-Underfull \hbox (badness 10000) in paragraph at lines 2225--2239
+Underfull \hbox (badness 10000) in paragraph at lines 2231--2245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2225--2239
+Underfull \hbox (badness 10000) in paragraph at lines 2231--2245
 
  []
 
 
-Underfull \hbox (badness 1132) in paragraph at lines 2225--2239
-\TU/RobotoLight(0)/m/n/10.95 La bibliothèque \TU/RobotoLight(0)/m/it/10.95 GeoP
-andas \TU/RobotoLight(0)/m/n/10.95 facilite ici énormément les apurements, en p
-ermettant d’inscrire directement
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2272--2287
+Underfull \hbox (badness 10000) in paragraph at lines 2278--2293
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2272--2287
+Underfull \hbox (badness 10000) in paragraph at lines 2278--2293
 
  []
 
@@ -2248,97 +2241,97 @@ Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;languag
 Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;language
 =dflt;!
 
-Underfull \hbox (badness 10000) in paragraph at lines 2338--2348
+Underfull \hbox (badness 10000) in paragraph at lines 2344--2354
 
  []
 
 [69]
-Underfull \hbox (badness 10000) in paragraph at lines 2396--2412
+Underfull \hbox (badness 10000) in paragraph at lines 2402--2419
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2396--2412
+Underfull \hbox (badness 10000) in paragraph at lines 2402--2419
 
  []
 
 [70] [71]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2420.
+(caption)                particular \caption on input line 2427.
 See the caption package documentation for explanation.
 
 File: __imgs/principe_agg.png Graphic file (type bmp)
 <__imgs/principe_agg.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2427--2452
+Underfull \hbox (badness 10000) in paragraph at lines 2434--2460
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2427--2452
+Underfull \hbox (badness 10000) in paragraph at lines 2434--2460
 
  []
 
 [72] [73]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2509.
+(caption)                particular \caption on input line 2518.
 See the caption package documentation for explanation.
 
 File: __imgs/principe_agg_photo.png Graphic file (type bmp)
 <__imgs/principe_agg_photo.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2516--2528
+Underfull \hbox (badness 10000) in paragraph at lines 2525--2537
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2516--2528
+Underfull \hbox (badness 10000) in paragraph at lines 2525--2537
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2516--2528
+Underfull \hbox (badness 10000) in paragraph at lines 2525--2537
 
  []
 
 [74] [75]
-Underfull \hbox (badness 10000) in paragraph at lines 2582--2594
+Underfull \hbox (badness 10000) in paragraph at lines 2591--2603
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2582--2594
+Underfull \hbox (badness 10000) in paragraph at lines 2591--2603
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2596.
+(caption)                particular \caption on input line 2605.
 See the caption package documentation for explanation.
 
 File: __imgs/agg_final.png Graphic file (type bmp)
 <__imgs/agg_final.png>
 [76] [77] [78] [79]
-Underfull \hbox (badness 10000) in paragraph at lines 2634--2660
+Underfull \hbox (badness 10000) in paragraph at lines 2642--2668
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2634--2660
+Underfull \hbox (badness 10000) in paragraph at lines 2642--2668
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2662.
+(caption)                particular \caption on input line 2670.
 See the caption package documentation for explanation.
 
 File: __imgs/encode.png Graphic file (type bmp)
 <__imgs/encode.png>
 
-Overfull \hbox (0.25938pt too wide) in paragraph at lines 2669--2672
+Overfull \hbox (0.25938pt too wide) in paragraph at lines 2677--2680
 []\TU/RobotoLight(0)/m/n/10.95 Cette fonction sera également appliquée aux attr
 ibuts \TU/RobotoLight(0)/m/it/10.95 MAT_MURS\TU/RobotoLight(0)/m/n/10.95 , \TU/
 RobotoLight(0)/m/it/10.95 MAT_TOITS \TU/RobotoLight(0)/m/n/10.95 ainsi qu’à \TU
@@ -2348,7 +2341,7 @@ RobotoLight(0)/m/it/10.95 MAT_TOITS \TU/RobotoLight(0)/m/n/10.95 ainsi qu’à \
 [80]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2716.
+(caption)                particular \caption on input line 2724.
 See the caption package documentation for explanation.
 
 File: __imgs/matrice_corr_c.png Graphic file (type bmp)
@@ -2363,36 +2356,36 @@ Missing character: There is no ␣ in font Ubuntu Regular/OT:script=latn;languag
 [82]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2748.
+(caption)                particular \caption on input line 2756.
 See the caption package documentation for explanation.
 
 File: __imgs/matrice_corr_nat.png Graphic file (type bmp)
 <__imgs/matrice_corr_nat.png>
 [83] [84]
-Underfull \hbox (badness 10000) in paragraph at lines 2783--2792
+Underfull \hbox (badness 10000) in paragraph at lines 2792--2801
 
  []
 
 
-Underfull \hbox (badness 1087) in paragraph at lines 2783--2792
+Underfull \hbox (badness 1087) in paragraph at lines 2792--2801
 \TU/RobotoLight(0)/m/n/10.95 Bien qu’à l’échelle des bâtiments, il n’existe pas
  encore de jeux de données relatifs à des \TU/RobotoLight(0)/b/n/10.95 thèmes p
 lus
  []
 
 [85]
-Underfull \hbox (badness 10000) in paragraph at lines 2799--2816
+Underfull \hbox (badness 10000) in paragraph at lines 2808--2826
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2799--2816
+Underfull \hbox (badness 10000) in paragraph at lines 2808--2826
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2818.
+(caption)                particular \caption on input line 2828.
 See the caption package documentation for explanation.
 
 File: __imgs/cnn_schema.png Graphic file (type bmp)
@@ -2400,105 +2393,105 @@ File: __imgs/cnn_schema.png Graphic file (type bmp)
 [86] [87] [88]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2942.
+(caption)                particular \caption on input line 2955.
 See the caption package documentation for explanation.
 
 File: __imgs/classif.png Graphic file (type bmp)
 <__imgs/classif.png>
 [89] [90]
-Underfull \hbox (badness 10000) in paragraph at lines 2951--2977
+Underfull \hbox (badness 10000) in paragraph at lines 2964--2990
 
  []
 
 
-Underfull \hbox (badness 2103) in paragraph at lines 2951--2977
+Underfull \hbox (badness 2103) in paragraph at lines 2964--2990
 \TU/RobotoLight(0)/m/n/10.95 En effet, des bibliothèques comme \TU/RobotoLight(
 0)/b/n/10.95 GeoPandas \TU/RobotoLight(0)/m/n/10.95 permettent de l’accompagner
  à travers \TU/RobotoLight(0)/b/n/10.95 les différentes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2951--2977
+Underfull \hbox (badness 10000) in paragraph at lines 2964--2990
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2951--2977
+Underfull \hbox (badness 10000) in paragraph at lines 2964--2990
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2979.
+(caption)                particular \caption on input line 2992.
 See the caption package documentation for explanation.
 
 File: __imgs/matrice_prospective.png Graphic file (type bmp)
 <__imgs/matrice_prospective.png>
 [91] [92]
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 2992--3083
+Underfull \hbox (badness 1117) in paragraph at lines 3005--3096
 \TU/RobotoLight(0)/m/n/10.95 En effet, permettant en premier lieu de \TU/Roboto
 Light(0)/b/n/10.95 rendre compréhensibles et manipulables aux plus novices les
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 2992--3083
+Underfull \hbox (badness 1577) in paragraph at lines 3005--3096
 \TU/RobotoLight(0)/m/n/10.95 Toutes ces opportunités nouvelles requièrent une c
 ertaine \TU/RobotoLight(0)/b/n/10.95 familiarité avec le fonctionnement algorit
 h-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2992--3083
+Underfull \hbox (badness 10000) in paragraph at lines 3005--3096
 
  []
 
 [93] [94] [95] [96] [97] [98]
-Underfull \hbox (badness 1881) in paragraph at lines 3251--3254
+Underfull \hbox (badness 1881) in paragraph at lines 3264--3267
 [][]\TU/RobotoLight(0)/m/n/10.95 ZHOU, Qian-Yi, PARK, Jaesik et KOLTUN, Vladlen
 . Open3D : A Modern Library for 3D Data Processing.
  []
@@ -2538,13 +2531,13 @@ Overfull \hbox (1.22638pt too wide) detected at line 37
 \openout7 = `memoire.lof'.
 
 [103] [104]
-Underfull \hbox (badness 10000) in paragraph at lines 3295--3307
+Underfull \hbox (badness 10000) in paragraph at lines 3308--3320
 
  []
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 3309.
+(caption)                particular \caption on input line 3322.
 See the caption package documentation for explanation.
 
 File: __imgs/markdown.png Graphic file (type bmp)
@@ -2552,7 +2545,7 @@ File: __imgs/markdown.png Graphic file (type bmp)
 [105] [106]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 3362.
+(caption)                particular \caption on input line 3375.
 See the caption package documentation for explanation.
 
 File: __imgs/pandoc1.png Graphic file (type bmp)
@@ -2560,18 +2553,18 @@ File: __imgs/pandoc1.png Graphic file (type bmp)
 [107]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 3392.
+(caption)                particular \caption on input line 3405.
 See the caption package documentation for explanation.
 
 File: __imgs/groff.png Graphic file (type bmp)
 <__imgs/groff.png>
 [108]
-Underfull \hbox (badness 10000) in paragraph at lines 3405--3431
+Underfull \hbox (badness 10000) in paragraph at lines 3418--3444
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3405--3431
+Underfull \hbox (badness 10000) in paragraph at lines 3418--3444
 
  []
 
@@ -2626,6 +2619,6 @@ Here is how much of TeX's memory you used:
  57055 multiletter control sequences out of 15000+600000
  410174 words of font info for 116 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 101i,17n,125p,718b,1436s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 101i,17n,125p,657b,1436s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on memoire.pdf (110 pages).
