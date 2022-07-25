@@ -1,0 +1,21 @@
+# run: conda env create --file environment.yml
+name: pfe
+channels:
+- conda-forge
+dependencies:
+- python==3.9
+- anaconda
+- pip
+- fiona=1.8.19
+- geopandas
+- rasterio
+- pip:
+  - plotly
+  - nbformat
+  - ezdxf
+  - rhino3dm
+  - notebook
+  - requests
+  - py7zr
+  - tensorflow
+  - autokeras

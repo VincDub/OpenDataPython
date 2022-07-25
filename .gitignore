@@ -1,2 +1,9 @@
-__ai
-.old
+_DATA/BD_ORTHO
+_DATA/BD_TOPO
+_DATA/BD_APUR.geojson
+_DATA_agg/BATIMENTS_GRAND_PARIS_imgs
+_DATA_agg/BATIMENTS_GRAND_PARIS.gpkg
+_MDL/mdl_prediction_mat_toiture
+_MDL/mdl_prediction_mat_toiture_temp
+_MDL/mdl_prediction_volume_materiaux_facade
+_MDL/mdl_prediction_volume_materiaux_facade_temp
